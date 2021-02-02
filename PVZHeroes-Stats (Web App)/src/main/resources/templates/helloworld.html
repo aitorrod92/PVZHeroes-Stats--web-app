@@ -2,40 +2,65 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title>Thymeleaf Demo</title>
-	<!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thymeleaf Demo</title>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-	
+<!-- Bootstrap CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+	crossorigin="anonymous">
+
 </head>
 
 <body>
-<div class="container">
-<h1>Queries in PVZHeroes database</h1>
-</div>
+	<div class="container">
+		<h1>Queries in PVZHeroes database</h1>
+	</div>
 
-<div class="container">
-<table class="table table-hover table-dark table-bordered table-striped">
-		<thead>
-			<tr>
-				<th>Nombre</th>
-				<th>Ataque</th>
-				<th>Defensa</th>
-			</tr>
-		</thead>
-		
-		<tbody>
-			<tr th:each="card : ${cards}">
-				<td th:text="${card.Nombre}"/>
-				<td th:text="${card.Ataque}"/>
-				<td th:text="${card.Defensa}"/>
-			</tr>
-		</tbody>
-	</table>
-</div>
+	<div class="container">
+		<table
+			class="table table-hover table-dark table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Ataque</th>
+					<th>Defensa</th>
+					<th>Coste</th>
+					<th>Clase</th>
+					<th>Tribus</th>
+					<th>Atributos</th>
+					<th>Habilidades</th>
+					<th>Rareza</th>
+					<th>Mazo</th>
+					<th>Tipo</th>
+					<th>URL</th>
+					<th>NumeroAtributos</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="card : ${cards}">
+					<td th:text="${card.Nombre}" />
+					<td th:text="${card.Ataque}" />
+					<td th:text="${card.Defensa}" />
+					<td th:text="${card.Coste}" />
+					<td th:text="${card.Clase}" />
+					<td th:text="${card.Tribus}" />
+					<td th:text="${card.Atributos}" />
+					<td th:text="${card.Habilidades}" />
+					<td th:text="${card.Rareza}" />
+					<td th:text="${card.Mazo}" />
+					<td th:text="${card.URL}" />
+					<td th:text="${card.Tipo}" />
+					<td th:text="${card.NumeroAtributos}" />
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
 </body>
 

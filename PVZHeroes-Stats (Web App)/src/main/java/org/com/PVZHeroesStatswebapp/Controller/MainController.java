@@ -1,25 +1,24 @@
 package org.com.PVZHeroesStatswebapp.Controller;
 
-
 import java.util.ArrayList;
 
 import org.com.PVZHeroesStatswebapp.Cards.Cartas;
+import org.com.PVZHeroesStatswebapp.Service.CardsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+
 @Controller
 public class MainController {
+	@Autowired
+	private CardsService cardsService;
+	
 	@GetMapping("/index")
 	public String showHelloWorld(Model theModel) {	
-		Cartas carta1 = new Cartas("Carta 1", 1, 1);
-		Cartas carta2 = new Cartas("Carta 2", 2, 1);
-		Cartas carta3 = new Cartas("Carta 3", 4, 5);
-		ArrayList<Cartas> Cards = new ArrayList();
-		Cards.add(carta1);
-		Cards.add(carta2);
-		Cards.add(carta3);
-		theModel.addAttribute("cards",Cards);
+		ArrayList<Cartas> cartas = cardsService.findAll();
+		theModel.addAttribute("cards", cartas);
 		return "helloworld";
 	}	
 
