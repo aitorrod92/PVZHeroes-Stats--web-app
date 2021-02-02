@@ -17,8 +17,8 @@ public class Cartas {
 	private String Habilidades;
 	private String Rareza;
 	private String Mazo;
-	private String Tipo;
 	private String URL;
+	private String Tipo;
 	private int NumeroAtributos;
 	
 	

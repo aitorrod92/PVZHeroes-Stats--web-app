@@ -17,11 +17,8 @@
 </head>
 
 <body>
-	<div class="container">
 		<h1>Queries in PVZHeroes database</h1>
-	</div>
 
-	<div class="container">
 		<table
 			class="table table-hover table-dark table-bordered table-striped">
 			<thead>
@@ -37,14 +34,15 @@
 					<th>Rareza</th>
 					<th>Mazo</th>
 					<th>Tipo</th>
-					<th>URL</th>
 					<th>NumeroAtributos</th>
 				</tr>
 			</thead>
 
 			<tbody>
 				<tr th:each="card : ${cards}">
-					<td th:text="${card.Nombre}" />
+					<td> 
+						<a th:href="${card.Tipo}" th:text="${card.Nombre}" target="_blank"/>
+					</td>
 					<td th:text="${card.Ataque}" />
 					<td th:text="${card.Defensa}" />
 					<td th:text="${card.Coste}" />
@@ -55,12 +53,10 @@
 					<td th:text="${card.Rareza}" />
 					<td th:text="${card.Mazo}" />
 					<td th:text="${card.URL}" />
-					<td th:text="${card.Tipo}" />
 					<td th:text="${card.NumeroAtributos}" />
 				</tr>
 			</tbody>
 		</table>
-	</div>
 
 </body>
 
