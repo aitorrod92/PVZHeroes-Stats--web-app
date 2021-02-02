@@ -41,7 +41,9 @@
 			<tbody>
 				<tr th:each="card : ${cards}">
 					<td> 
-						<a th:href="${card.Tipo}" th:text="${card.Nombre}" target="_blank"/>
+						<a th:href="${card.URL}" th:text="${card.Nombre}"/>
+						<br>
+						<img th:src="@{https://static.wikia.nocookie.net/plantsvszombies/images/c/c8/Astro-ShroomH.png}" th:width="50">
 					</td>
 					<td th:text="${card.Ataque}" />
 					<td th:text="${card.Defensa}" />
@@ -52,7 +54,7 @@
 					<td th:text="${card.Habilidades}" />
 					<td th:text="${card.Rareza}" />
 					<td th:text="${card.Mazo}" />
-					<td th:text="${card.URL}" />
+					<td th:text="${card.Tipo}" />
 					<td th:text="${card.NumeroAtributos}" />
 				</tr>
 			</tbody>
