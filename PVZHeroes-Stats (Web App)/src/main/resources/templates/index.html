@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>PVZHeroes-Stats (web app)</title>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Bootstrap CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+	crossorigin="anonymous">
+
+</head>
+
+<body>
+	<h1>Queries in PVZHeroes database</h1>
+	<table
+		class="table table-hover table-dark table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Ataque</th>
+				<th>Defensa</th>
+				<th>Coste</th>
+				<th>Clase</th>
+				<th>Tribus</th>
+				<th>Atributos</th>
+				<th>Habilidades</th>
+				<th>Rareza</th>
+				<th>Mazo</th>
+				<th>Tipo</th>
+				<th>NumeroAtributos</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr th:each="card : ${cards}">
+				<td><a th:href="${card.URL}" th:text="${card.Nombre}" /></td>
+				<td th:text="${card.Ataque}" />
+				<td th:text="${card.Defensa}" />
+				<td th:text="${card.Coste}" />
+				<td><span th:if="${card.Clase == 'Sin clase'}">Sin clase</span>
+					<span th:unless="${card.Clase == 'Sin clase'}"> <span
+						th:if="not ${card.Clase.matches('.*\s+.*')}"> <img
+							th:src="@{'/images/'+ ${card.Clase} + '.png'}" th:width="30">
+					</span> <span th:unless="not ${card.Clase.matches('.*\s+.*')}"> <span
+							th:each="image,status : ${#strings.arraySplit(card.Clase, ', ')}">
+								<span><img th:src="@{'/images/' + ${image} + '.png'}"
+									th:width="30"> </span>
+						</span>
+					</span>
+				</span></td>
+				<td th:text="${card.Tribus}" />
+				<td th:text="${card.Atributos}" />
+				<td th:text="${card.Habilidades}" />
+				<td th:text="${card.Rareza}" />
+				<td th:text="${card.Mazo}" />
+				<td>
+				<span><img th:src="@{'/images/'+ ${card.Tipo} + '.png'}"
+					th:width="40"></span></td>
+				<td th:text="${card.NumeroAtributos}" />
+			</tr>
+		</tbody>
+	</table>
+
+</body>
+
+</html>

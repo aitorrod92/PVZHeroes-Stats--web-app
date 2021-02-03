@@ -19,7 +19,7 @@ public class MainController {
 	public String showHelloWorld(Model theModel) {	
 		ArrayList<Cartas> cartas = cardsService.findAll();
 		theModel.addAttribute("cards", cartas);
-		return "helloworld";
+		return "index";
 	}	
 
 }
