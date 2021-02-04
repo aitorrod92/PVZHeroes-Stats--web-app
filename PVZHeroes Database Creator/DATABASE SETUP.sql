@@ -18,4 +18,5 @@ CREATE TABLE `pvzheroes`.`cartas` (
   `Tipo` TINYTEXT NULL,
   `URL` TEXT NULL,
   `NumeroAtributos` INT NULL,
+  `Imagen` TEXT NULL,
   PRIMARY KEY (`Nombre`));

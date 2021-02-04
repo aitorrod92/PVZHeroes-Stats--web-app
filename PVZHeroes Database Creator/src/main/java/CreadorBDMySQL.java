@@ -21,6 +21,7 @@ public class CreadorBDMySQL {
     static ArrayList<String> ListaTipos = new ArrayList();
     static ArrayList<String> ListaURLs = new ArrayList();
     static ArrayList<Integer> ListaNumeroAtributos = new ArrayList();
+    static ArrayList<String> ListaImagenes = new ArrayList();
 
     private final static String NOMBRE_BBDD_SQLITE = "PVZHeroes.db";
     private final static String NOMBRE_BBDD_MYSQL = "pvzheroes";
@@ -68,9 +69,10 @@ public class CreadorBDMySQL {
                 ListaHabilidades.add(rs.getString(8));
                 ListaRarezas.add(rs.getString(9));
                 ListaMazos.add(rs.getString(10));
-                ListaURLs.add(rs.getString(11));
-                ListaTipos.add(rs.getString(12));
+                ListaTipos.add(rs.getString(11));
+                ListaURLs.add(rs.getString(12));
                 ListaNumeroAtributos.add(rs.getInt(13));
+                ListaImagenes.add(rs.getString(14));
             }
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -78,7 +80,7 @@ public class CreadorBDMySQL {
     }
 
     private static void RellenarTablaMySQL() {
-        String sentenciaSQL = "INSERT INTO Cartas VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sentenciaSQL = "INSERT INTO Cartas VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement pe = null;
         try {
             pe = conn.prepareStatement(sentenciaSQL);
@@ -102,6 +104,7 @@ public class CreadorBDMySQL {
                 pe.setString(11, ListaTipos.get(i));
                 pe.setString(12, ListaURLs.get(i));
                 pe.setInt(13, ListaNumeroAtributos.get(i));
+                pe.setString(14, ListaImagenes.get(i));
                 pe.executeUpdate();
             } catch (SQLException ex) {
                 System.out.println(ex);

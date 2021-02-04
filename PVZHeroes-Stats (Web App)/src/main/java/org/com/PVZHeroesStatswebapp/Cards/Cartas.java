@@ -20,10 +20,11 @@ public class Cartas {
 	private String URL;
 	private String Tipo;
 	private int NumeroAtributos;
+	private String Imagen;
 	
 	
 	public Cartas(String nombre, int ataque, int defensa, int coste, String clase, String tribus, String atributos,
-			String habilidades, String rareza, String mazo, String tipo, String uRL, int numeroAtributos) {
+			String habilidades, String rareza, String mazo, String tipo, String uRL, int numeroAtributos, String imagen) {
 		Nombre = nombre;
 		Ataque = ataque;
 		Defensa = defensa;
@@ -37,6 +38,7 @@ public class Cartas {
 		Tipo = tipo;
 		URL = uRL;
 		NumeroAtributos = numeroAtributos;
+		Imagen = imagen;
 	}
 
 
@@ -141,9 +143,13 @@ public class Cartas {
 	public void setNumeroAtributos(int numeroAtributos) {
 		NumeroAtributos = numeroAtributos;
 	}
+	
+	public String getImagen() {
+		return Imagen;
+	}
+	public void setImagen(String imagen) {
+		Imagen = imagen;
+	}
 
-	@Override
-	public String toString() {
-		return "Card [Nombre=" + Nombre + ", Ataque=" + Ataque + ", Defensa=" + Defensa + "]";
-	}	
+
 }
