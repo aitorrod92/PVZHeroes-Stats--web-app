@@ -73,6 +73,7 @@ public class CreadorBDMySQL {
                 ListaURLs.add(rs.getString(12));
                 ListaNumeroAtributos.add(rs.getInt(13));
                 ListaImagenes.add(rs.getString(14));
+                System.out.println(" completado");
             }
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -103,7 +104,7 @@ public class CreadorBDMySQL {
                 pe.setString(10, ListaMazos.get(i));
                 pe.setString(11, ListaTipos.get(i));
                 pe.setString(12, ListaURLs.get(i));
-                pe.setInt(13, ListaNumeroAtributos.get(i));
+                pe.setInt(13, ListaNumeroAtributos.get(i));     
                 pe.setString(14, ListaImagenes.get(i));
                 pe.executeUpdate();
             } catch (SQLException ex) {
