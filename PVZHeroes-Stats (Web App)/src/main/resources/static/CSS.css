@@ -1,0 +1,10 @@
+@charset "ISO-8859-1";
+
+.elementoConMargen {
+	position: relative;
+	left: 30px;
+}
+
+#campoTexto {
+	max-width: 100px;
+}

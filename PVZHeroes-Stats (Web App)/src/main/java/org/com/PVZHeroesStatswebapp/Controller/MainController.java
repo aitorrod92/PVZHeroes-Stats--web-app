@@ -16,10 +16,13 @@ public class MainController {
 	private CardsService cardsService;
 	
 	@GetMapping("/index")
-	public String showHelloWorld(Model theModel) {	
+	public String mostrarPaginaInicial(Model theModel) {	
 		ArrayList<Cartas> cartas = cardsService.findAll();
+		Cartas carta = new Cartas();
 		theModel.addAttribute("cards", cartas);
+		theModel.addAttribute("cartaBuscada", carta);
 		return "index";
 	}	
+	
 
 }

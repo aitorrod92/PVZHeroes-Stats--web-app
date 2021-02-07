@@ -43,7 +43,7 @@ public class Cartas {
 	}
 
 
-	protected Cartas() {}
+	public Cartas() {}
 
 	
 	public String getNombre() {

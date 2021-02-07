@@ -13,11 +13,25 @@
 	rel="stylesheet"
 	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
 	crossorigin="anonymous">
-
+<link th:href="@{/CSS.css}" href="/CSS.css" rel="stylesheet"
+	type="text/css" />
 </head>
 
 <body>
-	<h1>Queries in PVZHeroes database</h1>
+	<br>
+	<div class="elementoConMargen">
+		<h1>Queries in PVZHeroes database</h1>
+	</div>
+	<br>
+	<div class="elementoConMargen">
+		<form id="campoTexto" action="#" th:action="@{/index}" th:object="${cartaBuscada}"
+			method="POST">
+			<input type="text" th:field="${cartaBuscada.Nombre}"
+				placeholder="Nombre" class="form-control mb-4 col-4">
+		</form>
+	</div>
+
+	<br>
 	<table
 		class="table table-hover table-dark table-bordered table-striped">
 		<thead>
@@ -62,9 +76,9 @@
 						th:unless="${card.Atributos}=='Sin atributos'"
 						th:style="'color: white'" /><span th:text="${card.Atributos}" /></td>
 				<td><span th:if="${card.Habilidades}=='Sin habilidades'"
-					th:style="'color: gray'"/> <span
+					th:style="'color: gray'" /> <span
 					th:unless="${card.Habilidades}=='Sin habilidades'"
-					th:style="'color: white'"/><span th:text="${card.Habilidades}" /></td>
+					th:style="'color: white'" /><span th:text="${card.Habilidades}" /></td>
 				<td th:text="${card.Rareza}" />
 				<td th:text="${card.Mazo}" />
 				<td><span><img
@@ -82,7 +96,6 @@
 			</tr>
 		</tbody>
 	</table>
-
 </body>
 
 </html>
