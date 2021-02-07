@@ -73,7 +73,6 @@ public class CreadorBDMySQL {
                 ListaURLs.add(rs.getString(12));
                 ListaNumeroAtributos.add(rs.getInt(13));
                 ListaImagenes.add(rs.getString(14));
-                System.out.println(" completado");
             }
         } catch (SQLException ex) {
             System.out.println(ex);
