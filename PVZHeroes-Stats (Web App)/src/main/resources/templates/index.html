@@ -40,10 +40,8 @@
 		<tbody>
 			<tr th:each="card : ${cards}">
 				<td><span><a th:href="${card.URL}"
-						th:text="${card.Nombre}" />
-						<br>
-						<img th:src="@{${card.Imagen}}" th:width="80">
-						</span></td>
+						th:text="${card.Nombre}" /> <br> <img
+						th:src="@{${card.Imagen}}" th:width="80"> </span></td>
 				<td th:text="${card.Ataque}" />
 				<td th:text="${card.Defensa}" />
 				<td th:text="${card.Coste}" />
@@ -59,13 +57,28 @@
 					</span>
 				</span></td>
 				<td th:text="${card.Tribus}" />
-				<td th:text="${card.Atributos}" />
-				<td th:text="${card.Habilidades}" />
+				<td><span th:if="${card.Atributos}=='Sin atributos'"
+					th:style="'color: gray'" /> <span
+						th:unless="${card.Atributos}=='Sin atributos'"
+						th:style="'color: white'" /><span th:text="${card.Atributos}" /></td>
+				<td><span th:if="${card.Habilidades}=='Sin habilidades'"
+					th:style="'color: gray'"/> <span
+					th:unless="${card.Habilidades}=='Sin habilidades'"
+					th:style="'color: white'"/><span th:text="${card.Habilidades}" /></td>
 				<td th:text="${card.Rareza}" />
 				<td th:text="${card.Mazo}" />
 				<td><span><img
 						th:src="@{'/images/'+ ${card.Tipo} + '.png'}" th:width="40"></span></td>
-				<td th:text="${card.NumeroAtributos}" /> 
+				<div th:switch="${card.NumeroAtributos}">
+					<td th:case="0" th:style="'background: firebrick;'"><span
+						th:text=${card.NumeroAtributos} th:style="'color: black;'" /></td>
+					<td th:case="1" th:style="'background: gold;'"><span
+						th:text=${card.NumeroAtributos} th:style="'color: black;'" /></td>
+					<td th:case="2" th:style="'background: limegreen;'"><span
+						th:text=${card.NumeroAtributos} th:style="'color: black;'" /></td>
+					<td th:case="*" th:style="'background: steelblue;'"><span
+						th:text=${card.NumeroAtributos} th:style="'color: black;'" /></td>
+				</div>
 			</tr>
 		</tbody>
 	</table>
