@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>PVZHeroes-Stats (web app)</title>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Bootstrap CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+	crossorigin="anonymous">
+<link th:href="@{/CSS.css}" href="/CSS.css" rel="stylesheet"
+	type="text/css" />
+</head>
+
+<body>
+	<br>
+	<div class="elementoConMargen">
+		<h1>Queries in PVZHeroes database</h1>
+	</div>
+
+	<div class="elementoConMargen">
+		<h2>
+			No existe ninguna carta con el nombre "<span th:style="'color: red; font-weight: bold;'"
+				th:text="${nombreCarta}"></span>" en la Base de Datos
+		</h2>
+	</div>
+
+	<br>
+	<div class="elementoConMargen">
+		<form id="campoTexto" action="#" th:action="@{/busqueda}"
+			th:object="${cartaBuscada}" method="POST">
+			<input type="text" th:field="*{Nombre}" placeholder="Nombre"
+				class="form-control mb-4 col-4">
+			<button type="submit">Buscar</button>
+		</form>
+	</div>
+</body>
+</html>

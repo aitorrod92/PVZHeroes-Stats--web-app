@@ -7,4 +7,5 @@ public interface CardsService {
 
 	public ArrayList<Cartas> findAll();
 	
+	public Cartas findById(String id);
 }
