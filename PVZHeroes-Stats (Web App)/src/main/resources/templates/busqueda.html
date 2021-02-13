@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>PVZHeroes-Stats (web app)</title>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Bootstrap CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+	crossorigin="anonymous">
+<link th:href="@{/CSS.css}" href="/CSS.css" rel="stylesheet"
+	type="text/css" />
+</head>
+
+<body>
+	<br>
+	<div class="elementoConMargen">
+		<h1>Queries in PVZHeroes database</h1>
+	</div>
+	<br>
+	<div class="elementoConMargen">
+		<form id="campoTexto" action="#" th:action="@{/busqueda}" th:object="${cartaBuscada}"
+			method="POST">
+			<input type="text" th:field="*{Nombre}"
+				placeholder="Nombre" class="form-control mb-4 col-4">
+				<button type="submit">Buscar</button>
+		</form>
+	</div>
+
+	<br>
+	<table
+		class="table table-hover table-dark table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Ataque</th>
+				<th>Defensa</th>
+				<th>Coste</th>
+				<th>Clase</th>
+				<th>Tribus</th>
+				<th>Atributos</th>
+				<th>Habilidades</th>
+				<th>Rareza</th>
+				<th>Mazo</th>
+				<th>Tipo</th>
+				<th>NumeroAtributos</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<td><span><a th:href="${cartaBuscada.URL}"
+						th:text="${cartaBuscada.Nombre}" /> <br> <img
+						th:src="@{${cartaBuscada.Imagen}}" th:width="80"> </span></td>
+				<td th:text="${cartaBuscada.Ataque}" />
+				<td th:text="${cartaBuscada.Defensa}" />
+				<td th:text="${cartaBuscada.Coste}" />
+				<td><span th:if="${cartaBuscada.Clase == 'Sin clase'}">Sin clase</span>
+					<span th:unless="${cartaBuscada.Clase == 'Sin clase'}"> <span
+						th:if="not ${cartaBuscada.Clase.matches('.*\s+.*')}"> <img
+							th:src="@{'/images/'+ ${cartaBuscada.Clase} + '.png'}" th:width="30">
+					</span> <span th:unless="not ${cartaBuscada.Clase.matches('.*\s+.*')}"> <span
+							th:each="image,status : ${#strings.arraySplit(cartaBuscada.Clase, ', ')}">
+								<span><img th:src="@{'/images/' + ${image} + '.png'}"
+									th:width="30"> </span>
+						</span>
+					</span>
+				</span></td>
+				<td th:text="${cartaBuscada.Tribus}" />
+				<td><span th:if="${cartaBuscada.Atributos}=='Sin atributos'"
+					th:style="'color: gray'" /> <span
+						th:unless="${cartaBuscada.Atributos}=='Sin atributos'"
+						th:style="'color: white'" /><span th:text="${cartaBuscada.Atributos}" /></td>
+				<td><span th:if="${cartaBuscada.Habilidades}=='Sin habilidades'"
+					th:style="'color: gray'" /> <span
+					th:unless="${cartaBuscada.Habilidades}=='Sin habilidades'"
+					th:style="'color: white'" /><span th:text="${cartaBuscada.Habilidades}" /></td>
+				<td th:text="${cartaBuscada.Rareza}" />
+				<td th:text="${cartaBuscada.Mazo}" />
+				<td><span><img
+						th:src="@{'/images/'+ ${cartaBuscada.Tipo} + '.png'}" th:width="40"></span></td>
+				<div th:switch="${cartaBuscada.NumeroAtributos}">
+					<td th:case="0" th:style="'background: firebrick;'"><span
+						th:text=${cartaBuscada.NumeroAtributos} th:style="'color: black;'" /></td>
+					<td th:case="1" th:style="'background: gold;'"><span
+						th:text=${cartaBuscada.NumeroAtributos} th:style="'color: black;'" /></td>
+					<td th:case="2" th:style="'background: limegreen;'"><span
+						th:text=${cartaBuscada.NumeroAtributos} th:style="'color: black;'" /></td>
+					<td th:case="*" th:style="'background: steelblue;'"><span
+						th:text=${cartaBuscada.NumeroAtributos} th:style="'color: black;'" /></td>
+				</div>
+			</tr>
+		</tbody>
+	</table>
+</body>
+
+</html>
