@@ -87,29 +87,47 @@
 				<td th:text="${card.Ataque}" />
 				<td th:text="${card.Defensa}" />
 				<td th:text="${card.Coste}" />
-				<td><span th:if="${card.Clase == 'Sin clase'}"
-					th:style="'color:gray'"> <span>Sin clase</span>
-				</span> <span th:unless="${card.Clase == 'Sin clase'}"> <span
-						th:if="not ${card.Clase.matches('.*\s+.*')}"> <img
-							th:src="@{'/images/classes/'+ ${card.Clase} + '.png'}"
-							th:width="30">
-					</span> <span th:unless="not ${card.Clase.matches('.*\s+.*')}"> <span
-							th:each="image,status : ${#strings.arraySplit(card.Clase, ', ')}">
-								<span><img
-									th:src="@{'/images/classes/' + ${image} + '.png'}"
-									th:width="30"> </span>
+				<td><span th:if="${card.Clase == 'Sin clase'}" th:style="'color:gray'"> 
+						<span>Sin clase</span>
+					</span> 
+					<span th:unless="${card.Clase == 'Sin clase'}"> 
+						<span th:if="not ${card.Clase.matches('.*\s+.*')}"> 
+							<img th:src="@{'/images/classes/'+ ${card.Clase} + '.png'}" th:width="30">
+						</span> 
+						<span th:unless="not ${card.Clase.matches('.*\s+.*')}"> 
+							<span th:each="image,status : ${#strings.arraySplit(card.Clase, ', ')}">
+								<span>
+									<img th:src="@{'/images/classes/' + ${image} + '.png'}" th:width="30"> 
+								</span>
+							</span>
 						</span>
 					</span>
-				</span></td>
+				</td>
 				
 				<td th:text="${card.Tribus}" />
 
-				<td><span th:if="${card.Atributos}=='Sin atributos'" th:style="'color: gray'"> 
-						<span th:text="${card.Atributos}"/>
+				<td><span th:if="not ${card.Atributos.matches('.*\s+.*')}" th:style="'color: white'"> 
+						<img th:src="@{'/images/abilities/'+ ${card.Atributos} + '.png'}" onerror="this.onerror=null; this.remove();" 
+							th:width="20">
+						<span th:text="${card.Atributos}"/>	
 					</span>
-					<span th:unless="${card.Atributos}=='Sin atributos'" th:style="'color: white'"> 
-						<img th:src="@{'/images/abilities/' + ${card.Atributos} +'.png'}" th:width="20"> 
-						<span th:text="${card.Atributos}"/>
+					<span th:unless="not ${card.Atributos.matches('.*\s+.*')}"> 
+						<span th:if="${card.Atributos}=='Sin atributos'" th:style="'color: gray'"> 
+							<span th:text="${card.Atributos}"/>
+						</span>
+						<span th:unless="${card.Atributos}=='Sin atributos'"> 
+							<span th:each="image,status : ${#strings.arraySplit(card.Atributos, ' ')}">
+								<span>
+									<span th:if="${image}=='Double'"> 
+										<img th:src="@{'/images/abilities/Double Strike.png'}" th:width="20"> 
+									</span>
+									<span th:unless="${image}=='Double'"> 
+										<img th:src="@{'/images/abilities/' + ${image} + '.png'}" onerror="this.onerror=null; this.remove();" th:width="20"> 
+									</span>
+								<span th:text="${image}"/>
+								</span>
+							</span>
+						</span>
 					</span>
 				</td>
 
