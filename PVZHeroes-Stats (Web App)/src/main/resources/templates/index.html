@@ -24,11 +24,11 @@
 	</div>
 	<br>
 	<div class="elementoConMargen">
-		<form id="campoTexto" action="#" th:action="@{/busqueda}" th:object="${cartaBuscada}"
-			method="POST">
-			<input type="text" th:field="*{Nombre}"
-				placeholder="Nombre" class="form-control mb-4 col-4">
-				<button type="submit">Buscar</button>
+		<form id="campoTexto" action="#" th:action="@{/busqueda}"
+			th:object="${cartaBuscada}" method="POST">
+			<input type="text" th:field="*{Nombre}" placeholder="Nombre"
+				class="form-control mb-4 col-4">
+			<button type="submit">Buscar</button>
 		</form>
 	</div>
 
@@ -55,13 +55,14 @@
 		<tbody>
 			<tr th:each="card : ${cards}">
 				<td><span><a th:href="${card.URL}"
-						th:text="${card.Nombre}" /> <br> <img
+						th:text="${card.Nombre}"</a>> <br> <img
 						th:src="@{${card.Imagen}}" th:width="80"> </span></td>
 				<td th:text="${card.Ataque}" />
 				<td th:text="${card.Defensa}" />
 				<td th:text="${card.Coste}" />
-				<td><span th:if="${card.Clase == 'Sin clase'}">Sin clase</span>
-					<span th:unless="${card.Clase == 'Sin clase'}"> <span
+				<td><span th:if="${card.Clase == 'Sin clase'}"
+					th:style="'color:gray'"> <span>Sin clase</span>
+				</span> <span th:unless="${card.Clase == 'Sin clase'}"> <span
 						th:if="not ${card.Clase.matches('.*\s+.*')}"> <img
 							th:src="@{'/images/'+ ${card.Clase} + '.png'}" th:width="30">
 					</span> <span th:unless="not ${card.Clase.matches('.*\s+.*')}"> <span
@@ -72,16 +73,27 @@
 					</span>
 				</span></td>
 				<td th:text="${card.Tribus}" />
+
 				<td><span th:if="${card.Atributos}=='Sin atributos'"
 					th:style="'color: gray'" /> <span
-						th:unless="${card.Atributos}=='Sin atributos'"
-						th:style="'color: white'" /><span th:text="${card.Atributos}" /></td>
+					th:unless="${card.Atributos}=='Sin atributos'"
+					th:style="'color: white'" /><span th:text="${card.Atributos}"></span></td>
+
 				<td><span th:if="${card.Habilidades}=='Sin habilidades'"
 					th:style="'color: gray'" /> <span
 					th:unless="${card.Habilidades}=='Sin habilidades'"
-					th:style="'color: white'" /><span th:text="${card.Habilidades}" /></td>
-				<td th:text="${card.Rareza}" />
-				<td th:text="${card.Mazo}" />
+					th:style="'color: white'" /><span th:text="${card.Habilidades}"></span></td>
+
+				<td><span th:if="${card.Rareza}=='Sin rareza'"
+					th:style="'color: gray'" /> <span
+					th:unless="${card.Rareza}=='Sin rareza'"
+					th:style="'color: white'" /><span th:text="${card.Rareza}"></span></td>
+
+				<td><span th:if="${card.Mazo}=='Sin mazo'"
+					th:style="'color: gray'" /> <span
+					th:unless="${card.Mazo}=='Sin mazo'"
+					th:style="'color: white'" /><span th:text="${card.Mazo}"></span></td>
+
 				<td><span><img
 						th:src="@{'/images/'+ ${card.Tipo} + '.png'}" th:width="40"></span></td>
 				<div th:switch="${card.NumeroAtributos}">
