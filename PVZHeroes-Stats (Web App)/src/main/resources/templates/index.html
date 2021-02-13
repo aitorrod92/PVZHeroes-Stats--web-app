@@ -24,18 +24,40 @@
 	</div>
 	<br>
 
-	<div class="elementoConMargen">
-		<form name='f' th:object="${combinacionCartaCombobox}" th:action="@{/busqueda}" method='POST' >
-			<select th:field="${combinacionCartaCombobox.combobox.valor}">
-				<option value="">--</option>
-				<option th:each="entry : ${combobox.opcionesSeleccion.entrySet()}"
-					th:value="${entry.value}" th:utext="${entry.key}"></option>
-			</select>
-			<input type="text" th:field="${combinacionCartaCombobox.carta.Nombre}" placeholder="Nombre"
-				class="form-control mb-4 col-4">
-			<button type="submit">Buscar</button>
-		</form>
-	</div>
+	<table class="elementoConMargen" id="tablaCombos">
+		<thead>
+			<th>Nombre</th>
+			<!--<th>Ataque</th>
+			<th>Defensa</th>
+			<th>Coste</th>-->
+		</thead>
+		<tbody>
+			<tr>
+				<form name='f' th:object="${combinacionCartaCombobox}"
+					th:action="@{/busqueda}" method='POST'>
+					<td><select
+						th:field="${combinacionCartaCombobox.combobox.valor}">
+							<option value="">--</option>
+							<option
+								th:each="entry : ${combobox.opcionesSeleccion.entrySet()}"
+								th:value="${entry.value}" th:utext="${entry.key}"></option>
+					</select> <input type="text"
+						th:field="${combinacionCartaCombobox.carta.Nombre}"
+						placeholder="Nombre" class="form-control mb-4 col-4">
+						<button type="submit">Buscar</button></td>
+					<!-- <td><select
+					th:field="${combinacionCartaCombobox.combobox.valor}">
+						<option value="">--</option>
+						<option th:each="entry : ${combobox.opcionesSeleccion.entrySet()}"
+							th:value="${entry.value}" th:utext="${entry.key}"></option>
+				</select> <input type="text"
+					th:field="${combinacionCartaCombobox.carta.Nombre}"
+					placeholder="Nombre" class="form-control mb-4 col-4">
+					<br></td> -->
+				</form>
+			</tr>
+		</tbody>
+	</table>
 
 	<br>
 	<table
@@ -69,25 +91,34 @@
 					th:style="'color:gray'"> <span>Sin clase</span>
 				</span> <span th:unless="${card.Clase == 'Sin clase'}"> <span
 						th:if="not ${card.Clase.matches('.*\s+.*')}"> <img
-							th:src="@{'/images/'+ ${card.Clase} + '.png'}" th:width="30">
+							th:src="@{'/images/classes/'+ ${card.Clase} + '.png'}"
+							th:width="30">
 					</span> <span th:unless="not ${card.Clase.matches('.*\s+.*')}"> <span
 							th:each="image,status : ${#strings.arraySplit(card.Clase, ', ')}">
-								<span><img th:src="@{'/images/' + ${image} + '.png'}"
+								<span><img
+									th:src="@{'/images/classes/' + ${image} + '.png'}"
 									th:width="30"> </span>
 						</span>
 					</span>
 				</span></td>
 				<td th:text="${card.Tribus}" />
 
-				<td><span th:if="${card.Atributos}=='Sin atributos'"
-					th:style="'color: gray'" /> <span
-					th:unless="${card.Atributos}=='Sin atributos'"
-					th:style="'color: white'" /><span th:text="${card.Atributos}"></span></td>
+				<td><span th:if="${card.Atributos}=='Sin atributos'" th:style="'color: gray'"> 
+						<span th:text="${card.Atributos}"/>
+					</span>
+					<span th:unless="${card.Atributos}=='Sin atributos'" th:style="'color: white'"> 
+						<img th:src="@{'/images/abilities/' + ${card.Atributos} +'.png'}" th:width="20"> 
+						<span th:text="${card.Atributos}"/>
+					</span>
+				</td>
 
-				<td><span th:if="${card.Habilidades}=='Sin habilidades'"
-					th:style="'color: gray'" /> <span
-					th:unless="${card.Habilidades}=='Sin habilidades'"
-					th:style="'color: white'" /><span th:text="${card.Habilidades}"></span></td>
+				<td><span th:if="${card.Habilidades}=='Sin habilidades'" th:style="'color: gray'" > 
+						<span th:text="${card.Habilidades}"/>
+					</span>
+					<span th:unless="${card.Habilidades}=='Sin habilidades'"
+					th:style="'color: white'"> <span
+						th:text="${card.Habilidades}"></span> <!--  <img th:src="@{'/images/abilities/' + ${card.Habilidades} +'.png'}"
+									th:width="30">--></span></td>
 
 				<td><span th:if="${card.Rareza}=='Sin rareza'"
 					th:style="'color: gray'" /> <span
@@ -100,7 +131,7 @@
 					th:text="${card.Mazo}"></span></td>
 
 				<td><span><img
-						th:src="@{'/images/'+ ${card.Tipo} + '.png'}" th:width="40"></span></td>
+						th:src="@{'/images/types/'+ ${card.Tipo} + '.png'}" th:width="40"></span></td>
 				<div th:switch="${card.NumeroAtributos}">
 					<td th:case="0" th:style="'background: firebrick;'"><span
 						th:text=${card.NumeroAtributos} th:style="'color: black;'" /></td>

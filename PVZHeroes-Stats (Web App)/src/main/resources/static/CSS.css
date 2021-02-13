@@ -6,6 +6,10 @@
 	max-width: 650px;
 }
 
+#tablaCombos{
+	border-spacing: 100px;
+}
+
 #campoTexto {
 	max-width: 100px;
 }

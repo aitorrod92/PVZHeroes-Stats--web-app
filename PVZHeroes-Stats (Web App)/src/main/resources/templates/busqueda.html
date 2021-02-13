@@ -64,10 +64,10 @@
 					th:style="'color:gray'"> <span>Sin clase</span>
 				</span> <span th:unless="${cartaBuscada.Clase == 'Sin clase'}"> <span
 						th:if="not ${cartaBuscada.Clase.matches('.*\s+.*')}"> <img
-							th:src="@{'/images/'+ ${cartaBuscada.Clase} + '.png'}" th:width="30">
+							th:src="@{'/images/classes/'+ ${cartaBuscada.Clase} + '.png'}" th:width="30">
 					</span> <span th:unless="not ${cartaBuscada.Clase.matches('.*\s+.*')}"> <span
 							th:each="image,status : ${#strings.arraySplit(cartaBuscada.Clase, ', ')}">
-								<span><img th:src="@{'/images/' + ${image} + '.png'}"
+								<span><img th:src="@{'/images/classes/' + ${image} + '.png'}"
 									th:width="30"> </span>
 						</span>
 					</span>
