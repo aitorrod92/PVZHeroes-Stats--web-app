@@ -55,7 +55,7 @@
 		<tbody>
 			<tr th:each="card : ${cards}">
 				<td><span><a th:href="${card.URL}"
-						th:text="${card.Nombre}"</a>> <br> <img
+						th:text="${card.Nombre}"></a> <br> <img
 						th:src="@{${card.Imagen}}" th:width="80"> </span></td>
 				<td th:text="${card.Ataque}" />
 				<td th:text="${card.Defensa}" />
