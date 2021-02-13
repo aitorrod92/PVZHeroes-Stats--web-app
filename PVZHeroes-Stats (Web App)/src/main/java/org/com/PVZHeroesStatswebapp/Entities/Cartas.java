@@ -1,6 +1,5 @@
-package org.com.PVZHeroesStatswebapp.Cards;
+package org.com.PVZHeroesStatswebapp.Entities;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 

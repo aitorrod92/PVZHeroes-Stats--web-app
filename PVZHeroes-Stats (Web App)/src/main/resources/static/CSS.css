@@ -3,6 +3,7 @@
 .elementoConMargen {
 	position: relative;
 	left: 30px;
+	max-width: 650px;
 }
 
 #campoTexto {

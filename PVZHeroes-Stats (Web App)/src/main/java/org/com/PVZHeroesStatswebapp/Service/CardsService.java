@@ -1,11 +1,14 @@
 package org.com.PVZHeroesStatswebapp.Service;
 
 import java.util.ArrayList;
-import org.com.PVZHeroesStatswebapp.Cards.Cartas;
+
+import org.com.PVZHeroesStatswebapp.Entities.Cartas;
 
 public interface CardsService {
 
 	public ArrayList<Cartas> findAll();
 	
 	public Cartas findById(String id);
+	
+	public ArrayList<Cartas> findByPatternId(String id, Boolean LIKE);
 }
