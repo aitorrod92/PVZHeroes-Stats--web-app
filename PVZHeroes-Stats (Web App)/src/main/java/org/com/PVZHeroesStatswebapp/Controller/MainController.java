@@ -35,62 +35,67 @@ public class MainController {
 			Model theModel) {
 		String valorCombo = cartaAndCombobox.getCombobox().getValor();
 		String nombreCarta = cartaAndCombobox.getCarta().getNombre().trim();
+		añadirElementos(theModel);
+		ArrayList<Cartas> cartasRecuperadas = new ArrayList();
 		try {
 			if (nombreCarta.equals("")) {
-				añadirListadoCompletoAlModelo(theModel);
-				return "index";
+				cartasRecuperadas = cardsService.findAll();
+				return devolverBusquedaConLista(theModel, cartasRecuperadas);
 			} else {
-				ArrayList<Cartas> cartasRecuperadas = new ArrayList();
 				switch (valorCombo) {
 				case "==":
-					Cartas cartaRecuperada = cardsService.findById(nombreCarta);
-					theModel.addAttribute("cartaBuscada", cartaRecuperada);
-					return "busqueda";
+				case "":
+					return devolverBusquedaMonoResultado(theModel, nombreCarta);
 				case "LIKE":
 					cartasRecuperadas = cardsService.findByPatternId(nombreCarta, true);
-					añadirElementos(theModel);
-					theModel.addAttribute("cards", cartasRecuperadas);
-					return "index"; // TEMPORAL
+					return devolverBusquedaOBusquedaFallida(theModel, nombreCarta, cartasRecuperadas); 
 				case "NOT LIKE":
 					cartasRecuperadas = cardsService.findByPatternId(nombreCarta, false);
-					añadirElementos(theModel);
-					theModel.addAttribute("cards", cartasRecuperadas);
-					return "index";
+					return devolverBusquedaOBusquedaFallida(theModel, nombreCarta, cartasRecuperadas); 
 				default:
 					return null;
 				}
 			}
 		} catch (NoSuchElementException ex) {
-			theModel.addAttribute("nombreCarta", nombreCarta);
-			return "busquedaFallida";
+			return devolverBusquedaFallida(theModel, nombreCarta);
 		}
 	}
 
+	private String devolverBusquedaMonoResultado(Model theModel, String nombreCarta) {
+		Cartas cartaRecuperada = cardsService.findById(nombreCarta);
+		theModel.addAttribute("cartaBuscada", cartaRecuperada);
+		return "busqueda";
+	}
+	
+	private String devolverBusquedaConLista(Model theModel, ArrayList<Cartas> listaCartas) {
+		theModel.addAttribute("listaCartas", listaCartas);
+		return "index";
+	}
+	
 	private void añadirListadoCompletoAlModelo(Model theModel) {
 		ArrayList<Cartas> cartas = cardsService.findAll();
-		theModel.addAttribute("cards", cartas);
+		theModel.addAttribute("listaCartas", cartas);
 	}
-		
+
 	private void añadirElementos(Model theModel) {
-		Cartas cartaBuscada = añadirCartaBuscada(theModel);
-		Combobox combobox = añadirCombobox(theModel);
-		// Para poder pasar dos atributos en el formulario, estos se tienen que poner en
-		// un objeto común
+		Cartas cartaBuscada = new Cartas();
+		Combobox combobox = new Combobox();
+		// Para poder pasar dos atributos en el formulario, estos se tienen que poner en un objeto común
 		theModel.addAttribute("combinacionCartaCombobox", new CartaAndCombobox(cartaBuscada, combobox));
 	}
-
-	private Combobox añadirCombobox(Model theModel) {
-		Combobox combobox = new Combobox();
-		theModel.addAttribute("combobox", combobox);
-		return combobox;
-	}
-
-	private Cartas añadirCartaBuscada(Model theModel) {
-		Cartas cartaBuscada = new Cartas();
-		theModel.addAttribute("cartaBuscada", cartaBuscada);
-		return cartaBuscada;
-	}
-
 	
+	private String devolverBusquedaOBusquedaFallida(Model theModel, String nombreCarta,
+			ArrayList<Cartas> cartasRecuperadas) {
+		if (cartasRecuperadas.isEmpty()) {
+			return devolverBusquedaFallida(theModel, nombreCarta);
+		} else {
+			return devolverBusquedaConLista(theModel, cartasRecuperadas);
+		}
+	}
 	
+	private String devolverBusquedaFallida(Model theModel, String nombreCarta) {
+		theModel.addAttribute("nombreCarta", nombreCarta);
+		theModel.addAttribute("cartaBuscada", new Cartas());
+		return "busquedaFallida";
+	}
 }

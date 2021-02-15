@@ -23,14 +23,31 @@
 		<h1>Queries in PVZHeroes database</h1>
 	</div>
 	<br>
-	<div class="elementoConMargen">
-		<form id="campoTexto" action="#" th:action="@{/busqueda}" th:object="${cartaBuscada}"
-			method="POST">
-			<input type="text" th:field="*{Nombre}"
-				placeholder="Nombre" class="form-control mb-4 col-4">
-				<button type="submit">Buscar</button>
-		</form>
-	</div>
+	<table class="elementoConMargen" id="tablaCombos">
+		<thead>
+			<th>Nombre</th>
+			<!--<th>Ataque</th>
+			<th>Defensa</th>
+			<th>Coste</th>-->
+		</thead>
+		<tbody>
+			<tr >
+				<form name='f' th:object="${combinacionCartaCombobox}"
+					th:action="@{/busqueda}" method='POST'>
+					<td><select
+						th:field="${combinacionCartaCombobox.combobox.valor}">
+							<option value="">--</option>
+							<option
+								th:each="entry : ${combinacionCartaCombobox.combobox.opcionesSeleccion.entrySet()}"
+								th:value="${entry.value}" th:utext="${entry.key}"></option>
+					</select> <input type="text"
+						th:field="${combinacionCartaCombobox.carta.Nombre}"
+						placeholder="Nombre" class="form-control mb-4 col-4">
+						<button type="submit">Buscar</button></td>
+				</form>
+			</tr>
+		</tbody>
+	</table>
 
 	<br>
 	<table

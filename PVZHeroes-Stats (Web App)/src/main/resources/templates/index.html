@@ -32,28 +32,19 @@
 			<th>Coste</th>-->
 		</thead>
 		<tbody>
-			<tr>
+			<tr >
 				<form name='f' th:object="${combinacionCartaCombobox}"
 					th:action="@{/busqueda}" method='POST'>
 					<td><select
 						th:field="${combinacionCartaCombobox.combobox.valor}">
 							<option value="">--</option>
 							<option
-								th:each="entry : ${combobox.opcionesSeleccion.entrySet()}"
+								th:each="entry : ${combinacionCartaCombobox.combobox.opcionesSeleccion.entrySet()}"
 								th:value="${entry.value}" th:utext="${entry.key}"></option>
 					</select> <input type="text"
 						th:field="${combinacionCartaCombobox.carta.Nombre}"
 						placeholder="Nombre" class="form-control mb-4 col-4">
 						<button type="submit">Buscar</button></td>
-					<!-- <td><select
-					th:field="${combinacionCartaCombobox.combobox.valor}">
-						<option value="">--</option>
-						<option th:each="entry : ${combobox.opcionesSeleccion.entrySet()}"
-							th:value="${entry.value}" th:utext="${entry.key}"></option>
-				</select> <input type="text"
-					th:field="${combinacionCartaCombobox.carta.Nombre}"
-					placeholder="Nombre" class="form-control mb-4 col-4">
-					<br></td> -->
 				</form>
 			</tr>
 		</tbody>
@@ -78,9 +69,8 @@
 				<th>NumeroAtributos</th>
 			</tr>
 		</thead>
-
 		<tbody>
-			<tr th:each="card : ${cards}">
+			<tr th:each="card : ${listaCartas}">
 				<td><span><a th:href="${card.URL}"
 						th:text="${card.Nombre}"></a> <br> <img
 						th:src="@{${card.Imagen}}" th:width="80"> </span></td>
