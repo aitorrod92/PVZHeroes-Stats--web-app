@@ -18,14 +18,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class MainController {
-	HashMap<String, String> OpcionesSelección = new HashMap<String, String>();
 
+	String [] listaPosiblesImagenes = {"strength", "suns", "brains", "freeze", "health"};
+	
 	@Autowired
 	private CardsService cardsService;
 
 	@GetMapping("/index")
 	public String mostrarPaginaInicial(Model theModel) {
 		añadirListadoCompletoAlModelo(theModel);
+		theModel.addAttribute("listaPosiblesImagenes", listaPosiblesImagenes);
 		añadirElementos(theModel);
 		return "index";
 	}
@@ -74,6 +76,20 @@ public class MainController {
 	
 	private void añadirListadoCompletoAlModelo(Model theModel) {
 		ArrayList<Cartas> cartas = cardsService.findAll();
+		for (Cartas carta : cartas) {
+			String habilidades = carta.getHabilidades();
+			for (String nombreImagen : listaPosiblesImagenes) {
+				if (habilidades.contains(nombreImagen)) {
+					int localizaciónImagen = habilidades.indexOf(nombreImagen);
+					int longitudNombreImagen = nombreImagen.length();
+					// "%" y "#" indican el inicio y el final, respectivamente, de las imágenes
+					habilidades = habilidades.substring(0, localizaciónImagen) + "%" + 
+							nombreImagen + "#" + habilidades.substring(localizaciónImagen +
+									longitudNombreImagen);
+					carta.setHabilidades(habilidades);
+				}
+			}
+		}
 		theModel.addAttribute("listaCartas", cartas);
 	}
 
