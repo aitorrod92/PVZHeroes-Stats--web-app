@@ -19,8 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MainController {
 
-	String [] listaPosiblesImagenes = {"strength", "suns", "brains", "freeze", "health"};
-	
+	String[] listaPosiblesImagenes = { "strength", "suns", "brains", "freeze", "health", "bullseye", "double strike",
+			"strikethrough", "deadly", "untrickable", "overshoot", "frenzy"};
+
 	@Autowired
 	private CardsService cardsService;
 
@@ -50,10 +51,10 @@ public class MainController {
 					return devolverBusquedaMonoResultado(theModel, nombreCarta);
 				case "LIKE":
 					cartasRecuperadas = cardsService.findByPatternId(nombreCarta, true);
-					return devolverBusquedaOBusquedaFallida(theModel, nombreCarta, cartasRecuperadas); 
+					return devolverBusquedaOBusquedaFallida(theModel, nombreCarta, cartasRecuperadas);
 				case "NOT LIKE":
 					cartasRecuperadas = cardsService.findByPatternId(nombreCarta, false);
-					return devolverBusquedaOBusquedaFallida(theModel, nombreCarta, cartasRecuperadas); 
+					return devolverBusquedaOBusquedaFallida(theModel, nombreCarta, cartasRecuperadas);
 				default:
 					return null;
 				}
@@ -68,12 +69,12 @@ public class MainController {
 		theModel.addAttribute("cartaBuscada", cartaRecuperada);
 		return "busqueda";
 	}
-	
+
 	private String devolverBusquedaConLista(Model theModel, ArrayList<Cartas> listaCartas) {
 		theModel.addAttribute("listaCartas", listaCartas);
 		return "index";
 	}
-	
+
 	private void añadirListadoCompletoAlModelo(Model theModel) {
 		ArrayList<Cartas> cartas = cardsService.findAll();
 		for (Cartas carta : cartas) {
@@ -83,9 +84,8 @@ public class MainController {
 					int localizaciónImagen = habilidades.indexOf(nombreImagen);
 					int longitudNombreImagen = nombreImagen.length();
 					// "%" y "#" indican el inicio y el final, respectivamente, de las imágenes
-					habilidades = habilidades.substring(0, localizaciónImagen) + "%" + 
-							nombreImagen + "#" + habilidades.substring(localizaciónImagen +
-									longitudNombreImagen);
+					habilidades = habilidades.substring(0, localizaciónImagen) + "%" + nombreImagen + "#"
+							+ habilidades.substring(localizaciónImagen + longitudNombreImagen);
 					carta.setHabilidades(habilidades);
 				}
 			}
@@ -96,10 +96,11 @@ public class MainController {
 	private void añadirElementos(Model theModel) {
 		Cartas cartaBuscada = new Cartas();
 		Combobox combobox = new Combobox();
-		// Para poder pasar dos atributos en el formulario, estos se tienen que poner en un objeto común
+		// Para poder pasar dos atributos en el formulario, estos se tienen que poner en
+		// un objeto común
 		theModel.addAttribute("combinacionCartaCombobox", new CartaAndCombobox(cartaBuscada, combobox));
 	}
-	
+
 	private String devolverBusquedaOBusquedaFallida(Model theModel, String nombreCarta,
 			ArrayList<Cartas> cartasRecuperadas) {
 		if (cartasRecuperadas.isEmpty()) {
@@ -108,7 +109,7 @@ public class MainController {
 			return devolverBusquedaConLista(theModel, cartasRecuperadas);
 		}
 	}
-	
+
 	private String devolverBusquedaFallida(Model theModel, String nombreCarta) {
 		theModel.addAttribute("nombreCarta", nombreCarta);
 		theModel.addAttribute("cartaBuscada", new Cartas());
