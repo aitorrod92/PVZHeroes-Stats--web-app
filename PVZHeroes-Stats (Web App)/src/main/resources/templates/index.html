@@ -148,9 +148,6 @@
 											<span th:if="${fragmentoFinal2.matches('.*%.*')}">
 												<span th:with="indiceNombre3=${#strings.indexOf(fragmentoFinal2,'%')}">
 												<span th:with="indiceNombreFinal3=${#strings.indexOf(fragmentoFinal2,'#')}">
-												<!--<span th:text="${fragmentoFinal2}"></span> 
-												<span th:text="${indiceNombre3}"></span> 
-												<span th:text="${indiceNombreFinal3}"></span> -->
 												<span th:with="nombreImagen3=${#strings.substring(fragmentoFinal2, indiceNombre3+1, indiceNombreFinal3)}">
 												<span th:with="fragmentoFinal3=${#strings.substring(fragmentoFinal2,indiceNombreFinal3)}">	
 												<span th:text="${#strings.substring(fragmentoFinal2,0,indiceNombre3)}"></span> 

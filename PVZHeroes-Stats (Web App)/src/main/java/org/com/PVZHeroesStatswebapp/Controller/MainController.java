@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MainController {
 
-	String[] listaPosiblesImagenes = { "strength", "suns", "brains", "freeze", "health", "bullseye", "double strike",
-			"strikethrough", "deadly", "untrickable", "overshoot", "frenzy"};
+	String[] listaPosiblesImagenes = { "strength", "health", "suns", "brains", "freeze", "bullseye", "double strike",
+			"strikethrough", "deadly", "untrickable", "overshoot", "frenzy" };
 
 	@Autowired
 	private CardsService cardsService;
@@ -81,12 +81,8 @@ public class MainController {
 			String habilidades = carta.getHabilidades();
 			for (String nombreImagen : listaPosiblesImagenes) {
 				if (habilidades.contains(nombreImagen)) {
-					int localizaciónImagen = habilidades.indexOf(nombreImagen);
-					int longitudNombreImagen = nombreImagen.length();
-					// "%" y "#" indican el inicio y el final, respectivamente, de las imágenes
-					habilidades = habilidades.substring(0, localizaciónImagen) + "%" + nombreImagen + "#"
-							+ habilidades.substring(localizaciónImagen + longitudNombreImagen);
-					carta.setHabilidades(habilidades);
+					int Repeticiones = calcularNumeroVecesContieneImagen(habilidades, nombreImagen);
+					habilidades = añadirMarcadoresImagenesAHabilidades(carta, habilidades, nombreImagen, Repeticiones);
 				}
 			}
 		}
@@ -115,4 +111,49 @@ public class MainController {
 		theModel.addAttribute("cartaBuscada", new Cartas());
 		return "busquedaFallida";
 	}
+	
+	
+	private int calcularNumeroVecesContieneImagen(String habilidades, String imagen) {
+		int ultimoIndice = 0;
+		int repeticiones = 0;
+
+		while(ultimoIndice != -1){
+
+			ultimoIndice = habilidades.indexOf(imagen,ultimoIndice);
+
+		    if(ultimoIndice != -1){
+		        repeticiones ++;
+		        ultimoIndice += imagen.length();
+		    }
+		}
+		return repeticiones;
+	}
+	
+	
+	private String añadirMarcadoresImagenesAHabilidades(Cartas carta, String habilidades, String nombreImagen,
+			int Repeticiones) {
+		for (int i = 0; i < Repeticiones; i++) {
+			int localizaciónImagen;
+			if (i == 0) {
+				localizaciónImagen = habilidades.indexOf(nombreImagen);
+			} else {
+				localizaciónImagen = habilidades.lastIndexOf(nombreImagen);
+			}
+			int longitudNombreImagen = nombreImagen.length();
+			// "%" y "#" indican el inicio y el final, respectivamente, de las imágenes
+			habilidades = habilidades.substring(0, localizaciónImagen) + "%" + nombreImagen + "#"
+					+ habilidades.substring(localizaciónImagen + longitudNombreImagen);
+			carta.setHabilidades(habilidades);
+			/*if (i==1) {
+			System.out.println(carta.getHabilidades());}*/
+			
+		}
+		return habilidades;
+	}
+	
+	
+	
 }
+
+
+
