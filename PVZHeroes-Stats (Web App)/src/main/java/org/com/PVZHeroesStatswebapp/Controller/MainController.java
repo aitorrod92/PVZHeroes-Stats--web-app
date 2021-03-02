@@ -7,6 +7,7 @@ import java.util.NoSuchElementException;
 
 import org.com.PVZHeroesStatswebapp.Entities.CartaAndCombobox;
 import org.com.PVZHeroesStatswebapp.Entities.Cartas;
+import org.com.PVZHeroesStatswebapp.Entities.ComboNumeroFiltros;
 import org.com.PVZHeroesStatswebapp.Entities.Combobox;
 import org.com.PVZHeroesStatswebapp.Service.CardsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,9 +101,11 @@ public class MainController {
 	private void añadirElementos(Model theModel) {
 		Cartas cartaBuscada = new Cartas();
 		Combobox combobox = new Combobox();
+		ComboNumeroFiltros numeroFiltros = new ComboNumeroFiltros();
 		// Para poder pasar dos atributos en el formulario, estos se tienen que poner en
 		// un objeto común
 		theModel.addAttribute("combinacionCartaCombobox", new CartaAndCombobox(cartaBuscada, combobox));
+		theModel.addAttribute("comboNumeroFiltros", numeroFiltros);
 	}
 
 	private String devolverBusquedaOBusquedaFallida(Model theModel, String nombreCarta,
