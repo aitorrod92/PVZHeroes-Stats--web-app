@@ -41,7 +41,7 @@
 							<option
 								th:each="entry : ${combinacionCartaCombobox.combobox.opcionesSeleccion.entrySet()}"
 								th:value="${entry.value}" th:utext="${entry.key}"></option>
-					</select> <input type="text"
+					</select> <input autofocus type="text"
 						th:field="${combinacionCartaCombobox.carta.Nombre}"
 						placeholder="Nombre" class="form-control mb-4 col-4">
 						<button type="submit">Buscar</button></td>
@@ -129,11 +129,70 @@
 							<span th:text="${card.Habilidades}"/>
 						</span>
 						<span th:unless="not ${card.Habilidades.matches('.*%.*')}">
-							<span th:if="${card.Habilidades.matches('.*%.*%.*%.*')}"> <!-- 3 IMAGENES -->
-							<span th:with="indiceNombre=${#strings.indexOf(card.Habilidades,'%')}">
-							<span th:with="indiceNombreFinal=${#strings.indexOf(card.Habilidades,'#')}">
-							<span th:with="nombreImagen=${#strings.substring(card.Habilidades, indiceNombre+1, indiceNombreFinal)}">
-							<span th:with="fragmentoFinal=${#strings.substring(card.Habilidades,indiceNombreFinal+1)}">
+							<span th:if="${card.Habilidades.matches('.*%.*%.*%.*%.*')}"> <!-- 4 IMAGENES -->
+								<span th:with="indiceNombre=${#strings.indexOf(card.Habilidades,'%')}">
+								<span th:with="indiceNombreFinal=${#strings.indexOf(card.Habilidades,'#')}">
+								<span th:with="nombreImagen=${#strings.substring(card.Habilidades, indiceNombre+1, indiceNombreFinal)}">
+								<span th:with="fragmentoFinal=${#strings.substring(card.Habilidades,indiceNombreFinal+1)}">
+								<span th:text="${#strings.substring(card.Habilidades,0,indiceNombre)}"></span> 
+								<img th:src="@{'/images/abilities/' + ${nombreImagen} +'.png'}" 
+									onerror="this.onerror=null; this.remove();" th:width="30">
+									<span th:if="${fragmentoFinal.matches('.*%.*')}">
+										 	<span th:with="indiceNombre2=${#strings.indexOf(fragmentoFinal,'%')}">
+											<span th:with="indiceNombreFinal2=${#strings.indexOf(fragmentoFinal,'#')}">
+											<span th:with="nombreImagen2=${#strings.substring(fragmentoFinal, indiceNombre2+1, indiceNombreFinal2)}">
+											<span th:text="${#strings.substring(fragmentoFinal,0,indiceNombre2)}"></span> 
+											<img th:src="@{'/images/abilities/' + ${nombreImagen2} +'.png'}" 
+												onerror="this.onerror=null; this.remove();" th:width="30">		
+											<span th:with="fragmentoFinal2=${#strings.substring(fragmentoFinal,indiceNombreFinal2+1)}">		
+											<span th:if="${fragmentoFinal2.matches('.*%.*')}">
+												<span th:with="indiceNombre3=${#strings.indexOf(fragmentoFinal2,'%')}">
+												<span th:with="indiceNombreFinal3=${#strings.indexOf(fragmentoFinal2,'#')}">
+												<span th:with="nombreImagen3=${#strings.substring(fragmentoFinal2, indiceNombre3+1, indiceNombreFinal3)}">
+												<span th:with="fragmentoFinal3=${#strings.substring(fragmentoFinal2,indiceNombreFinal3)}">	
+												<span th:text="${#strings.substring(fragmentoFinal2,0,indiceNombre3)}"></span> 
+												<img th:src="@{'/images/abilities/' + ${nombreImagen3} +'.png'}" 
+													onerror="this.onerror=null; this.remove();" th:width="30">
+												<span th:with="fragmentoFinal3=${#strings.substring(fragmentoFinal2,indiceNombreFinal3+1)}">		
+													<span th:if="${fragmentoFinal3.matches('.*%.*')}">
+													<span th:with="indiceNombre4=${#strings.indexOf(fragmentoFinal3,'%')}">
+													<span th:with="indiceNombreFinal4=${#strings.indexOf(fragmentoFinal3,'#')}">
+													<span th:with="nombreImagen4=${#strings.substring(fragmentoFinal3, indiceNombre4+1, indiceNombreFinal4)}">
+													<span th:with="fragmentoFinal4=${#strings.substring(fragmentoFinal3,indiceNombreFinal4)}">	
+													<span th:text="${#strings.substring(fragmentoFinal3,0,indiceNombre4)}"></span> 
+													<img th:src="@{'/images/abilities/' + ${nombreImagen4} +'.png'}" 
+														onerror="this.onerror=null; this.remove();" th:width="30">
+													<span th:text="${#strings.replace(fragmentoFinal4,'#','')} "></span>  
+													</span> 
+													</span>
+													</span>
+													</span>
+													</span>
+													<span th:unless="${fragmentoFinal3.matches('.*%.*')}">
+														<span th:text="${#strings.replace(fragmentoFinal2,'#','')} "></span> 
+													</span>
+												</span> 
+												</span>
+												</span>		
+										</span>
+									</span>
+								</span>
+								</span>
+								</span>
+								</span>
+							</span>
+							</span>
+							</span>
+							</span>
+							</span>
+							</span>
+							</span>
+							<span th:unless="${card.Habilidades.matches('.*%.*%.*%.*%.*')}">
+								<span th:if="${card.Habilidades.matches('.*%.*%.*%.*')}"> <!-- 3 IMAGENES -->
+								<span th:with="indiceNombre=${#strings.indexOf(card.Habilidades,'%')}">
+								<span th:with="indiceNombreFinal=${#strings.indexOf(card.Habilidades,'#')}">
+								<span th:with="nombreImagen=${#strings.substring(card.Habilidades, indiceNombre+1, indiceNombreFinal)}">
+								<span th:with="fragmentoFinal=${#strings.substring(card.Habilidades,indiceNombreFinal+1)}">
 								<span th:text="${#strings.substring(card.Habilidades,0,indiceNombre)}"></span> 
 								<img th:src="@{'/images/abilities/' + ${nombreImagen} +'.png'}" 
 									onerror="this.onerror=null; this.remove();" th:width="30">
@@ -167,23 +226,22 @@
 											</span>		
 										</span>
 									</span>
-		
-							</span>
-							</span>
-							</span>
-							</span>
-							</span>
-							<span th:unless="${card.Habilidades.matches('.*%.*%.*%.*')}">
-								<span th:if="${card.Habilidades.matches('.*%.*%.*')}"> <!-- 2 IMAGENES -->
-									<span th:with="indiceNombre=${#strings.indexOf(card.Habilidades,'%')}">
-									<span th:with="indiceNombreFinal=${#strings.indexOf(card.Habilidades,'#')}">
-									<span th:with="nombreImagen=${#strings.substring(card.Habilidades, indiceNombre+1, indiceNombreFinal)}">
-									<span th:with="fragmentoFinal=${#strings.substring(card.Habilidades,indiceNombreFinal+1)}">
-									<span th:text="${#strings.substring(card.Habilidades,0,indiceNombre)}"></span> 
-									<img th:src="@{'/images/abilities/' + ${nombreImagen} +'.png'}" 
+								</span>
+								</span>
+								</span>
+								</span>
+								</span>
+								<span th:unless="${card.Habilidades.matches('.*%.*%.*%.*')}">
+									<span th:if="${card.Habilidades.matches('.*%.*%.*')}"> <!-- 2 IMAGENES -->
+										<span th:with="indiceNombre=${#strings.indexOf(card.Habilidades,'%')}">
+										<span th:with="indiceNombreFinal=${#strings.indexOf(card.Habilidades,'#')}">
+										<span th:with="nombreImagen=${#strings.substring(card.Habilidades, indiceNombre+1, indiceNombreFinal)}">
+										<span th:with="fragmentoFinal=${#strings.substring(card.Habilidades,indiceNombreFinal+1)}">
+										<span th:text="${#strings.substring(card.Habilidades,0,indiceNombre)}"></span> 
+										<img th:src="@{'/images/abilities/' + ${nombreImagen} +'.png'}" 
 										onerror="this.onerror=null; this.remove();" th:width="30">
-									<span th:if="${fragmentoFinal.matches('.*%.*')}">
-										 <span th:with="indiceNombre2=${#strings.indexOf(fragmentoFinal,'%')}">
+										<span th:if="${fragmentoFinal.matches('.*%.*')}">
+										 	<span th:with="indiceNombre2=${#strings.indexOf(fragmentoFinal,'%')}">
 											<span th:with="indiceNombreFinal2=${#strings.indexOf(fragmentoFinal,'#')}">
 											<span th:with="nombreImagen2=${#strings.substring(fragmentoFinal, indiceNombre2+1, indiceNombreFinal2)}">
 											<span th:text="${#strings.substring(fragmentoFinal,0,indiceNombre2)}"></span> 
@@ -194,29 +252,31 @@
 											</span> 
 											</span>
 											</span>		
+											</span>
+										</span>
+										</span>
+										</span>
+										</span>
 										</span>
 									</span>
-									</span>
-									</span>
-									</span>
-									</span>
-								</span>
 									<span th:unless="${card.Habilidades.matches('.*%.*%.*')}"> <!-- SOLO UNA IMAGEN -->
-									<span th:with="indiceNombre=${#strings.indexOf(card.Habilidades,'%')}">
-									<span th:with="indiceNombreFinal=${#strings.indexOf(card.Habilidades,'#')}">
-									<span th:with="nombreImagen=${#strings.substring(card.Habilidades, indiceNombre+1, indiceNombreFinal)}">
-									<span th:with="fragmentoFinal=${#strings.substring(card.Habilidades,indiceNombreFinal+1)}">
-									<span th:text="${#strings.substring(card.Habilidades,0,indiceNombre)}"></span> 
-									<img th:src="@{'/images/abilities/' + ${nombreImagen} +'.png'}" 
-										onerror="this.onerror=null; this.remove();" th:width="30">
-									<span th:text="${#strings.substring(card.Habilidades,indiceNombreFinal+1)}"></span> 
+										<span th:with="indiceNombre=${#strings.indexOf(card.Habilidades,'%')}">
+										<span th:with="indiceNombreFinal=${#strings.indexOf(card.Habilidades,'#')}">
+										<span th:with="nombreImagen=${#strings.substring(card.Habilidades, indiceNombre+1, indiceNombreFinal)}">
+										<span th:with="fragmentoFinal=${#strings.substring(card.Habilidades,indiceNombreFinal+1)}">
+										<span th:text="${#strings.substring(card.Habilidades,0,indiceNombre)}"></span> 
+										<img th:src="@{'/images/abilities/' + ${nombreImagen} +'.png'}" 
+											onerror="this.onerror=null; this.remove();" th:width="30">
+										<span th:text="${#strings.substring(card.Habilidades,indiceNombreFinal+1)}"></span> 
 									</span>
 									</span>
 									</span>
 									</span>
 									</span>
 							</span>
-						</span>
+							</span>
+							</span>
+							</span>
 					</td>
 				
 				<td><span th:if="${card.Rareza}=='Sin rareza'"
@@ -244,6 +304,24 @@
 			</tr>
 		</tbody>
 	</table>
+	
+	<!-- 
+	<form action="get">
+        <input type="text" id="valor"/>
+        <input type="button" value="Confirmar" onclick="ProbarMetodo()" />
+    </form>
+    <br>
+    <p class="hola"></p>
+	
+	<script type="text/javascript">
+	
+	function ProbarMetodo(String1){
+		var String = document.getElementById("valor").value;
+		document.getElementsByClassName("hola") = String;
+		
+	}
+	</script> -->
+	
 </body>
 
 </html>
