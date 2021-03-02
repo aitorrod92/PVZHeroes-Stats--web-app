@@ -66,17 +66,26 @@ public class MainController {
 
 	private String devolverBusquedaMonoResultado(Model theModel, String nombreCarta) {
 		Cartas cartaRecuperada = cardsService.findById(nombreCarta);
-		theModel.addAttribute("cartaBuscada", cartaRecuperada);
+		ArrayList<Cartas> carta = new ArrayList<Cartas>();
+		carta.add(cartaRecuperada);
+		añadirImagenesHabilidades(carta);
+		theModel.addAttribute("cartaBuscada", carta.get(0));
 		return "busqueda";
 	}
 
 	private String devolverBusquedaConLista(Model theModel, ArrayList<Cartas> listaCartas) {
+		añadirImagenesHabilidades(listaCartas);
 		theModel.addAttribute("listaCartas", listaCartas);
 		return "index";
 	}
 
 	private void añadirListadoCompletoAlModelo(Model theModel) {
 		ArrayList<Cartas> cartas = cardsService.findAll();
+		añadirImagenesHabilidades(cartas);
+		theModel.addAttribute("listaCartas", cartas);
+	}
+
+	private void añadirImagenesHabilidades(ArrayList<Cartas> cartas) {
 		for (Cartas carta : cartas) {
 			String habilidades = carta.getHabilidades();
 			for (String nombreImagen : listaPosiblesImagenes) {
@@ -86,7 +95,6 @@ public class MainController {
 				}
 			}
 		}
-		theModel.addAttribute("listaCartas", cartas);
 	}
 
 	private void añadirElementos(Model theModel) {

@@ -291,6 +291,7 @@
 
 				<td><span><img
 						th:src="@{'/images/types/'+ ${card.Tipo} + '.png'}" th:width="40"></span></td>
+						
 				<div th:switch="${card.NumeroAtributos}">
 					<td th:case="0" th:style="'background: firebrick;'"><span
 						th:text=${card.NumeroAtributos} th:style="'color: black;'" /></td>
