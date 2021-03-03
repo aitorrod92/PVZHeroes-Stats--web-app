@@ -15,16 +15,20 @@ public class ComboboxNumerico extends ComboboxGenerico {
 	}
 	
 	public ComboboxNumerico() {
-		opcionesSeleccion.put(">", ">");
-		opcionesSeleccion.put("=", "=");
-		opcionesSeleccion.put("<", "<");
+		generarOpcionesSeleccion();
 	}
 	
 	public ComboboxNumerico(String valor) {
+		generarOpcionesSeleccion();
+		this.valor = valor;
+	}
+	
+	private void generarOpcionesSeleccion() {
 		opcionesSeleccion.put(">", ">");
 		opcionesSeleccion.put("=", "=");
 		opcionesSeleccion.put("<", "<");
-		this.valor = valor;
+		opcionesSeleccion.put(">=", ">=");
+		opcionesSeleccion.put("<=", "<=");
 	}
 	
 }

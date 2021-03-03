@@ -37,18 +37,10 @@ public class CardsServiceImp implements CardsService {
 	}
 
 	@Override
-	public ArrayList<Cartas> findByValue(int valor, String Operador) {
-		switch (Operador) {
-		case ">":
-			return (ArrayList<Cartas>) cardsRepository.findByValueGreaterThan(valor);
-		case "=":
-			return (ArrayList<Cartas>) cardsRepository.findByValueEqualTo(valor);
-			/* Usar dynamic queries en lugar de diferentes métodos https://www.baeldung.com/spring-data-jpa-query*/
-		case "<":
-			return (ArrayList<Cartas>) cardsRepository.findByValueLessThan(valor);
-		default:
-			return null;
-		}
+	public ArrayList<Cartas> findByValue(int valor, String Operador) { 
+		// NECESARIO MODIFICARLO PARA QUE SE PASEN OTROS ATRIBUTOS EN FUNCIÓN DE LO SELECCIONADO
+		return (ArrayList<Cartas>)cardsRepository.findByValue(valor, Operador, "Ataque");
 
 	}
 }
+

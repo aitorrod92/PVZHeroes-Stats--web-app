@@ -57,7 +57,7 @@
 							placeholder="Nombre" class="form-control mb-4 col-4">
 						<button type="submit">Buscar</button>
 					</form></td>
-					
+
 				<td><form hidden class="filtroAdicional" name='f'
 						th:object="${combinacionCartaCombobox2}" th:action="@{/busqueda}"
 						method='POST'>
@@ -71,7 +71,7 @@
 							placeholder="Ataque" class="form-control mb-4 col-4">
 						<button type="submit">Buscar</button>
 					</form></td>
-					
+
 				<td><form hidden class="filtroAdicional" name='f'
 						th:object="${combinacionCartaCombobox}" th:action="@{/busqueda}"
 						method='POST'>
@@ -86,8 +86,9 @@
 						<button type="submit">Buscar</button>
 					</form></td>
 
-				<td><form hidden class="filtroAdicional" name='f' th:object="${combinacionCartaCombobox}"
-						th:action="@{/busqueda}" method='POST'>
+				<td><form hidden class="filtroAdicional" name='f'
+						th:object="${combinacionCartaCombobox}" th:action="@{/busqueda}"
+						method='POST'>
 						<select th:field="${combinacionCartaCombobox.combobox.valor}">
 							<option value="">--</option>
 							<option
@@ -414,14 +415,6 @@
 		</tbody>
 	</table>
 
-	<!-- 
-	<form action="get">
-        <input type="text" id="valor"/>
-        <input type="button" value="Confirmar" onclick="ProbarMetodo()" />
-    </form>
-    <br>
-    <p class="hola"></p>
-	-->
 	<script src="javascript/scriptFiltros.js">
 		
 	</script>
