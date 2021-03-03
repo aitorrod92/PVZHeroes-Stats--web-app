@@ -1,14 +1,12 @@
 package org.com.PVZHeroesStatswebapp.Controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.NoSuchElementException;
-
 import org.com.PVZHeroesStatswebapp.Entities.CartaAndCombobox;
 import org.com.PVZHeroesStatswebapp.Entities.Cartas;
 import org.com.PVZHeroesStatswebapp.Entities.ComboNumeroFiltros;
-import org.com.PVZHeroesStatswebapp.Entities.Combobox;
+import org.com.PVZHeroesStatswebapp.Entities.ComboboxNumerico;
+import org.com.PVZHeroesStatswebapp.Entities.ComboboxStrings;
 import org.com.PVZHeroesStatswebapp.Service.CardsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,8 +34,9 @@ public class MainController {
 
 	@RequestMapping("/busqueda")
 	public String mostrarPaginaBusqueda(@ModelAttribute("combinaciónCartaCombobox") CartaAndCombobox cartaAndCombobox,
+			@ModelAttribute("combinaciónCartaCombobox2") CartaAndCombobox cartaAndCombobox2,
 			Model theModel) {
-		String valorCombo = cartaAndCombobox.getCombobox().getValor();
+		/*String valorCombo = cartaAndCombobox.getCombobox().getValor();
 		String nombreCarta = cartaAndCombobox.getCarta().getNombre().trim();
 		añadirElementos(theModel);
 		ArrayList<Cartas> cartasRecuperadas = new ArrayList();
@@ -62,6 +61,22 @@ public class MainController {
 			}
 		} catch (NoSuchElementException ex) {
 			return devolverBusquedaFallida(theModel, nombreCarta);
+		}*/
+		
+		String valorCombo = cartaAndCombobox2.getComboboxN().getValor();
+		int ataqueCarta = cartaAndCombobox2.getCarta().getAtaque();
+		añadirElementos(theModel);
+		ArrayList<Cartas> cartasRecuperadas = new ArrayList();
+		try {
+			if (ataqueCarta == 0) {
+				cartasRecuperadas = cardsService.findAll();
+				return devolverBusquedaConLista(theModel, cartasRecuperadas);
+			} else {
+				cartasRecuperadas = cardsService.findByValue(ataqueCarta, valorCombo);
+				return devolverBusquedaOBusquedaFallida(theModel, String.valueOf(ataqueCarta), cartasRecuperadas);
+			}
+		} catch (NoSuchElementException ex) {
+			return devolverBusquedaFallida(theModel, String.valueOf(ataqueCarta));
 		}
 	}
 
@@ -100,11 +115,13 @@ public class MainController {
 
 	private void añadirElementos(Model theModel) {
 		Cartas cartaBuscada = new Cartas();
-		Combobox combobox = new Combobox();
+		ComboboxStrings combobox = new ComboboxStrings();
+		ComboboxNumerico comboboxN = new ComboboxNumerico();
 		ComboNumeroFiltros numeroFiltros = new ComboNumeroFiltros();
 		// Para poder pasar dos atributos en el formulario, estos se tienen que poner en
 		// un objeto común
 		theModel.addAttribute("combinacionCartaCombobox", new CartaAndCombobox(cartaBuscada, combobox));
+		theModel.addAttribute("combinacionCartaCombobox2", new CartaAndCombobox(cartaBuscada, comboboxN));
 		theModel.addAttribute("comboNumeroFiltros", numeroFiltros);
 	}
 
@@ -157,13 +174,9 @@ public class MainController {
 			carta.setHabilidades(habilidades);
 			/*if (i==1) {
 			System.out.println(carta.getHabilidades());}*/
-			
 		}
 		return habilidades;
 	}
-	
-	
-	
 }
 
 

@@ -25,7 +25,7 @@ public class CardsServiceImp implements CardsService {
 	public Cartas findById(String id) {
 		Optional<Cartas> resultado = cardsRepository.findById(id);
 		return resultado.get();
-		}
+	}
 
 	@Override
 	public ArrayList<Cartas> findByPatternId(String id, Boolean LIKE) {
@@ -34,8 +34,21 @@ public class CardsServiceImp implements CardsService {
 		} else {
 			return (ArrayList<Cartas>) cardsRepository.findByPatternIdNOTLIKE(id);
 		}
+	}
+
+	@Override
+	public ArrayList<Cartas> findByValue(int valor, String Operador) {
+		switch (Operador) {
+		case ">":
+			return (ArrayList<Cartas>) cardsRepository.findByValueGreaterThan(valor);
+		case "=":
+			return (ArrayList<Cartas>) cardsRepository.findByValueEqualTo(valor);
+			/* Usar dynamic queries en lugar de diferentes métodos https://www.baeldung.com/spring-data-jpa-query*/
+		case "<":
+			return (ArrayList<Cartas>) cardsRepository.findByValueLessThan(valor);
+		default:
+			return null;
+		}
 
 	}
 }
-
-

@@ -59,16 +59,16 @@
 					</form></td>
 					
 				<td><form hidden class="filtroAdicional" name='f'
-						th:object="${combinacionCartaCombobox}" th:action="@{/busqueda}"
+						th:object="${combinacionCartaCombobox2}" th:action="@{/busqueda}"
 						method='POST'>
-						<select th:field="${combinacionCartaCombobox.combobox.valor}">
+						<select th:field="${combinacionCartaCombobox2.comboboxN.valor}">
 							<option value="">--</option>
 							<option
-								th:each="entry : ${combinacionCartaCombobox.combobox.opcionesSeleccion.entrySet()}"
+								th:each="entry : ${combinacionCartaCombobox2.comboboxN.opcionesSeleccion.entrySet()}"
 								th:value="${entry.value}" th:utext="${entry.key}"></option>
 						</select> <input autofocus type="text"
-							th:field="${combinacionCartaCombobox.carta.Nombre}"
-							placeholder="Nombre" class="form-control mb-4 col-4">
+							th:field="${combinacionCartaCombobox2.carta.Ataque}"
+							placeholder="Ataque" class="form-control mb-4 col-4">
 						<button type="submit">Buscar</button>
 					</form></td>
 					

@@ -11,4 +11,7 @@ public interface CardsService {
 	public Cartas findById(String id);
 	
 	public ArrayList<Cartas> findByPatternId(String id, Boolean LIKE);
+	
+	public ArrayList<Cartas> findByValue(int valor, String Operador);
+
 }
