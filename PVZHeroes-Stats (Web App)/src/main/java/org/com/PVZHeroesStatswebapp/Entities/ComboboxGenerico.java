@@ -11,8 +11,5 @@ public class ComboboxGenerico {
 		return opcionesSeleccion;
 	}
 
-	public void setOpcionesSeleccion(HashMap<String, String> opcionesSeleccion) {
-		this.opcionesSeleccion = opcionesSeleccion;
-	}
 	
 }

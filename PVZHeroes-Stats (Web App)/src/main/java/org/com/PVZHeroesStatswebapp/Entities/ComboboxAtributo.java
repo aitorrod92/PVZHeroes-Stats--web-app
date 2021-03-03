@@ -2,33 +2,33 @@ package org.com.PVZHeroesStatswebapp.Entities;
 
 import javax.persistence.Id;
 
-public class ComboboxNumerico extends ComboboxGenerico {
+public class ComboboxAtributo extends ComboboxGenerico {
 
 	@Id
 	protected String valor;
 	
-	public ComboboxNumerico() {
+	public ComboboxAtributo() {	
 		generarOpcionesSeleccion();
 	}
-	
-	public ComboboxNumerico(String valor) {
+
+	public ComboboxAtributo(String valor) {
 		generarOpcionesSeleccion();
 		this.valor = valor;
 	}
-	
+
 	public String getValor() {
 		return valor;
 	}
+
 	public void setValor(String valor) {
 		this.valor = valor;
 	}
 	
 	private void generarOpcionesSeleccion() {
-		opcionesSeleccion.put(">", ">");
-		opcionesSeleccion.put("=", "=");
-		opcionesSeleccion.put("<", "<");
-		opcionesSeleccion.put(">=", ">=");
-		opcionesSeleccion.put("<=", "<=");
+		opcionesSeleccion.put("Nombre", "Nombre");
+		opcionesSeleccion.put("Ataque", "Ataque");
+		opcionesSeleccion.put("Defensa", "Defensa");
+		opcionesSeleccion.put("Coste", "Coste");
+		opcionesSeleccion.put("Clase", "Clase");
 	}
-	
 }

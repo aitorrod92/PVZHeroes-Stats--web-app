@@ -4,6 +4,7 @@ public class CartaAndCombobox {
 	private Cartas carta;
 	private ComboboxStrings combobox;
 	private ComboboxNumerico comboboxN;
+	private ComboboxAtributo comboboxA;
 	
 	public CartaAndCombobox() {	}
 	
@@ -17,6 +18,11 @@ public class CartaAndCombobox {
 		this.comboboxN = comboboxN;
 	}
 		
+	public CartaAndCombobox(Cartas carta, ComboboxAtributo comboboxA) {
+		this.carta = carta;
+		this.comboboxA = comboboxA;
+	}
+
 	public Cartas getCarta() {
 		return carta;
 	}
@@ -40,4 +46,15 @@ public class CartaAndCombobox {
 	public void setComboboxN(ComboboxNumerico comboboxN) {
 		this.comboboxN = comboboxN;
 	}
+
+	public ComboboxAtributo getComboboxA() {
+		return comboboxA;
+	}
+
+	public void setComboboxA(ComboboxAtributo comboboxA) {
+		this.comboboxA = comboboxA;
+	}
+	
+	
+	
 }

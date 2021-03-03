@@ -38,6 +38,7 @@
 
 	<table class="elementoConMargen" id="tablaCombos">
 		<thead>
+
 			<th>Nombre</th>
 			<th hidden class="tituloAdicional">Ataque</th>
 			<th hidden class="tituloAdicional">Defensa</th>
@@ -47,7 +48,12 @@
 			<tr>
 				<td><form name='f' th:object="${combinacionCartaCombobox}"
 						th:action="@{/busqueda}" method='POST'>
-						<select th:field="${combinacionCartaCombobox.combobox.valor}">
+						<select th:field="${combinacionCartaCombobox3.comboboxA.valor}">
+							<option value="">--</option>
+							<option
+								th:each="entry : ${combinacionCartaCombobox3.comboboxA.opcionesSeleccion.entrySet()}"
+								th:value="${entry.value}" th:utext="${entry.key}"></option>
+						</select> <select th:field="${combinacionCartaCombobox.combobox.valor}">
 							<option value="">--</option>
 							<option
 								th:each="entry : ${combinacionCartaCombobox.combobox.opcionesSeleccion.entrySet()}"
@@ -61,13 +67,18 @@
 				<td><form hidden class="filtroAdicional" name='f'
 						th:object="${combinacionCartaCombobox2}" th:action="@{/busqueda}"
 						method='POST'>
-						<select th:field="${combinacionCartaCombobox2.comboboxN.valor}">
+						<select th:field="${combinacionCartaCombobox3.comboboxA.valor}">
+							<option value="">--</option>
+							<option
+								th:each="entry : ${combinacionCartaCombobox3.comboboxA.opcionesSeleccion.entrySet()}"
+								th:value="${entry.value}" th:utext="${entry.key}"></option>
+						</select> <select th:field="${combinacionCartaCombobox2.comboboxN.valor}">
 							<option value="">--</option>
 							<option
 								th:each="entry : ${combinacionCartaCombobox2.comboboxN.opcionesSeleccion.entrySet()}"
 								th:value="${entry.value}" th:utext="${entry.key}"></option>
 						</select> <input autofocus type="text"
-							th:field="${combinacionCartaCombobox2.carta.Ataque}"
+							th:field="${combinacionCartaCombobox2.carta.ValorNumerico}"
 							placeholder="Ataque" class="form-control mb-4 col-4">
 						<button type="submit">Buscar</button>
 					</form></td>

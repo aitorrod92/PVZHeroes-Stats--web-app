@@ -37,9 +37,8 @@ public class CardsServiceImp implements CardsService {
 	}
 
 	@Override
-	public ArrayList<Cartas> findByValue(int valor, String Operador) { 
-		// NECESARIO MODIFICARLO PARA QUE SE PASEN OTROS ATRIBUTOS EN FUNCIÓN DE LO SELECCIONADO
-		return (ArrayList<Cartas>)cardsRepository.findByValue(valor, Operador, "Ataque");
+	public ArrayList<Cartas> findByValue(int valor, String Operador, String Atributo) { 
+		return (ArrayList<Cartas>)cardsRepository.findByValue(valor, Operador, Atributo);
 
 	}
 }

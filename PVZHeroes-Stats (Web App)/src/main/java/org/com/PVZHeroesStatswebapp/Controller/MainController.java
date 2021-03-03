@@ -5,6 +5,7 @@ import java.util.NoSuchElementException;
 import org.com.PVZHeroesStatswebapp.Entities.CartaAndCombobox;
 import org.com.PVZHeroesStatswebapp.Entities.Cartas;
 import org.com.PVZHeroesStatswebapp.Entities.ComboNumeroFiltros;
+import org.com.PVZHeroesStatswebapp.Entities.ComboboxAtributo;
 import org.com.PVZHeroesStatswebapp.Entities.ComboboxNumerico;
 import org.com.PVZHeroesStatswebapp.Entities.ComboboxStrings;
 import org.com.PVZHeroesStatswebapp.Service.CardsService;
@@ -35,48 +36,41 @@ public class MainController {
 	@RequestMapping("/busqueda")
 	public String mostrarPaginaBusqueda(@ModelAttribute("combinaciónCartaCombobox") CartaAndCombobox cartaAndCombobox,
 			@ModelAttribute("combinaciónCartaCombobox2") CartaAndCombobox cartaAndCombobox2,
-			Model theModel) {
-		/*String valorCombo = cartaAndCombobox.getCombobox().getValor();
-		String nombreCarta = cartaAndCombobox.getCarta().getNombre().trim();
-		añadirElementos(theModel);
-		ArrayList<Cartas> cartasRecuperadas = new ArrayList();
-		try {
-			if (nombreCarta.equals("")) {
-				cartasRecuperadas = cardsService.findAll();
-				return devolverBusquedaConLista(theModel, cartasRecuperadas);
-			} else {
-				switch (valorCombo) {
-				case "==":
-				case "":
-					return devolverBusquedaMonoResultado(theModel, nombreCarta);
-				case "LIKE":
-					cartasRecuperadas = cardsService.findByPatternId(nombreCarta, true);
-					return devolverBusquedaOBusquedaFallida(theModel, nombreCarta, cartasRecuperadas);
-				case "NOT LIKE":
-					cartasRecuperadas = cardsService.findByPatternId(nombreCarta, false);
-					return devolverBusquedaOBusquedaFallida(theModel, nombreCarta, cartasRecuperadas);
-				default:
-					return null;
-				}
-			}
-		} catch (NoSuchElementException ex) {
-			return devolverBusquedaFallida(theModel, nombreCarta);
-		}*/
+			@ModelAttribute("combinacionCartaCombobox3") CartaAndCombobox cartaAndCombobox3, Model theModel) {
+		/*
+		 * String valorCombo = cartaAndCombobox.getCombobox().getValor(); String
+		 * nombreCarta = cartaAndCombobox.getCarta().getNombre().trim();
+		 * añadirElementos(theModel); ArrayList<Cartas> cartasRecuperadas = new
+		 * ArrayList(); try { if (nombreCarta.equals("")) { cartasRecuperadas =
+		 * cardsService.findAll(); return devolverBusquedaConLista(theModel,
+		 * cartasRecuperadas); } else { switch (valorCombo) { case "==": case "": return
+		 * devolverBusquedaMonoResultado(theModel, nombreCarta); case "LIKE":
+		 * cartasRecuperadas = cardsService.findByPatternId(nombreCarta, true); return
+		 * devolverBusquedaOBusquedaFallida(theModel, nombreCarta, cartasRecuperadas);
+		 * case "NOT LIKE": cartasRecuperadas =
+		 * cardsService.findByPatternId(nombreCarta, false); return
+		 * devolverBusquedaOBusquedaFallida(theModel, nombreCarta, cartasRecuperadas);
+		 * default: return null; } } } catch (NoSuchElementException ex) { return
+		 * devolverBusquedaFallida(theModel, nombreCarta); }
+		 */
+
+		String operador = cartaAndCombobox2.getComboboxN().getValor();
+		String atributo = cartaAndCombobox3.getComboboxA().getValor();
+		int valor = cartaAndCombobox3.getCarta().getValorNumerico();
+		System.out.println("valor " + valor);
 		
-		String valorCombo = cartaAndCombobox2.getComboboxN().getValor();
-		int ataqueCarta = cartaAndCombobox2.getCarta().getAtaque();
 		añadirElementos(theModel);
 		ArrayList<Cartas> cartasRecuperadas = new ArrayList();
 		try {
-			if (ataqueCarta == 0) {
+			if (valor == 0) {
 				cartasRecuperadas = cardsService.findAll();
 				return devolverBusquedaConLista(theModel, cartasRecuperadas);
 			} else {
-				cartasRecuperadas = cardsService.findByValue(ataqueCarta, valorCombo);
-				return devolverBusquedaOBusquedaFallida(theModel, String.valueOf(ataqueCarta), cartasRecuperadas);
+				cartasRecuperadas = cardsService.findByValue(valor, operador, atributo);
+				return devolverBusquedaOBusquedaFallida(theModel, String.valueOf(valor), cartasRecuperadas);
 			}
 		} catch (NoSuchElementException ex) {
-			return devolverBusquedaFallida(theModel, String.valueOf(ataqueCarta));
+			return devolverBusquedaFallida(theModel, String.valueOf(valor));
 		}
 	}
 
@@ -117,11 +111,14 @@ public class MainController {
 		Cartas cartaBuscada = new Cartas();
 		ComboboxStrings combobox = new ComboboxStrings();
 		ComboboxNumerico comboboxN = new ComboboxNumerico();
+		ComboboxAtributo comboboxA = new ComboboxAtributo();
 		ComboNumeroFiltros numeroFiltros = new ComboNumeroFiltros();
+
 		// Para poder pasar dos atributos en el formulario, estos se tienen que poner en
 		// un objeto común
 		theModel.addAttribute("combinacionCartaCombobox", new CartaAndCombobox(cartaBuscada, combobox));
 		theModel.addAttribute("combinacionCartaCombobox2", new CartaAndCombobox(cartaBuscada, comboboxN));
+		theModel.addAttribute("combinacionCartaCombobox3", new CartaAndCombobox(cartaBuscada, comboboxA));
 		theModel.addAttribute("comboNumeroFiltros", numeroFiltros);
 	}
 
@@ -139,25 +136,23 @@ public class MainController {
 		theModel.addAttribute("cartaBuscada", new Cartas());
 		return "busquedaFallida";
 	}
-	
-	
+
 	private int calcularNumeroVecesContieneImagen(String habilidades, String imagen) {
 		int ultimoIndice = 0;
 		int repeticiones = 0;
 
-		while(ultimoIndice != -1){
+		while (ultimoIndice != -1) {
 
-			ultimoIndice = habilidades.indexOf(imagen,ultimoIndice);
+			ultimoIndice = habilidades.indexOf(imagen, ultimoIndice);
 
-		    if(ultimoIndice != -1){
-		        repeticiones ++;
-		        ultimoIndice += imagen.length();
-		    }
+			if (ultimoIndice != -1) {
+				repeticiones++;
+				ultimoIndice += imagen.length();
+			}
 		}
 		return repeticiones;
 	}
-	
-	
+
 	private String añadirMarcadoresImagenesAHabilidades(Cartas carta, String habilidades, String nombreImagen,
 			int Repeticiones) {
 		for (int i = 0; i < Repeticiones; i++) {
@@ -172,12 +167,10 @@ public class MainController {
 			habilidades = habilidades.substring(0, localizaciónImagen) + "%" + nombreImagen + "#"
 					+ habilidades.substring(localizaciónImagen + longitudNombreImagen);
 			carta.setHabilidades(habilidades);
-			/*if (i==1) {
-			System.out.println(carta.getHabilidades());}*/
+			/*
+			 * if (i==1) { System.out.println(carta.getHabilidades());}
+			 */
 		}
 		return habilidades;
 	}
 }
-
-
-

@@ -17,16 +17,18 @@ public class ComboboxStrings extends ComboboxGenerico {
 	}
 	
 	public ComboboxStrings() {
-		opcionesSeleccion.put("Es exactamente", "==");
-		opcionesSeleccion.put("Incluye", "LIKE");
-		opcionesSeleccion.put("No incluye", "NOT LIKE");
+		generarOpcionesSeleccion();
 	}
 	
 	public ComboboxStrings(String valor) {
+		generarOpcionesSeleccion();
+		this.valor = valor;
+	}
+	
+	private void generarOpcionesSeleccion() {
 		opcionesSeleccion.put("Es exactamente", "==");
 		opcionesSeleccion.put("Incluye", "LIKE");
 		opcionesSeleccion.put("No incluye", "NOT LIKE");
-		this.valor = valor;
 	}
 	
 }
