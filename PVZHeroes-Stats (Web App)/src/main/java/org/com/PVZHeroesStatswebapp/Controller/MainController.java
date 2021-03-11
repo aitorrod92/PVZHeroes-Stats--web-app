@@ -5,9 +5,7 @@ import java.util.NoSuchElementException;
 import org.com.PVZHeroesStatswebapp.Entities.CartaAndCombobox;
 import org.com.PVZHeroesStatswebapp.Entities.Cartas;
 import org.com.PVZHeroesStatswebapp.Entities.ComboNumeroFiltros;
-import org.com.PVZHeroesStatswebapp.Entities.ComboboxAtributo;
-import org.com.PVZHeroesStatswebapp.Entities.ComboboxNumerico;
-import org.com.PVZHeroesStatswebapp.Entities.ComboboxStrings;
+import org.com.PVZHeroesStatswebapp.Entities.ComboboxOperadores;
 import org.com.PVZHeroesStatswebapp.Service.CardsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,44 +32,64 @@ public class MainController {
 	}
 
 	@RequestMapping("/busqueda")
-	public String mostrarPaginaBusqueda(@ModelAttribute("combinaciónCartaCombobox") CartaAndCombobox cartaAndCombobox,
-			@ModelAttribute("combinaciónCartaCombobox2") CartaAndCombobox cartaAndCombobox2,
+	public String mostrarPaginaBusqueda(@ModelAttribute("combinacionCC1") CartaAndCombobox cartaAndCombobox,
+			@ModelAttribute("combinacionCC2") CartaAndCombobox cartaAndCombobox2,
 			@ModelAttribute("combinacionCartaCombobox3") CartaAndCombobox cartaAndCombobox3, Model theModel) {
-		/*
-		 * String valorCombo = cartaAndCombobox.getCombobox().getValor(); String
-		 * nombreCarta = cartaAndCombobox.getCarta().getNombre().trim();
-		 * añadirElementos(theModel); ArrayList<Cartas> cartasRecuperadas = new
-		 * ArrayList(); try { if (nombreCarta.equals("")) { cartasRecuperadas =
-		 * cardsService.findAll(); return devolverBusquedaConLista(theModel,
-		 * cartasRecuperadas); } else { switch (valorCombo) { case "==": case "": return
-		 * devolverBusquedaMonoResultado(theModel, nombreCarta); case "LIKE":
-		 * cartasRecuperadas = cardsService.findByPatternId(nombreCarta, true); return
-		 * devolverBusquedaOBusquedaFallida(theModel, nombreCarta, cartasRecuperadas);
-		 * case "NOT LIKE": cartasRecuperadas =
-		 * cardsService.findByPatternId(nombreCarta, false); return
-		 * devolverBusquedaOBusquedaFallida(theModel, nombreCarta, cartasRecuperadas);
-		 * default: return null; } } } catch (NoSuchElementException ex) { return
-		 * devolverBusquedaFallida(theModel, nombreCarta); }
-		 */
 
-		String operador = cartaAndCombobox2.getComboboxN().getValor();
-		String atributo = cartaAndCombobox3.getComboboxA().getValor();
-		int valor = cartaAndCombobox3.getCarta().getValorNumerico();
-		System.out.println("valor " + valor);
-		
+		// INCLUIR EL PRIMER COMBO
 		añadirElementos(theModel);
+		@SuppressWarnings("unchecked")
 		ArrayList<Cartas> cartasRecuperadas = new ArrayList();
-		try {
-			if (valor == 0) {
-				cartasRecuperadas = cardsService.findAll();
-				return devolverBusquedaConLista(theModel, cartasRecuperadas);
-			} else {
-				cartasRecuperadas = cardsService.findByValue(valor, operador, atributo);
-				return devolverBusquedaOBusquedaFallida(theModel, String.valueOf(valor), cartasRecuperadas);
+
+		String atributo = cartaAndCombobox.getComboboxA().getValor();
+		String valor = cartaAndCombobox.getCarta().getValor();
+		String operador = null;
+
+		switch (atributo) {
+		case "Nombre":
+		case "Clase":
+			valor = valor.trim();
+			operador = cartaAndCombobox.getComboboxOperadores().getValor();
+			try {
+				if (valor.toString().equals("")) {
+					cartasRecuperadas = cardsService.findAll();
+					return devolverBusquedaConLista(theModel, cartasRecuperadas);
+				} else {
+					switch (operador) {
+					case "==":
+					case "":
+						return devolverBusquedaMonoResultado(theModel, valor.toString());
+					case "LIKE":
+						cartasRecuperadas = cardsService.findByPatternId(valor.toString(), true);
+						return devolverBusquedaOBusquedaFallida(theModel, valor.toString(), cartasRecuperadas);
+					case "NOT LIKE":
+						cartasRecuperadas = cardsService.findByPatternId(valor.toString(), false);
+						return devolverBusquedaOBusquedaFallida(theModel, valor.toString(), cartasRecuperadas);
+					default:
+						return null;
+					}
+				}
+			} catch (NoSuchElementException ex) {
+				return devolverBusquedaFallida(theModel, valor.toString());
 			}
-		} catch (NoSuchElementException ex) {
-			return devolverBusquedaFallida(theModel, String.valueOf(valor));
+		case "Ataque":
+		case "Defensa":
+		case "Coste":
+		default:
+			operador = cartaAndCombobox.getComboboxOperadores().getValor();
+			int ValorNumerico = 0;
+			try {
+				ValorNumerico = Integer.valueOf(valor);
+			} catch (NumberFormatException e) {	}
+
+			try {
+				cartasRecuperadas = cardsService.findByValue(ValorNumerico, operador, atributo);
+				return devolverBusquedaOBusquedaFallida(theModel, valor, cartasRecuperadas);
+			} catch (NoSuchElementException ex) {
+				return devolverBusquedaFallida(theModel, String.valueOf(valor));
+			}
 		}
+
 	}
 
 	private String devolverBusquedaMonoResultado(Model theModel, String nombreCarta) {
@@ -108,18 +126,15 @@ public class MainController {
 	}
 
 	private void añadirElementos(Model theModel) {
-		Cartas cartaBuscada = new Cartas();
-		ComboboxStrings combobox = new ComboboxStrings();
-		ComboboxNumerico comboboxN = new ComboboxNumerico();
-		ComboboxAtributo comboboxA = new ComboboxAtributo();
-		ComboNumeroFiltros numeroFiltros = new ComboNumeroFiltros();
+		ComboNumeroFiltros comboNumeroFiltros = new ComboNumeroFiltros();
+		theModel.addAttribute("comboNumeroFiltros", comboNumeroFiltros);
+
+		ComboboxOperadores comboOperadores = new ComboboxOperadores();
 
 		// Para poder pasar dos atributos en el formulario, estos se tienen que poner en
 		// un objeto común
-		theModel.addAttribute("combinacionCartaCombobox", new CartaAndCombobox(cartaBuscada, combobox));
-		theModel.addAttribute("combinacionCartaCombobox2", new CartaAndCombobox(cartaBuscada, comboboxN));
-		theModel.addAttribute("combinacionCartaCombobox3", new CartaAndCombobox(cartaBuscada, comboboxA));
-		theModel.addAttribute("comboNumeroFiltros", numeroFiltros);
+		theModel.addAttribute("combinacionCC1", new CartaAndCombobox());
+		theModel.addAttribute("combinacionCC2", new CartaAndCombobox());
 	}
 
 	private String devolverBusquedaOBusquedaFallida(Model theModel, String nombreCarta,

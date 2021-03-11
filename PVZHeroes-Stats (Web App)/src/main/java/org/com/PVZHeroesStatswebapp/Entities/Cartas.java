@@ -22,8 +22,7 @@ public class Cartas {
 	private int NumeroAtributos;
 	private String Imagen;
 	
-	// Usado para unificar los campos numéricos. El campo concreto se determina en el controlador
-	private int ValorNumerico;
+	private String Valor;
 		
 	public Cartas(String nombre, int ataque, int defensa, int coste, String clase, String tribus, String atributos,
 			String habilidades, String rareza, String mazo, String tipo, String uRL, int numeroAtributos, String imagen) {
@@ -153,12 +152,12 @@ public class Cartas {
 		Imagen = imagen;
 	}
 	
-	public int getValorNumerico() {
-		return ValorNumerico;
+	public String getValor() {
+		return this.Valor;
 	}
 
-	public void setValorNumerico(int valorNumerico) {
-		ValorNumerico = valorNumerico;
+	public void setValor(String valor) {
+		this.Valor = valor;
 	}
 
 

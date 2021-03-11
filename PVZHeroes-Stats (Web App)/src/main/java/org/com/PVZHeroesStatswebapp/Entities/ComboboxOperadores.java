@@ -1,27 +1,28 @@
 package org.com.PVZHeroesStatswebapp.Entities;
 
-import javax.persistence.Entity;
+import java.util.HashMap;
+
 import javax.persistence.Id;
 
-@Entity
-public class ComboboxStrings extends ComboboxGenerico {
+public class ComboboxOperadores {
 
 	@Id
 	protected String valor;
 	
+	private HashMap <String, String> opcionesSeleccion = new HashMap();
+		
 	public String getValor() {
 		return valor;
 	}
 	public void setValor(String valor) {
-		this.valor = valor;
+		this.valor = opcionesSeleccion.get(valor);
 	}
 	
-	public ComboboxStrings() {
+	public ComboboxOperadores() {
 		generarOpcionesSeleccion();
 	}
 	
-	public ComboboxStrings(String valor) {
-		generarOpcionesSeleccion();
+	public ComboboxOperadores(String valor) {
 		this.valor = valor;
 	}
 	
@@ -29,6 +30,11 @@ public class ComboboxStrings extends ComboboxGenerico {
 		opcionesSeleccion.put("Es exactamente", "==");
 		opcionesSeleccion.put("Incluye", "LIKE");
 		opcionesSeleccion.put("No incluye", "NOT LIKE");
+		
+		opcionesSeleccion.put(">", ">");
+		opcionesSeleccion.put("=", "=");
+		opcionesSeleccion.put("<", "<");
+		opcionesSeleccion.put(">=", ">=");
+		opcionesSeleccion.put("<=", "<=");
 	}
-	
 }

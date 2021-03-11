@@ -2,26 +2,17 @@ package org.com.PVZHeroesStatswebapp.Entities;
 
 public class CartaAndCombobox {
 	private Cartas carta;
-	private ComboboxStrings combobox;
-	private ComboboxNumerico comboboxN;
+	
+	private ComboboxOperadores comboboxOperadores; 
 	private ComboboxAtributo comboboxA;
 	
-	public CartaAndCombobox() {	}
-	
-	public CartaAndCombobox(Cartas carta, ComboboxStrings combobox) {
-		this.carta = carta;
-		this.combobox = combobox;
+
+	public CartaAndCombobox() {
+		carta = new Cartas();
+		this.comboboxOperadores = new ComboboxOperadores();
+		this.comboboxA = new ComboboxAtributo();
 	}
-	
-	public CartaAndCombobox(Cartas carta, ComboboxNumerico comboboxN) {
-		this.carta = carta;
-		this.comboboxN = comboboxN;
-	}
-		
-	public CartaAndCombobox(Cartas carta, ComboboxAtributo comboboxA) {
-		this.carta = carta;
-		this.comboboxA = comboboxA;
-	}
+
 
 	public Cartas getCarta() {
 		return carta;
@@ -31,21 +22,16 @@ public class CartaAndCombobox {
 		this.carta = carta;
 	}
 
-	public ComboboxStrings getCombobox() {
-		return combobox;
-	}
-
-	public void setCombobox(ComboboxStrings combobox) {
-		this.combobox = combobox;
-	}	
 	
-	public ComboboxNumerico getComboboxN() {
-		return comboboxN;
+	public ComboboxOperadores getComboboxOperadores() {
+		return comboboxOperadores;
 	}
 
-	public void setComboboxN(ComboboxNumerico comboboxN) {
-		this.comboboxN = comboboxN;
+
+	public void setComboboxOperadores(ComboboxOperadores comboboxOperadores) {
+		this.comboboxOperadores = comboboxOperadores;
 	}
+
 
 	public ComboboxAtributo getComboboxA() {
 		return comboboxA;

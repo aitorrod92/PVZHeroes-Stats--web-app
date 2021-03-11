@@ -39,50 +39,49 @@
 	<table class="elementoConMargen" id="tablaCombos">
 		<thead>
 
-			<th>Nombre</th>
-			<th hidden class="tituloAdicional">Ataque</th>
-			<th hidden class="tituloAdicional">Defensa</th>
-			<th hidden class="tituloAdicional">Coste</th>
+			<th>Filtro 1</th>
+			<th hidden class="tituloAdicional">Filtro 2</th>
+			<th hidden class="tituloAdicional">Filtro 3</th>
+			<th hidden class="tituloAdicional">Filtro 4</th>
 		</thead>
 		<tbody>
 			<tr>
-				<td><form name='f' th:object="${combinacionCartaCombobox}"
+				<td><form name='f' th:object="${combinacionCC1}"
 						th:action="@{/busqueda}" method='POST'>
-						<select th:field="${combinacionCartaCombobox3.comboboxA.valor}">
+						<select id="comboAtributos1" 
+							th:field="${combinacionCC1.comboboxA.valor}">
 							<option value="">--</option>
 							<option
-								th:each="entry : ${combinacionCartaCombobox3.comboboxA.opcionesSeleccion.entrySet()}"
+								th:each="entry : ${combinacionCC1.comboboxA.opcionesSeleccion.entrySet()}"
 								th:value="${entry.value}" th:utext="${entry.key}"></option>
-						</select> <select th:field="${combinacionCartaCombobox.combobox.valor}">
+						</select> <select id="comboOperadores1" 
+							th:field="${combinacionCC1.comboboxOperadores.valor}">
 							<option value="">--</option>
-							<option
-								th:each="entry : ${combinacionCartaCombobox.combobox.opcionesSeleccion.entrySet()}"
-								th:value="${entry.value}" th:utext="${entry.key}"></option>
-						</select> <input autofocus type="text"
-							th:field="${combinacionCartaCombobox.carta.Nombre}"
+						</select> <input autofocus type="text" id="input1"
+							th:field="${combinacionCC1.carta.Valor}" 
 							placeholder="Nombre" class="form-control mb-4 col-4">
 						<button type="submit">Buscar</button>
 					</form></td>
 
 				<td><form hidden class="filtroAdicional" name='f'
-						th:object="${combinacionCartaCombobox2}" th:action="@{/busqueda}"
+						th:object="${combinacionCC2}" th:action="@{/busqueda}"
 						method='POST'>
-						<select th:field="${combinacionCartaCombobox3.comboboxA.valor}">
+						<select id="comboAtributos2"
+							th:field="${combinacionCC2.comboboxA.valor}">
 							<option value="">--</option>
 							<option
-								th:each="entry : ${combinacionCartaCombobox3.comboboxA.opcionesSeleccion.entrySet()}"
+								th:each="entry : ${combinacionCC2.comboboxA.opcionesSeleccion.entrySet()}"
 								th:value="${entry.value}" th:utext="${entry.key}"></option>
-						</select> <select th:field="${combinacionCartaCombobox2.comboboxN.valor}">
+						</select> <select id="comboOperadores2"
+							th:field="${combinacionCC2.comboboxOperadores.valor}">
 							<option value="">--</option>
-							<option
-								th:each="entry : ${combinacionCartaCombobox2.comboboxN.opcionesSeleccion.entrySet()}"
-								th:value="${entry.value}" th:utext="${entry.key}"></option>
 						</select> <input autofocus type="text"
-							th:field="${combinacionCartaCombobox2.carta.ValorNumerico}"
+							th:field="${combinacionCC2.carta.Valor}"
 							placeholder="Ataque" class="form-control mb-4 col-4">
 						<button type="submit">Buscar</button>
 					</form></td>
 
+				<!-- 
 				<td><form hidden class="filtroAdicional" name='f'
 						th:object="${combinacionCartaCombobox}" th:action="@{/busqueda}"
 						method='POST'>
@@ -109,7 +108,7 @@
 							th:field="${combinacionCartaCombobox.carta.Nombre}"
 							placeholder="Nombre" class="form-control mb-4 col-4">
 						<button type="submit">Buscar</button>
-					</form></td>
+					</form></td> -->
 			</tr>
 		</tbody>
 	</table>
@@ -427,6 +426,10 @@
 	</table>
 
 	<script src="javascript/scriptFiltros.js">
+		
+	</script>
+
+	<script src="javascript/adaptacionComboOperadores.js">
 		
 	</script>
 
