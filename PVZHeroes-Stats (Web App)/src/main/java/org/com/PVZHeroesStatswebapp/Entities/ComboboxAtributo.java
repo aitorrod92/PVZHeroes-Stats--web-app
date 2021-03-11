@@ -30,5 +30,11 @@ public class ComboboxAtributo extends ComboboxGenerico {
 		opcionesSeleccion.put("Defensa", "Defensa");
 		opcionesSeleccion.put("Coste", "Coste");
 		opcionesSeleccion.put("Clase", "Clase");
+		opcionesSeleccion.put("Tribus", "Tribus");
+		opcionesSeleccion.put("Rareza", "Rareza");
+		opcionesSeleccion.put("Mazo", "Mazo");
+		opcionesSeleccion.put("Tipo", "Tipo");
+		opcionesSeleccion.put("Habilidades", "Habilidades");
+		opcionesSeleccion.put("NumeroAtributos", "NumeroAtributos");
 	}
 }

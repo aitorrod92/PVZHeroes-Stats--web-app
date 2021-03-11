@@ -45,16 +45,14 @@ public class MainController {
 		String operador = cartaAndCombobox.getComboboxOperadores().getValor();
 
 		switch (atributo) {
-		case "Nombre":
-		case "Clase":
-			return buscarCartas(theModel, valor, operador, atributo, "String");
 		case "Ataque":
 		case "Defensa":
 		case "Coste":
-		default:
+		case "NumeroAtributos":
 			return buscarCartas(theModel, valor, operador, atributo, "Numero");
+		default:
+			return buscarCartas(theModel, valor, operador, atributo, "String");
 		}
-
 	}
 
 	private String buscarCartas(Model theModel, String valor, String operador, String atributo, String tipo) {

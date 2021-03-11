@@ -3,12 +3,13 @@ $('#comboAtributos1').change(function() {
 	var opciones;
 
 	$('#comboOperadores1 > option').remove();
-	
-	if (atributoSeleccionado == "Nombre" || atributoSeleccionado == "Clase") {
-		opciones = ["Incluye", "Es exactamente", "No incluye"];
-	} else {
+
+	if (atributoSeleccionado == "Ataque" || atributoSeleccionado == "Defensa"
+		|| atributoSeleccionado == "Coste" || atributoSeleccionado == "NumeroAtributos") {
 		opciones = [">", ">=", "=", "<=", "<"];
-	}	
+	} else {
+		opciones = ["Incluye", "Es exactamente", "No incluye"];
+	}
 	opciones.forEach(element => {
 		jQuery('<option/>', {
 			value: element,
