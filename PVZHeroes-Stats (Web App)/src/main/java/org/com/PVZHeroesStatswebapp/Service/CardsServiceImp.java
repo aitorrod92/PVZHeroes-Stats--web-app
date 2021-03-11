@@ -30,17 +30,13 @@ public class CardsServiceImp implements CardsService {
 	}
 
 	@Override
-	public ArrayList<Cartas> findByPatternId(String id, Boolean LIKE) {
-		if (LIKE) {
-			return (ArrayList<Cartas>) cardsRepository.findByPatternIdLIKE(id);
-		} else {
-			return (ArrayList<Cartas>) cardsRepository.findByPatternIdNOTLIKE(id);
-		}
+	public ArrayList<Cartas> findByPattern(String valor, String Operador, String atributo) {
+		return (ArrayList<Cartas>)cardsRepository.findByPattern(valor, Operador, atributo);
 	}
 
 	@Override
-	public ArrayList<Cartas> findByValue(int valor, String Operador, String Atributo) { 
-		return (ArrayList<Cartas>)cardsRepository.findByValue(valor, Operador, Atributo);
+	public ArrayList<Cartas> findByValue(int valor, String Operador, String atributo) { 
+		return (ArrayList<Cartas>)cardsRepository.findByValue(valor, Operador, atributo);
 
 	}
 }

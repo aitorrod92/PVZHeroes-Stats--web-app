@@ -58,10 +58,10 @@ public class MainController {
 	}
 
 	private String buscarCartas(Model theModel, String valor, String operador, String atributo, String tipo) {
-		if (tipo.equals("String")) {
-			{
-				valor = valor.trim();
-				try {
+		try {
+			if (tipo.equals("String")) {
+				{
+					valor = valor.trim();
 					if (valor.toString().equals("")) {
 						cartasRecuperadas = cardsService.findAll();
 					} else {
@@ -71,32 +71,26 @@ public class MainController {
 							cartasRecuperadas = cardsService.findById(valor);
 							break;
 						case "LIKE":
-							cartasRecuperadas = cardsService.findByPatternId(valor, true);
-							break;
 						case "NOT LIKE":
-							cartasRecuperadas = cardsService.findByPatternId(valor, false);
+							cartasRecuperadas = cardsService.findByPattern(valor, operador, atributo);
 							break;
 						}
 					}
 					return devolverBusquedaOBusquedaFallida(theModel, valor, cartasRecuperadas);
-				} catch (NoSuchElementException ex) {
-					return devolverBusquedaFallida(theModel, valor.toString());
 				}
-			}
-		} else {
-			int valorNumerico = 0;
-			try {
-				valorNumerico = Integer.valueOf(valor);
-			} catch (NumberFormatException e) {
-			}
-			try {
+			} else {
+				int valorNumerico = 0;
+				try {
+					valorNumerico = Integer.valueOf(valor);
+				} catch (NumberFormatException e) {
+				}
 				cartasRecuperadas = cardsService.findByValue(valorNumerico, operador, atributo);
 				return devolverBusquedaOBusquedaFallida(theModel, valor, cartasRecuperadas);
-			} catch (NoSuchElementException ex) {
-				return devolverBusquedaFallida(theModel, valor);
 			}
-			
+		} catch (NoSuchElementException ex) {
+			return devolverBusquedaFallida(theModel, valor.toString());
 		}
+
 	}
 
 	private void añadirElementos(Model theModel) {

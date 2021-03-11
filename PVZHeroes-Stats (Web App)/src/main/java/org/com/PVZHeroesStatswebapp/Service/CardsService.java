@@ -10,7 +10,7 @@ public interface CardsService {
 	
 	public ArrayList<Cartas> findById(String id);
 	
-	public ArrayList<Cartas> findByPatternId(String id, Boolean LIKE);
+	public ArrayList<Cartas> findByPattern(String valor, String Operador, String atributo);
 	
 	public ArrayList<Cartas> findByValue(int valor, String Operador, String atributo);
 

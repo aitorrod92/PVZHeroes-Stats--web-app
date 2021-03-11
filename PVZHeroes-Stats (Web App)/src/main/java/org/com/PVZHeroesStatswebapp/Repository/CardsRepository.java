@@ -9,10 +9,11 @@ import org.springframework.data.repository.query.Param;
 
 public interface CardsRepository extends JpaRepository<Cartas, String>, UserRepositoryCustom {
 
+	/*
 	@Query("SELECT u FROM Cartas u WHERE u.Nombre LIKE %:id%")
 	ArrayList<Cartas> findByPatternIdLIKE(@Param("id") String id);
 	
 	@Query("SELECT u FROM Cartas u WHERE u.Nombre NOT LIKE %:id%") 
-	ArrayList<Cartas> findByPatternIdNOTLIKE(@Param("id") String id);
+	ArrayList<Cartas> findByPatternIdNOTLIKE(@Param("id") String id);*/
 }
 

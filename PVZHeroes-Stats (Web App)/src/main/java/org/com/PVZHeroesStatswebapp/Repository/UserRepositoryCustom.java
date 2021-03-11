@@ -8,4 +8,6 @@ public interface UserRepositoryCustom {
 
 	List<Cartas> findByValue(int value, String operator, String atributo);
 	
+	List<Cartas> findByPattern(String value, String operator, String atributo);
+	
 }
