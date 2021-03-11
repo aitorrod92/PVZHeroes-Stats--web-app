@@ -8,7 +8,7 @@ public interface CardsService {
 
 	public ArrayList<Cartas> findAll();
 	
-	public Cartas findById(String id);
+	public ArrayList<Cartas> findById(String id);
 	
 	public ArrayList<Cartas> findByPatternId(String id, Boolean LIKE);
 	

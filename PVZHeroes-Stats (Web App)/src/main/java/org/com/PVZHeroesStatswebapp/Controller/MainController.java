@@ -19,16 +19,17 @@ public class MainController {
 
 	String[] listaPosiblesImagenes = { "strength", "health", "suns", "brains", "freeze", "bullseye", "double strike",
 			"strikethrough", "deadly", "untrickable", "overshoot", "frenzy" };
+	ArrayList<Cartas> cartasRecuperadas = new ArrayList();
 
 	@Autowired
 	private CardsService cardsService;
 
 	@GetMapping("/index")
 	public String mostrarPaginaInicial(Model theModel) {
-		añadirListadoCompletoAlModelo(theModel);
 		theModel.addAttribute("listaPosiblesImagenes", listaPosiblesImagenes);
 		añadirElementos(theModel);
-		return "index";
+		cartasRecuperadas = cardsService.findAll();
+		return devolverBusquedaOBusquedaFallida(theModel, "", cartasRecuperadas);
 	}
 
 	@RequestMapping("/busqueda")
@@ -38,90 +39,63 @@ public class MainController {
 
 		// INCLUIR EL PRIMER COMBO
 		añadirElementos(theModel);
-		@SuppressWarnings("unchecked")
-		ArrayList<Cartas> cartasRecuperadas = new ArrayList();
 
 		String atributo = cartaAndCombobox.getComboboxA().getValor();
 		String valor = cartaAndCombobox.getCarta().getValor();
-		String operador = null;
+		String operador = cartaAndCombobox.getComboboxOperadores().getValor();
 
 		switch (atributo) {
 		case "Nombre":
 		case "Clase":
-			valor = valor.trim();
-			operador = cartaAndCombobox.getComboboxOperadores().getValor();
-			try {
-				if (valor.toString().equals("")) {
-					cartasRecuperadas = cardsService.findAll();
-					return devolverBusquedaConLista(theModel, cartasRecuperadas);
-				} else {
-					switch (operador) {
-					case "==":
-					case "":
-						return devolverBusquedaMonoResultado(theModel, valor.toString());
-					case "LIKE":
-						cartasRecuperadas = cardsService.findByPatternId(valor.toString(), true);
-						return devolverBusquedaOBusquedaFallida(theModel, valor.toString(), cartasRecuperadas);
-					case "NOT LIKE":
-						cartasRecuperadas = cardsService.findByPatternId(valor.toString(), false);
-						return devolverBusquedaOBusquedaFallida(theModel, valor.toString(), cartasRecuperadas);
-					default:
-						return null;
-					}
-				}
-			} catch (NoSuchElementException ex) {
-				return devolverBusquedaFallida(theModel, valor.toString());
-			}
+			return buscarCartas(theModel, valor, operador, atributo, "String");
 		case "Ataque":
 		case "Defensa":
 		case "Coste":
 		default:
-			operador = cartaAndCombobox.getComboboxOperadores().getValor();
-			int ValorNumerico = 0;
-			try {
-				ValorNumerico = Integer.valueOf(valor);
-			} catch (NumberFormatException e) {	}
-
-			try {
-				cartasRecuperadas = cardsService.findByValue(ValorNumerico, operador, atributo);
-				return devolverBusquedaOBusquedaFallida(theModel, valor, cartasRecuperadas);
-			} catch (NoSuchElementException ex) {
-				return devolverBusquedaFallida(theModel, String.valueOf(valor));
-			}
+			return buscarCartas(theModel, valor, operador, atributo, "Numero");
 		}
 
 	}
 
-	private String devolverBusquedaMonoResultado(Model theModel, String nombreCarta) {
-		Cartas cartaRecuperada = cardsService.findById(nombreCarta);
-		ArrayList<Cartas> carta = new ArrayList<Cartas>();
-		carta.add(cartaRecuperada);
-		añadirImagenesHabilidades(carta);
-		theModel.addAttribute("cartaBuscada", carta.get(0));
-		return "busqueda";
-	}
-
-	private String devolverBusquedaConLista(Model theModel, ArrayList<Cartas> listaCartas) {
-		añadirImagenesHabilidades(listaCartas);
-		theModel.addAttribute("listaCartas", listaCartas);
-		return "index";
-	}
-
-	private void añadirListadoCompletoAlModelo(Model theModel) {
-		ArrayList<Cartas> cartas = cardsService.findAll();
-		añadirImagenesHabilidades(cartas);
-		theModel.addAttribute("listaCartas", cartas);
-	}
-
-	private void añadirImagenesHabilidades(ArrayList<Cartas> cartas) {
-		for (Cartas carta : cartas) {
-			String habilidades = carta.getHabilidades();
-			for (String nombreImagen : listaPosiblesImagenes) {
-				if (habilidades.contains(nombreImagen)) {
-					int Repeticiones = calcularNumeroVecesContieneImagen(habilidades, nombreImagen);
-					habilidades = añadirMarcadoresImagenesAHabilidades(carta, habilidades, nombreImagen, Repeticiones);
+	private String buscarCartas(Model theModel, String valor, String operador, String atributo, String tipo) {
+		if (tipo.equals("String")) {
+			{
+				valor = valor.trim();
+				try {
+					if (valor.toString().equals("")) {
+						cartasRecuperadas = cardsService.findAll();
+					} else {
+						switch (operador) {
+						case "==":
+						case "":
+							cartasRecuperadas = cardsService.findById(valor);
+							break;
+						case "LIKE":
+							cartasRecuperadas = cardsService.findByPatternId(valor, true);
+							break;
+						case "NOT LIKE":
+							cartasRecuperadas = cardsService.findByPatternId(valor, false);
+							break;
+						}
+					}
+					return devolverBusquedaOBusquedaFallida(theModel, valor, cartasRecuperadas);
+				} catch (NoSuchElementException ex) {
+					return devolverBusquedaFallida(theModel, valor.toString());
 				}
 			}
+		} else {
+			int valorNumerico = 0;
+			try {
+				valorNumerico = Integer.valueOf(valor);
+			} catch (NumberFormatException e) {
+			}
+			try {
+				cartasRecuperadas = cardsService.findByValue(valorNumerico, operador, atributo);
+				return devolverBusquedaOBusquedaFallida(theModel, valor, cartasRecuperadas);
+			} catch (NoSuchElementException ex) {
+				return devolverBusquedaFallida(theModel, valor);
+			}
+			
 		}
 	}
 
@@ -152,12 +126,28 @@ public class MainController {
 		return "busquedaFallida";
 	}
 
+	private String devolverBusquedaConLista(Model theModel, ArrayList<Cartas> listaCartas) {
+		añadirImagenesHabilidades(listaCartas);
+		theModel.addAttribute("listaCartas", listaCartas);
+		return "index";
+	}
+
+	private void añadirImagenesHabilidades(ArrayList<Cartas> cartas) {
+		for (Cartas carta : cartas) {
+			String habilidades = carta.getHabilidades();
+			for (String nombreImagen : listaPosiblesImagenes) {
+				if (habilidades.contains(nombreImagen)) {
+					int Repeticiones = calcularNumeroVecesContieneImagen(habilidades, nombreImagen);
+					habilidades = añadirMarcadoresImagenesAHabilidades(carta, habilidades, nombreImagen, Repeticiones);
+				}
+			}
+		}
+	}
+
 	private int calcularNumeroVecesContieneImagen(String habilidades, String imagen) {
 		int ultimoIndice = 0;
 		int repeticiones = 0;
-
 		while (ultimoIndice != -1) {
-
 			ultimoIndice = habilidades.indexOf(imagen, ultimoIndice);
 
 			if (ultimoIndice != -1) {

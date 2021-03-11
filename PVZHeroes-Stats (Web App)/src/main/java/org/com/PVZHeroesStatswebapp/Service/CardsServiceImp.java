@@ -22,9 +22,11 @@ public class CardsServiceImp implements CardsService {
 		return (ArrayList<Cartas>) cardsRepository.findAll();
 	}
 
-	public Cartas findById(String id) {
-		Optional<Cartas> resultado = cardsRepository.findById(id);
-		return resultado.get();
+	public ArrayList<Cartas> findById(String id) {
+		Cartas resultado = cardsRepository.findById(id).get();
+		ArrayList<Cartas> arrayList = new ArrayList();
+		arrayList.add(resultado);
+		return arrayList;
 	}
 
 	@Override
