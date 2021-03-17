@@ -7,5 +7,9 @@
 }
 
 body {
-	background-color: salmon;
+	background-color: aquamarine;
+}
+
+.table th  {
+   text-align: center;   
 }
