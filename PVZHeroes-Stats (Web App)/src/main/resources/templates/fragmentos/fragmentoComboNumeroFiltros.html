@@ -1,0 +1,12 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<div class="elementoConMargen" style="font-weight: bold;">
+	Número de filtros <select class="elementoConMargen"
+		id="comboNumeroFiltros" th:field="${comboNumeroFiltros.valor}">
+		<option value="">--</option>
+		<option
+			th:each="entry : ${comboNumeroFiltros.opcionesSeleccion.entrySet()}"
+			th:value="${entry.value}" th:utext="${entry.key}"></option>
+	</select>
+</div>

@@ -8,15 +8,18 @@
 	<div class="elementoConMargen">
 		<h1>Queries in PVZHeroes database</h1>
 	</div>
-
-	<div class="elementoConMargen">
-		<h2>
+	<br>
+	<th:block th:replace="fragmentos/fragmentoComboNumeroFiltros.html"></th:block>
+	<br>
+	<th:block th:replace="fragmentos/fragmentoTablaCombosFiltros.html"></th:block>
+	<br>
+	<div class="elementoConMargen alert alert-warning col-md-12"
+		role="alert">
+		<h4>
 			No existe ninguna carta con el nombre "<span
 				th:style="'color: red; font-weight: bold;'" th:text="${nombreCarta}"></span>"
 			en la Base de Datos
-		</h2>
+		</h4>
 	</div>
-	<br>
-	<th:block th:replace="fragmentos/fragmentoTablaCombosFiltros.html"></th:block>
 </body>
 </html>
