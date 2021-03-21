@@ -39,25 +39,25 @@
 					</select> <input autofocus type="text"
 						th:field="${combinacionCC2.carta.Valor}" placeholder="Ataque"
 						class="form-control mb-4 col-4">
-					<button onClick="submitAllFormsAtOnce()" class="btn btn-primary">Buscar</button>
+					<button onClick="submitAllFormsAtOnce()" style="visibility:hidden" class="btn btn-primary">Buscar</button>
 				</form></td>
 
 			<td><form hidden class="filtroAdicional" name='f'
-					th:object="${combinacionCC2}" th:action="@{/busqueda}"
+					th:object="${combinacionCC3}" th:action="@{/busqueda}"
 					method='POST' id="form3">
 					<select id="comboAtributos3" class="form-select form-select-sm"
-						th:field="${combinacionCC2.comboboxA.valor}">
+						th:field="${combinacionCC3.comboboxA.valor}">
 						<option value="">--</option>
 						<option
-							th:each="entry : ${combinacionCC2.comboboxA.opcionesSeleccion.entrySet()}"
+							th:each="entry : ${combinacionCC3.comboboxA.opcionesSeleccion.entrySet()}"
 							th:value="${entry.value}" th:utext="${entry.key}"></option>
 					</select> <select id="comboOperadores3" class="form-select form-select-sm"
-						th:field="${combinacionCC2.comboboxOperadores.valor}">
+						th:field="${combinacionCC3.comboboxOperadores.valor}">
 						<option value="">--</option>
 					</select> <input autofocus type="text"
-						th:field="${combinacionCC2.carta.Valor}" placeholder="Ataque"
+						th:field="${combinacionCC3.carta.Valor}" placeholder="Ataque"
 						class="form-control mb-4 col-4">
-					<button onClick="submitAllFormsAtOnce()" class="btn btn-primary">Buscar</button>
+					<button onClick="submitAllFormsAtOnce()" style="visibility:hidden" class="btn btn-primary">Buscar</button>
 				</form></td>
 		</tr>
 	</tbody>

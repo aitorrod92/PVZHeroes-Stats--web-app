@@ -92,6 +92,7 @@ public class MainController {
 		// un objeto común
 		theModel.addAttribute("combinacionCC1", new CartaAndCombobox());
 		theModel.addAttribute("combinacionCC2", new CartaAndCombobox());
+		theModel.addAttribute("combinacionCC3", new CartaAndCombobox());
 	}
 
 	private String devolverBusquedaOBusquedaFallida(Model theModel, String nombreCarta,
