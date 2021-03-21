@@ -14,19 +14,21 @@ import org.com.PVZHeroesStatswebapp.Entities.Cartas;
 
 public class UserRepositoryCustomImpl implements UserRepositoryCustom {
 
+	CriteriaBuilder cb;
+	CriteriaQuery<Cartas> cq;
+	Root<Cartas> root;
+	
 	// Se han seguido las directrices de esto:
 	// https://www.baeldung.com/spring-data-jpa-query
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	
+	
 	@Override
 	public List<Cartas> findByValue(int value, String operator, String atributo) {
-		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-
-		CriteriaQuery<Cartas> cq = cb.createQuery(Cartas.class);
-		Root<Cartas> root = cq.from(Cartas.class);
-		cq.select(root);
+		defineBeginningOfQuery();
 
 		switch (operator) {
 		case ">":
@@ -44,7 +46,6 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
 		case "<=":
 			cq.where(cb.lessThanOrEqualTo(root.get(atributo), value));
 			break;
-
 		}
 		List<Cartas> cartas = entityManager.createQuery(cq).getResultList();
 		return cartas;
@@ -53,14 +54,10 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
 	@Override
 	public List<Cartas> findByPattern(String value, String operator, String atributo) {
 		String regExp = "";
-
-		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-		CriteriaQuery<Cartas> cq = cb.createQuery(Cartas.class);
-		Root<Cartas> root = cq.from(Cartas.class);
-		cq.select(root);
+		defineBeginningOfQuery();
 
 		switch (operator) {
-		case "=":
+		case "==":
 			cq.where(cb.equal(root.get(atributo), value));
 			break;
 		case "LIKE":
@@ -75,4 +72,13 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
 		List<Cartas> cartas = entityManager.createQuery(cq).getResultList();
 		return cartas;
 	}
+
+	private void defineBeginningOfQuery() {
+		cb = entityManager.getCriteriaBuilder();
+		cq = cb.createQuery(Cartas.class);
+		root = cq.from(Cartas.class);
+		cq.select(root);
+	}
+
+
 }

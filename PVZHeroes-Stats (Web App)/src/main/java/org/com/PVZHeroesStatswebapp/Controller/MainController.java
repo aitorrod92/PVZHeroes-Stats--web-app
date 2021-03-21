@@ -63,16 +63,7 @@ public class MainController {
 					if (valor.toString().equals("")) {
 						cartasRecuperadas = cardsService.findAll();
 					} else {
-						switch (operador) {
-						case "==":
-						case "":
-							cartasRecuperadas = cardsService.findById(valor);
-							break;
-						case "LIKE":
-						case "NOT LIKE":
-							cartasRecuperadas = cardsService.findByPattern(valor, operador, atributo);
-							break;
-						}
+						cartasRecuperadas = cardsService.findByPattern(valor, operador, atributo);
 					}
 					return devolverBusquedaOBusquedaFallida(theModel, valor, cartasRecuperadas);
 				}
