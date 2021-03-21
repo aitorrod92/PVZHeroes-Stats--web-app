@@ -1,0 +1,13 @@
+$('#form1').submit(doubleSubmit);
+
+function doubleSubmit(e1) {
+    e1.preventDefault();
+    e1.stopPropagation();
+    var post_form1 = $.post($(this).action, $(this).serialize());
+
+    post_form1.done(function(result) {
+            $('#form2').submit();
+        });
+        
+        // CONTINUAR CON LOS SIGUIENTES
+};

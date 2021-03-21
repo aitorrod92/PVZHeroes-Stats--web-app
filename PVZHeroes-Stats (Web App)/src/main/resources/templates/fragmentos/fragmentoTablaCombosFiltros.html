@@ -1,46 +1,64 @@
 <table class="elementoConMargen" id="tablaCombos">
-		<thead>
-			<th>Filtro 1</th>
-			<th hidden class="tituloAdicional">Filtro 2</th>
-			<th hidden class="tituloAdicional">Filtro 3</th>
-			<th hidden class="tituloAdicional">Filtro 4</th>
-		</thead>
-		<tbody>
-			<tr>
-				<td><form name='f' th:object="${combinacionCC1}"
-						th:action="@{/busqueda}" method='POST'>
-						<select id="comboAtributos1" class="form-select form-select-sm"
-							th:field="${combinacionCC1.comboboxA.valor}">
-							<option value="">--</option>
-							<option
-								th:each="entry : ${combinacionCC1.comboboxA.opcionesSeleccion.entrySet()}"
-								th:value="${entry.value}" th:utext="${entry.key}"></option>
-						</select> <select id="comboOperadores1" class="form-select form-select-sm"
-							th:field="${combinacionCC1.comboboxOperadores.valor}">
-							<option value="">--</option>
-						</select> <input autofocus type="text" id="input1"
-							th:field="${combinacionCC1.carta.Valor}" 
-							placeholder="Nombre" class="form-control mb-4 col-4">
-						<button type="submit" class="btn btn-primary">Buscar</button>
-					</form></td>
+	<thead>
+		<th>Filtro 1</th>
+		<th hidden class="tituloAdicional">Filtro 2</th>
+		<th hidden class="tituloAdicional">Filtro 3</th>
+		<th hidden class="tituloAdicional">Filtro 4</th>
+	</thead>
+	<tbody>
+		<tr>
+			<td><form name='f' th:object="${combinacionCC1}"
+					th:action="@{/busqueda}" method='POST' id="form1">
+					<select id="comboAtributos1" class="form-select form-select-sm"
+						th:field="${combinacionCC1.comboboxA.valor}">
+						<option value="">--</option>
+						<option
+							th:each="entry : ${combinacionCC1.comboboxA.opcionesSeleccion.entrySet()}"
+							th:value="${entry.value}" th:utext="${entry.key}"></option>
+					</select> <select id="comboOperadores1" class="form-select form-select-sm"
+						th:field="${combinacionCC1.comboboxOperadores.valor}">
+						<option value="">--</option>
+					</select> <input autofocus type="text" id="input1"
+						th:field="${combinacionCC1.carta.Valor}" placeholder="Nombre"
+						class="form-control mb-4 col-4">
+					<button onClick="submitAllFormsAtOnce()" class="btn btn-primary">Buscar</button>
+				</form></td>
 
-				<td><form hidden class="filtroAdicional" name='f'
-						th:object="${combinacionCC2}" th:action="@{/busqueda}"
-						method='POST'>
-						<select id="comboAtributos2" class="form-select form-select-sm"
-							th:field="${combinacionCC2.comboboxA.valor}">
-							<option value="">--</option>
-							<option
-								th:each="entry : ${combinacionCC2.comboboxA.opcionesSeleccion.entrySet()}"
-								th:value="${entry.value}" th:utext="${entry.key}"></option>
-						</select> <select id="comboOperadores2" class="form-select form-select-sm"
-							th:field="${combinacionCC2.comboboxOperadores.valor}">
-							<option value="">--</option>
-						</select> <input autofocus type="text"
-							th:field="${combinacionCC2.carta.Valor}"
-							placeholder="Ataque" class="form-control mb-4 col-4">
-						<button type="submit" class="btn btn-primary">Buscar</button>
-					</form></td>
-			</tr>
-		</tbody>
-	</table>
+			<td><form hidden class="filtroAdicional" name='f'
+					th:object="${combinacionCC2}" th:action="@{/busqueda}"
+					method='POST' id="form2">
+					<select id="comboAtributos2" class="form-select form-select-sm"
+						th:field="${combinacionCC2.comboboxA.valor}">
+						<option value="">--</option>
+						<option
+							th:each="entry : ${combinacionCC2.comboboxA.opcionesSeleccion.entrySet()}"
+							th:value="${entry.value}" th:utext="${entry.key}"></option>
+					</select> <select id="comboOperadores2" class="form-select form-select-sm"
+						th:field="${combinacionCC2.comboboxOperadores.valor}">
+						<option value="">--</option>
+					</select> <input autofocus type="text"
+						th:field="${combinacionCC2.carta.Valor}" placeholder="Ataque"
+						class="form-control mb-4 col-4">
+					<button onClick="submitAllFormsAtOnce()" class="btn btn-primary">Buscar</button>
+				</form></td>
+
+			<td><form hidden class="filtroAdicional" name='f'
+					th:object="${combinacionCC2}" th:action="@{/busqueda}"
+					method='POST' id="form3">
+					<select id="comboAtributos3" class="form-select form-select-sm"
+						th:field="${combinacionCC2.comboboxA.valor}">
+						<option value="">--</option>
+						<option
+							th:each="entry : ${combinacionCC2.comboboxA.opcionesSeleccion.entrySet()}"
+							th:value="${entry.value}" th:utext="${entry.key}"></option>
+					</select> <select id="comboOperadores3" class="form-select form-select-sm"
+						th:field="${combinacionCC2.comboboxOperadores.valor}">
+						<option value="">--</option>
+					</select> <input autofocus type="text"
+						th:field="${combinacionCC2.carta.Valor}" placeholder="Ataque"
+						class="form-control mb-4 col-4">
+					<button onClick="submitAllFormsAtOnce()" class="btn btn-primary">Buscar</button>
+				</form></td>
+		</tr>
+	</tbody>
+</table>

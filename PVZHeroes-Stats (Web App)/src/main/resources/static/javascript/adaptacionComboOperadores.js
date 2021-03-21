@@ -1,8 +1,22 @@
 $('#comboAtributos1').change(function() {
 	var atributoSeleccionado = $(this).val();
+	adaptarCombo(1, atributoSeleccionado);
+})
+
+$('#comboAtributos2').change(function() {
+	var atributoSeleccionado = $(this).val();
+	adaptarCombo(2, atributoSeleccionado);
+})
+
+$('#comboAtributos3').change(function() {
+	var atributoSeleccionado = $(this).val();
+	adaptarCombo(3, atributoSeleccionado);
+})
+
+function adaptarCombo(numeroCombo, atributoSeleccionado) {
 	var opciones;
 
-	$('#comboOperadores1 > option').remove();
+	$('#comboOperadores' + numeroCombo + '> option').remove();
 
 	if (atributoSeleccionado == "Ataque" || atributoSeleccionado == "Defensa"
 		|| atributoSeleccionado == "Coste" || atributoSeleccionado == "NumeroAtributos") {
@@ -14,6 +28,6 @@ $('#comboAtributos1').change(function() {
 		jQuery('<option/>', {
 			value: element,
 			html: element
-		}).appendTo('#comboOperadores1');
+		}).appendTo('#comboOperadores' + numeroCombo);
 	});
-})
+};

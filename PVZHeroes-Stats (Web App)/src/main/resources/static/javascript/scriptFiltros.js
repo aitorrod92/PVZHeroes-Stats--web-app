@@ -1,6 +1,5 @@
 $('#comboNumeroFiltros').change(function () {
 	var numeroFiltros = $(this).val();
-	console.log(numeroFiltros);
 
 	$('.filtroAdicional').each(function (i, obj) {
 		if (i < numeroFiltros-1) {
