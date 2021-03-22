@@ -9,7 +9,7 @@
 		<tr>
 			<td><form name='f' th:object="${combinacionCC1}"
 					th:action="@{/busqueda}" method='POST' id="form1">
-					<select id="comboAtributos1" class="form-select form-select-sm"
+					<select id="comboAtributos1" class="form-select form-select-sm comboAtributos"
 						th:field="${combinacionCC1.comboboxA.valor}">
 						<option value="">--</option>
 						<option
@@ -27,7 +27,7 @@
 			<td><form hidden class="filtroAdicional" name='f'
 					th:object="${combinacionCC2}" th:action="@{/busqueda}"
 					method='POST' id="form2">
-					<select id="comboAtributos2" class="form-select form-select-sm"
+					<select id="comboAtributos2" class="form-select form-select-sm comboAtributos"
 						th:field="${combinacionCC2.comboboxA.valor}">
 						<option value="">--</option>
 						<option
@@ -36,7 +36,7 @@
 					</select> <select id="comboOperadores2" class="form-select form-select-sm"
 						th:field="${combinacionCC2.comboboxOperadores.valor}">
 						<option value="">--</option>
-					</select> <input autofocus type="text"
+					</select> <input autofocus type="text" id="input2"
 						th:field="${combinacionCC2.carta.Valor}" placeholder="Ataque"
 						class="form-control mb-4 col-4">
 					<button onClick="submitAllFormsAtOnce()" style="visibility:hidden" class="btn btn-primary">Buscar</button>
@@ -45,7 +45,7 @@
 			<td><form hidden class="filtroAdicional" name='f'
 					th:object="${combinacionCC3}" th:action="@{/busqueda}"
 					method='POST' id="form3">
-					<select id="comboAtributos3" class="form-select form-select-sm"
+					<select id="comboAtributos3" class="form-select form-select-sm comboAtributos"
 						th:field="${combinacionCC3.comboboxA.valor}">
 						<option value="">--</option>
 						<option
@@ -54,8 +54,8 @@
 					</select> <select id="comboOperadores3" class="form-select form-select-sm"
 						th:field="${combinacionCC3.comboboxOperadores.valor}">
 						<option value="">--</option>
-					</select> <input autofocus type="text"
-						th:field="${combinacionCC3.carta.Valor}" placeholder="Ataque"
+					</select> <input autofocus type="text" id="input3"
+						th:field="${combinacionCC3.carta.Valor}" placeholder="Defensa"
 						class="form-control mb-4 col-4">
 					<button onClick="submitAllFormsAtOnce()" style="visibility:hidden" class="btn btn-primary">Buscar</button>
 				</form></td>
