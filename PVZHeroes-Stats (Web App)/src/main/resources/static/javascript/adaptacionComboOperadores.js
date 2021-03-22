@@ -1,16 +1,9 @@
-$('#comboAtributos1').change(function() {
+$('.comboAtributos').change(function() {
 	var atributoSeleccionado = $(this).val();
-	adaptarCombo(1, atributoSeleccionado);
-})
-
-$('#comboAtributos2').change(function() {
-	var atributoSeleccionado = $(this).val();
-	adaptarCombo(2, atributoSeleccionado);
-})
-
-$('#comboAtributos3').change(function() {
-	var atributoSeleccionado = $(this).val();
-	adaptarCombo(3, atributoSeleccionado);
+	var nombreCombo = $(this).attr('id');
+	var longitudId = nombreCombo.length;
+	var numeroCombo = nombreCombo.substring(longitudId-1);
+	adaptarCombo(numeroCombo, atributoSeleccionado);
 })
 
 function adaptarCombo(numeroCombo, atributoSeleccionado) {
