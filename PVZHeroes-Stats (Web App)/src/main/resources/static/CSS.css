@@ -3,13 +3,16 @@
 .elementoConMargen {
 	position: relative;
 	left: 30px;
-	max-width: 650px;
+}
+
+.elementoConTamañoMaximo {
+	max-width: 800px;
 }
 
 body {
 	background-color: aquamarine;
 }
 
-.table th  {
-   text-align: center;   
+.table th {
+	text-align: center;
 }

@@ -54,6 +54,11 @@ public class MainController {
 			return buscarCartas(theModel, valor, operador, atributo, "String");
 		}
 	}
+	
+	@GetMapping("/error")
+	public String mostrarPaginaError() {
+		return "error";
+	}
 
 	private void obtenerValoresFiltro(CartaAndCombobox cartaAndCombobox) {
 		atributo = cartaAndCombobox.getComboboxA().getValor();
