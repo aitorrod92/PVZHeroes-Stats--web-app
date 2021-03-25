@@ -22,7 +22,8 @@ public class Cartas {
 	private int NumeroAtributos;
 	private String Imagen;
 	
-	private String Valor;
+	private String ValorInput;
+	private String ValorCombo;
 		
 	public Cartas(String nombre, int ataque, int defensa, int coste, String clase, String tribus, String atributos,
 			String habilidades, String rareza, String mazo, String tipo, String uRL, int numeroAtributos, String imagen) {
@@ -152,12 +153,20 @@ public class Cartas {
 		Imagen = imagen;
 	}
 	
-	public String getValor() {
-		return this.Valor;
+	public String getValorInput() {
+		return this.ValorInput;
 	}
 
-	public void setValor(String valor) {
-		this.Valor = valor;
+	public void setValorInput(String valor) {
+		this.ValorInput = valor;
+	}
+	
+	public String getValorCombo() {
+		return this.ValorCombo;
+	}
+
+	public void setValorCombo(String valor) {
+		this.ValorCombo = valor;
 	}
 
 

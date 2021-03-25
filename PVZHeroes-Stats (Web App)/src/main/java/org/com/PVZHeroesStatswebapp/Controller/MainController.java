@@ -21,6 +21,10 @@ public class MainController {
 			"strikethrough", "deadly", "untrickable", "overshoot", "frenzy" };
 	ArrayList<Cartas> cartasRecuperadas = new ArrayList();
 
+	String atributo;
+	String operador;
+	String valor;
+
 	@Autowired
 	private CardsService cardsService;
 
@@ -39,13 +43,7 @@ public class MainController {
 
 		// INCLUIR EL PRIMER COMBO
 		añadirElementos(theModel);
-
-		String atributo = cartaAndCombobox.getComboboxA().getValor();
-		String operador = cartaAndCombobox.getComboboxOperadores().getValor();
-		String valor = cartaAndCombobox.getCarta().getValor();
-		valor = valor.replace(",", "");
-		System.out.println("Atributo: " + atributo + " operador: " + operador + " valor: " + valor);
-
+		obtenerValoresFiltro(cartaAndCombobox);
 		switch (atributo) {
 		case "Ataque":
 		case "Defensa":
@@ -55,6 +53,24 @@ public class MainController {
 		default:
 			return buscarCartas(theModel, valor, operador, atributo, "String");
 		}
+	}
+
+	private void obtenerValoresFiltro(CartaAndCombobox cartaAndCombobox) {
+		atributo = cartaAndCombobox.getComboboxA().getValor();
+		operador = cartaAndCombobox.getComboboxOperadores().getValor();
+		switch (atributo) {
+		case "Mazo":
+		case "Rareza":
+		case "Atributos":
+		case "Clase":
+		case "Tipo":
+			valor = cartaAndCombobox.getCarta().getValorCombo();
+			break;
+		default:
+			valor = cartaAndCombobox.getCarta().getValorInput();
+			break;
+		}
+		System.out.println("Atributo: " + atributo + " operador: " + operador + " valor: " + valor);
 	}
 
 	private String buscarCartas(Model theModel, String valor, String operador, String atributo, String tipo) {

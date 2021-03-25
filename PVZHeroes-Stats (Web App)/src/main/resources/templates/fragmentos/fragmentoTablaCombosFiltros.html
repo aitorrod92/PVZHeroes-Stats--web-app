@@ -20,14 +20,14 @@
 						th:field="${combinacionCC1.comboboxOperadores.valor}">
 						<option value="">--</option>
 					</select> <select id="comboOpcionesAtributo1" style="display: none"
-						th:field="${combinacionCC1.carta.Valor}"
+						th:field="${combinacionCC1.carta.ValorCombo}"
 						class="form-control mb-4 col-4">
 					</select> <input autofocus type="text" id="input1" style="display: block"
-						th:field="${combinacionCC1.carta.Valor}" placeholder=""
+						th:field="${combinacionCC1.carta.ValorInput}" placeholder=""
 						class="form-control mb-4 col-4">
 					<button onClick="submitAllFormsAtOnce()" class="btn btn-primary">Buscar</button>
 				</form></td>
-
+<!--  
 			<td><form hidden class="filtroAdicional" name='f'
 					th:object="${combinacionCC2}" th:action="@{/busqueda}"
 					method='POST' id="form2">
@@ -65,6 +65,7 @@
 						class="form-control mb-4 col-4">
 					<button style="visibility: hidden" class="btn btn-primary">Buscar</button>
 				</form></td>
+				-->
 		</tr>
 	</tbody>
 </table>
