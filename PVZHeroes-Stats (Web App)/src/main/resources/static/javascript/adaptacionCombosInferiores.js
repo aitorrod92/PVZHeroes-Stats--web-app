@@ -27,26 +27,65 @@ function adaptarComboOperadores(numeroCombo, atributoSeleccionado) {
 };
 
 function elegirInputOCombo(numeroCombo, atributoSeleccionado) {
-	if (atributoSeleccionado == "Clase" || atributoSeleccionado == "Tribus"
-		|| atributoSeleccionado == "Mazo" || atributoSeleccionado == "Rareza"
-		|| atributoSeleccionado == "Tipo" || atributoSeleccionado == "Atributos") {
+	switch (atributoSeleccionado) {
+		case "Clase":
+		case "Mazo":
+		case "Rareza":
+		case "Tipo":
+		case "Atributos":
+			mostrarInputYOcultarCombo(false, numeroCombo);
+			asignarValoresCombo(atributoSeleccionado, numeroCombo);
+			break;
+		default:
+			mostrarInputYOcultarCombo(true, numeroCombo);
+			break;
+	}
+}
+
+function mostrarInputYOcultarCombo(valor, numeroCombo) {
+	if (valor == true) {
+		$('#input' + numeroCombo).attr("style", "display:block");
+		$('#comboOpcionesAtributo' + numeroCombo).attr("style", "display:none");
+	} else {
 		$('#input' + numeroCombo).attr("style", "display:none");
 		$('#comboOpcionesAtributo' + numeroCombo).attr("style", "display:block");
 		$('#comboOpcionesAtributo' + numeroCombo + '> option').remove();
-	} else {
-		$('#input' + numeroCombo).attr("style", "display:block");
-		$('#comboOpcionesAtributo' + numeroCombo).attr("style", "display:none");
+	}
+}
+
+function asignarValoresCombo(atributoSeleccionado, numeroCombo) {
+	var opciones;
+	var opcionesRareza = ["Common", "Basic", "Rare", "Super-rare", "Uncommon", "Legendary"];
+	var opcionesMazo = ["Sin mazo", "Basic", "Premium", "Legendary", "Galactic", "Colossal", "Triassic"];
+	var opcionesClase = ["Beastly", "Brainy", "Crazy", "Guardian", "Hearty", "Kabloom", "Mega-Grow", "Smarty", "Sneaky", "Solar"];
+	var opcionesTipo = ["Plants", "Zombies"];
+	var opcionesAtributos = ["Double Strike", "Splash Damage", "Team-Up", "Deadly", "Frenzy", "Gravestone", "Overshoot", "Amphibious", "Anti-Hero", "Armored", "Hunt", "Bullseye", "Strikethrough", "Untrickable", "Ninguno"];
+
+	switch (atributoSeleccionado) {
+		case "Rareza":
+			opciones = opcionesRareza;
+			break;
+		case "Mazo":
+			opciones = opcionesMazo;
+			break;
+		case "Clase":
+			opciones = opcionesClase;
+			break;
+		case "Tipo":
+			opciones = opcionesTipo;
+			break;
+		case "Atributos":
+			opciones = opcionesAtributos;
+			break;
 	}
 
-
-	if (atributoSeleccionado == "Rareza") {
-		var opcionesClase = ["Common", "Basic", "Rare", "Super-rare", "Uncommon", "Legendary"];
-		opcionesClase.forEach(element => {
-			jQuery('<option/>', {
-				value: element,
-				html: element
-			}).appendTo('#comboOpcionesAtributo' + numeroCombo);
-		});
-	};
+	opciones.forEach(element => {
+		jQuery('<option/>', {
+			value: element,
+			html: element
+		}).appendTo('#comboOpcionesAtributo' + numeroCombo);
+	});
 }
+
+
 
