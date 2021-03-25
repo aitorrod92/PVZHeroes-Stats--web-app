@@ -41,8 +41,10 @@ public class MainController {
 		añadirElementos(theModel);
 
 		String atributo = cartaAndCombobox.getComboboxA().getValor();
-		String valor = cartaAndCombobox.getCarta().getValor();
 		String operador = cartaAndCombobox.getComboboxOperadores().getValor();
+		String valor = cartaAndCombobox.getCarta().getValor();
+		valor = valor.replace(",", "");
+		System.out.println("Atributo: " + atributo + " operador: " + operador + " valor: " + valor);
 
 		switch (atributo) {
 		case "Ataque":
