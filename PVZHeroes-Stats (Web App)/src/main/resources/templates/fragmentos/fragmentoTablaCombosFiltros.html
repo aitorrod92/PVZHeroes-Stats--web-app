@@ -16,15 +16,17 @@
 						<option
 							th:each="entry : ${combinacionCC1.comboboxA.opcionesSeleccion.entrySet()}"
 							th:value="${entry.value}" th:utext="${entry.key}"></option>
-					</select> <select id="comboOperadores1" class="form-select form-select-sm"
+					</select> <select id="comboOperadores1" class="form-select form-select-sm ddcommon"
 						th:field="${combinacionCC1.comboboxOperadores.valor}">
 						<option value="">--</option>
 					</select> <select id="comboOpcionesAtributo1" style="display: none"
 						th:field="${combinacionCC1.carta.ValorCombo}"
 						class="form-control mb-4 col-4">
-					</select> <input autofocus type="text" id="input1" style="display: block"
+					</select> 
+					<th:block th:replace="fragmentos/comboImagenesClases.html"></th:block>
+					<input autofocus type="text" id="input1" style="display: block"
 						th:field="${combinacionCC1.carta.ValorInput}" placeholder=""
-						class="form-control mb-4 col-4">
+						class="form-control mb-4 col-4">						
 					<button onClick="submitAllFormsAtOnce()" class="btn btn-primary">Buscar</button>
 				</form></td>
   

@@ -8,7 +8,6 @@ $(document).ready(function() {
 		$('#explosion').attr('src', '/images/decoration/explosion.gif');
 		$('#explosion').attr('width', '200');
 
-
 		setTimeout(removeExplosion, 1000);
 	});
 });
@@ -34,7 +33,6 @@ function move(direccion) {
 		movingLoop("derecha");
 	}
 }
-
 
 function removeExplosion() {
 	$('#explosion').remove();

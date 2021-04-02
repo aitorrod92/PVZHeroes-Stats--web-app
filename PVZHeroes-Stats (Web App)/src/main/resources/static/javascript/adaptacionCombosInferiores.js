@@ -1,3 +1,5 @@
+	$('#comboClases').attr("style", "display:none");
+
 $('.comboAtributos').change(function() {
 	var atributoSeleccionado = $(this).val();
 	var nombreCombo = $(this).attr('id');
@@ -33,7 +35,7 @@ function elegirInputOCombo(numeroCombo, atributoSeleccionado) {
 		case "Rareza":
 		case "Tipo":
 		case "Atributos":
-			mostrarInputYOcultarCombo(false, numeroCombo);
+			mostrarInputYOcultarCombo(false, numeroCombo, atributoSeleccionado);
 			asignarValoresCombo(atributoSeleccionado, numeroCombo);
 			break;
 		default:
@@ -42,13 +44,22 @@ function elegirInputOCombo(numeroCombo, atributoSeleccionado) {
 	}
 }
 
-function mostrarInputYOcultarCombo(valor, numeroCombo) {
+function mostrarInputYOcultarCombo(valor, numeroCombo, filtro) {
 	if (valor == true) {
-		$('#input' + numeroCombo).attr("style", "display:block");
 		$('#comboOpcionesAtributo' + numeroCombo).attr("style", "display:none");
+		$('#comboClases').attr("style", "display:none");
+		$('#comboClases_msdd').attr("style", "display:none");
+		$('#input' + numeroCombo).attr("style", "display:block");
 	} else {
 		$('#input' + numeroCombo).attr("style", "display:none");
-		$('#comboOpcionesAtributo' + numeroCombo).attr("style", "display:block");
+		if (filtro == "Clase") {
+			$('#comboOpcionesAtributo' + numeroCombo).attr("style", "display:none");
+			$('#comboClases_msdd').attr("style", "width: 200px; display: block");
+
+		} else {
+			$('#comboOpcionesAtributo' + numeroCombo).attr("style", "display:block");
+			$('#comboClases_msdd').attr("style", "display:none");
+		}
 		$('#comboOpcionesAtributo' + numeroCombo + '> option').remove();
 	}
 }
@@ -86,6 +97,13 @@ function asignarValoresCombo(atributoSeleccionado, numeroCombo) {
 		}).appendTo('#comboOpcionesAtributo' + numeroCombo);
 	});
 }
+
+// Reinicia el combo
+$('#comboClases').click(function(){
+	$('#comboClases_child').attr("style", "");
+});
+
+
 
 
 
