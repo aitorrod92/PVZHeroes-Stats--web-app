@@ -23,7 +23,9 @@
 						th:field="${combinacionCC1.carta.ValorCombo}"
 						class="form-control mb-4 col-4">
 					</select> 
+					<th:block th:replace="fragmentos/comboImagenesAtributos.html"></th:block>
 					<th:block th:replace="fragmentos/comboImagenesClases.html"></th:block>
+					<th:block th:replace="fragmentos/comboImagenesTipos.html"></th:block>
 					<input autofocus type="text" id="input1" style="display: block"
 						th:field="${combinacionCC1.carta.ValorInput}" placeholder=""
 						class="form-control mb-4 col-4">						

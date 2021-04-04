@@ -1,5 +1,3 @@
-	$('#comboClases').attr("style", "display:none");
-
 $('.comboAtributos').change(function() {
 	var atributoSeleccionado = $(this).val();
 	var nombreCombo = $(this).attr('id');
@@ -36,7 +34,9 @@ function elegirInputOCombo(numeroCombo, atributoSeleccionado) {
 		case "Tipo":
 		case "Atributos":
 			mostrarInputYOcultarCombo(false, numeroCombo, atributoSeleccionado);
-			asignarValoresCombo(atributoSeleccionado, numeroCombo);
+			if (atributoSeleccionado == "Mazo" || atributoSeleccionado == "Rareza") {
+				asignarValoresCombo(atributoSeleccionado, numeroCombo);
+			}
 			break;
 		default:
 			mostrarInputYOcultarCombo(true, numeroCombo);
@@ -46,19 +46,55 @@ function elegirInputOCombo(numeroCombo, atributoSeleccionado) {
 
 function mostrarInputYOcultarCombo(valor, numeroCombo, filtro) {
 	if (valor == true) {
-		$('#comboOpcionesAtributo' + numeroCombo).attr("style", "display:none");
-		$('#comboClases').attr("style", "display:none");
-		$('#comboClases_msdd').attr("style", "display:none");
-		$('#input' + numeroCombo).attr("style", "display:block");
+		ActivarPrimeroYDesactivarElResto(
+			$('#input' + numeroCombo),
+			$('#comboOpcionesAtributo' + numeroCombo),
+			$('#comboClases_msdd'),
+			$('#comboAtributos_msdd'),
+			$('#comboTipos_msdd'),
+		);
 	} else {
 		$('#input' + numeroCombo).attr("style", "display:none");
-		if (filtro == "Clase") {
-			$('#comboOpcionesAtributo' + numeroCombo).attr("style", "display:none");
-			$('#comboClases_msdd').attr("style", "width: 200px; display: block");
-
-		} else {
-			$('#comboOpcionesAtributo' + numeroCombo).attr("style", "display:block");
-			$('#comboClases_msdd').attr("style", "display:none");
+		switch (filtro) {
+			case "Clase":
+				ActivarPrimeroYDesactivarElResto(
+					$('#comboClases_msdd'),
+					$('#comboOpcionesAtributo' + numeroCombo),
+					$('#comboAtributos_msdd'),
+					$('#comboTipos_msdd'),
+					$('#input' + numeroCombo)
+				);
+				$('#comboClases_msdd').addClass("mb-4 sb-4");
+				break;
+			case "Atributos":
+				ActivarPrimeroYDesactivarElResto(
+					$('#comboAtributos_msdd'),
+					$('#comboOpcionesAtributo' + numeroCombo),
+					$('#comboClases_msdd'),
+					$('#comboTipos_msdd'),
+					$('#input' + numeroCombo),
+				);
+				$('#comboAtributos_msdd').addClass("mb-4 sb-4");
+				break;
+			case "Tipo":
+				ActivarPrimeroYDesactivarElResto(
+					$('#comboTipos_msdd'),
+					$('#comboOpcionesAtributo' + numeroCombo),
+					$('#comboClases_msdd'),
+					$('#comboAtributos_msdd'),
+					$('#input' + numeroCombo),
+				);
+				$('#comboTipos_msdd').addClass("mb-4 sb-4");
+				break;
+			default:
+				ActivarPrimeroYDesactivarElResto(
+					$('#comboOpcionesAtributo' + numeroCombo),
+					$('#comboAtributos_msdd'),
+					$('#comboClases_msdd'),
+					$('#comboTipos_msdd'),
+					$('#input' + numeroCombo),
+				);
+				break;
 		}
 		$('#comboOpcionesAtributo' + numeroCombo + '> option').remove();
 	}
@@ -68,9 +104,6 @@ function asignarValoresCombo(atributoSeleccionado, numeroCombo) {
 	var opciones;
 	var opcionesRareza = ["Common", "Basic", "Rare", "Super-rare", "Uncommon", "Legendary"];
 	var opcionesMazo = ["Sin mazo", "Basic", "Premium", "Legendary", "Galactic", "Colossal", "Triassic"];
-	var opcionesClase = ["Beastly", "Brainy", "Crazy", "Guardian", "Hearty", "Kabloom", "Mega-Grow", "Smarty", "Sneaky", "Solar"];
-	var opcionesTipo = ["Plants", "Zombies"];
-	var opcionesAtributos = ["Double Strike", "Splash Damage", "Team-Up", "Deadly", "Frenzy", "Gravestone", "Overshoot", "Amphibious", "Anti-Hero", "Armored", "Hunt", "Bullseye", "Strikethrough", "Untrickable", "Ninguno"];
 
 	switch (atributoSeleccionado) {
 		case "Rareza":
@@ -78,15 +111,6 @@ function asignarValoresCombo(atributoSeleccionado, numeroCombo) {
 			break;
 		case "Mazo":
 			opciones = opcionesMazo;
-			break;
-		case "Clase":
-			opciones = opcionesClase;
-			break;
-		case "Tipo":
-			opciones = opcionesTipo;
-			break;
-		case "Atributos":
-			opciones = opcionesAtributos;
 			break;
 	}
 
@@ -98,10 +122,32 @@ function asignarValoresCombo(atributoSeleccionado, numeroCombo) {
 	});
 }
 
+function ActivarPrimeroYDesactivarElResto(ElementoActivado, ElementoDesactivado1,
+	ElementoDesactivado2, ElementoDesactivado3, ElementoDesactivado4) {
+	ElementoActivado.attr("style", "width: 200px; display: block");
+	ElementoDesactivado1.attr("style", "display:none");
+	ElementoDesactivado2.attr("style", "display:none");
+	ElementoDesactivado3.attr("style", "display:none");
+	ElementoDesactivado4.attr("style", "display:none");
+}
+
+
 // Reinicia el combo
-$('#comboClases').click(function(){
+$('#comboClases').click(function() {
 	$('#comboClases_child').attr("style", "");
 });
+
+$('#comboAtributos').click(function() {
+	$('#comboAtributos_child').attr("style", "");
+});
+
+$('#comboTipos').click(function() {
+	$('#comboTipos_child').attr("style", "");
+});
+
+
+
+
 
 
 
