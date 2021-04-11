@@ -21,12 +21,16 @@ public class Cartas {
 	private String Tipo;
 	private int NumeroAtributos;
 	private String Imagen;
-	
+
 	private String ValorInput;
 	private String ValorCombo;
-		
+	private String ValorComboClases;
+	private String ValorComboAtributos;
+	private String ValorComboTipo;
+
 	public Cartas(String nombre, int ataque, int defensa, int coste, String clase, String tribus, String atributos,
-			String habilidades, String rareza, String mazo, String tipo, String uRL, int numeroAtributos, String imagen) {
+			String habilidades, String rareza, String mazo, String tipo, String uRL, int numeroAtributos,
+			String imagen) {
 		Nombre = nombre;
 		Ataque = ataque;
 		Defensa = defensa;
@@ -43,29 +47,33 @@ public class Cartas {
 		Imagen = imagen;
 	}
 
+	public Cartas() {
+	}
 
-	public Cartas() {}
-
-	
 	public String getNombre() {
 		return Nombre;
 	}
+
 	public void setNombre(String nombre) {
 		Nombre = nombre;
 	}
+
 	public int getAtaque() {
 		return Ataque;
 	}
+
 	public void setAtaque(int ataque) {
 		Ataque = ataque;
 	}
+
 	public int getDefensa() {
 		return Defensa;
 	}
+
 	public void setDefensa(int defensa) {
 		Defensa = defensa;
 	}
-	
+
 	public int getCoste() {
 		return Coste;
 	}
@@ -145,14 +153,15 @@ public class Cartas {
 	public void setNumeroAtributos(int numeroAtributos) {
 		NumeroAtributos = numeroAtributos;
 	}
-	
+
 	public String getImagen() {
 		return Imagen;
 	}
+
 	public void setImagen(String imagen) {
 		Imagen = imagen;
 	}
-	
+
 	public String getValorInput() {
 		return this.ValorInput;
 	}
@@ -160,15 +169,40 @@ public class Cartas {
 	public void setValorInput(String valor) {
 		this.ValorInput = valor;
 	}
-	
+
 	public String getValorCombo() {
+		System.out.println("valor combo letras: " + this.ValorCombo);
 		return this.ValorCombo;
 	}
 
 	public void setValorCombo(String valor) {
+
 		this.ValorCombo = valor;
 	}
 
+	public String getValorComboTipo() {
+		System.out.println("valor combo tipo: " + this.ValorComboTipo);
+		return this.ValorComboTipo;
+	}
 
+	public void setValorComboTipo(String valorComboTipo) {
+		ValorComboTipo = valorComboTipo;
+	}
+
+	public String getValorComboAtributos() {
+		return ValorComboAtributos;
+	}
+
+	public void setValorComboAtributos(String valorComboAtributos) {
+		ValorComboAtributos = valorComboAtributos;
+	}
+
+	public String getValorComboClases() {
+		return ValorComboClases;
+	}
+
+	public void setValorComboClases(String valorComboClases) {
+		ValorComboClases = valorComboClases;
+	}
 
 }

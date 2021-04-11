@@ -66,10 +66,16 @@ public class MainController {
 		switch (atributo) {
 		case "Mazo":
 		case "Rareza":
-		case "Atributos":
-		case "Clase":
-		case "Tipo":
 			valor = cartaAndCombobox.getCarta().getValorCombo();
+			break;
+		case "Atributos":
+			valor = cartaAndCombobox.getCarta().getValorComboAtributos();
+			break;
+		case "Clase":
+			valor = cartaAndCombobox.getCarta().getValorComboClases();
+			break;
+		case "Tipo":
+			valor = cartaAndCombobox.getCarta().getValorComboTipo();
 			break;
 		default:
 			valor = cartaAndCombobox.getCarta().getValorInput();

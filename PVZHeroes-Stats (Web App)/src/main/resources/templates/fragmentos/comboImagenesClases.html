@@ -1,6 +1,6 @@
 <!-- Las rutas parten desde el directorio de las carpetas Jquery y msdropdown -->
-<select name="webmenu" id="comboClases" style="display: none" class="form-select form-select-sm" >
-		<option value="Guardian" selected="selected" title="../images/classes/icons/Guardian.png">Guardian</option>
+<select name="webmenu" id="comboClases" th:field="${combinacionCC1.carta.ValorComboClases}" style="display: none" class="form-select form-select-sm" >
+		<option value="Guardian" title="../images/classes/icons/Guardian.png">Guardian</option>
 		<option value="Kabloom" data-image="../images/classes/icons/Kabloom.png">Kabloom</option>
 		<option value="Mega-Grow" data-image="../images/classes/icons/Mega-Grow.png">Mega-Grow</option>
 		<option value="Smarty"  data-image="../images/classes/icons/Smarty.png">Smarty</option>

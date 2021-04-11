@@ -65,6 +65,7 @@ function mostrarInputYOcultarCombo(valor, numeroCombo, filtro) {
 					$('#input' + numeroCombo)
 				);
 				$('#comboClases_msdd').addClass("mb-4 sb-4");
+				DesactivarSetterCombosImagenes($('#comboAtributos'), $('#comboTipos'));
 				break;
 			case "Atributos":
 				ActivarPrimeroYDesactivarElResto(
@@ -75,6 +76,7 @@ function mostrarInputYOcultarCombo(valor, numeroCombo, filtro) {
 					$('#input' + numeroCombo),
 				);
 				$('#comboAtributos_msdd').addClass("mb-4 sb-4");
+				DesactivarSetterCombosImagenes($('#comboClases'), $('#comboTipos'));
 				break;
 			case "Tipo":
 				ActivarPrimeroYDesactivarElResto(
@@ -85,6 +87,7 @@ function mostrarInputYOcultarCombo(valor, numeroCombo, filtro) {
 					$('#input' + numeroCombo),
 				);
 				$('#comboTipos_msdd').addClass("mb-4 sb-4");
+				DesactivarSetterCombosImagenes($('#comboClases'), $('#comboAtributos'));
 				break;
 			default:
 				ActivarPrimeroYDesactivarElResto(
@@ -144,6 +147,14 @@ $('#comboAtributos').click(function() {
 $('#comboTipos').click(function() {
 	$('#comboTipos_child').attr("style", "");
 });
+
+// NO SE PUEDE CAMBIAR ESE CAMPO UNA VEZ YA ESTÁ SELECCIONADO, 
+//PROBABLEMENTE HACER UN COMPONENTE COMBO DIFERENTE POR CADA
+// O HACER ALGO EN EL SETTER QUE IDENTIFIQUE EL CAMPO QUE ESTÁ ACTIVO
+function DesactivarSetterCombosImagenes(ComboADesactivar1, ComboADesactivar2){
+	ComboADesactivar1.attr("th:field", "");
+	ComboADesactivar2.attr("th:field", "");
+}
 
 
 
