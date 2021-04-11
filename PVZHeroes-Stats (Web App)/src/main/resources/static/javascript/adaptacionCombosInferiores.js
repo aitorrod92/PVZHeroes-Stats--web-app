@@ -5,7 +5,6 @@ $('.comboAtributos').change(function() {
 	var numeroCombo = nombreCombo.substring(longitudId - 1);
 	adaptarComboOperadores(numeroCombo, atributoSeleccionado);
 	elegirInputOCombo(numeroCombo, atributoSeleccionado);
-
 })
 
 function adaptarComboOperadores(numeroCombo, atributoSeleccionado) {
@@ -50,19 +49,19 @@ function mostrarInputYOcultarCombo(valor, numeroCombo, filtro) {
 		ActivarPrimeroYDesactivarElResto(
 			$('#input' + numeroCombo),
 			$('#comboOpcionesAtributo' + numeroCombo),
-			$('#comboClases_msdd'),
+			$('#comboClases' + numeroCombo + '_msdd'),
 			$('#comboAtrib' + numeroCombo + '_msdd'),
-			$('#comboTipos_msdd'),
+			$('#comboTipos' + numeroCombo + '_msdd'),
 		);
 	} else {
 		$('#input' + numeroCombo).attr("style", "display:none");
 		switch (filtro) {
 			case "Clase":
 				ActivarPrimeroYDesactivarElResto(
-					$('#comboClases_msdd'),
+					$('#comboClases' + numeroCombo + '_msdd'),
 					$('#comboOpcionesAtributo' + numeroCombo),
 					$('#comboAtrib' + numeroCombo + '_msdd'),
-					$('#comboTipos_msdd'),
+					$('#comboTipos' + numeroCombo + '_msdd'),
 					$('#input' + numeroCombo)
 				);
 				$('#comboClases_msdd').addClass("mb-4 sb-4");
@@ -71,17 +70,17 @@ function mostrarInputYOcultarCombo(valor, numeroCombo, filtro) {
 				ActivarPrimeroYDesactivarElResto(
 					$('#comboAtrib' + numeroCombo + '_msdd'),
 					$('#comboOpcionesAtributo' + numeroCombo),
-					$('#comboClases_msdd'),
-					$('#comboTipos_msdd'),
+					$('#comboClases' + numeroCombo + '_msdd'),
+					$('#comboTipos' + numeroCombo + '_msdd'),
 					$('#input' + numeroCombo),
 				);
 				$('#comboAtributos_msdd').addClass("mb-4 sb-4");
 				break;
 			case "Tipo":
 				ActivarPrimeroYDesactivarElResto(
-					$('#comboTipos_msdd'),
+					$('#comboTipos' + numeroCombo + '_msdd'),
 					$('#comboOpcionesAtributo' + numeroCombo),
-					$('#comboClases_msdd'),
+					$('#comboClases' + numeroCombo + '_msdd'),
 					$('#comboAtrib' + numeroCombo + '_msdd'),
 					$('#input' + numeroCombo),
 				);
@@ -91,8 +90,8 @@ function mostrarInputYOcultarCombo(valor, numeroCombo, filtro) {
 				ActivarPrimeroYDesactivarElResto(
 					$('#comboOpcionesAtributo' + numeroCombo),
 					$('#comboAtrib' + numeroCombo + '_msdd'),
-					$('#comboClases_msdd'),
-					$('#comboTipos_msdd'),
+					$('#comboClases' + numeroCombo + '_msdd'),
+					$('#comboTipos' + numeroCombo + '_msdd'),
 					$('#input' + numeroCombo),
 				);
 				break;
@@ -131,21 +130,6 @@ function ActivarPrimeroYDesactivarElResto(ElementoActivado, ElementoDesactivado1
 	ElementoDesactivado3.attr("style", "display:none");
 	ElementoDesactivado4.attr("style", "display:none");
 }
-
-
-// Reinicia el combo
-$('#comboClases').click(function() {
-	$('#comboClases_child').attr("style", "");
-});
-
-
-
-$('#comboTipos').click(function() {
-	$('#comboTipos_child').attr("style", "");
-});
-
-
-
 
 
 

@@ -25,8 +25,8 @@
 						class="form-control mb-4 col-4">
 					</select>
 					<th:block th:replace="fragmentos/comboImagenesAtributos.html :: fragmento(numero = '1')"></th:block>
-					<th:block th:replace="fragmentos/comboImagenesClases.html"></th:block>
-					<th:block th:replace="fragmentos/comboImagenesTipos.html"></th:block>
+					<th:block th:replace="fragmentos/comboImagenesClases.html :: fragmento(numero = '1')"></th:block>
+					<th:block th:replace="fragmentos/comboImagenesTipos.html :: fragmento(numero = '1')"></th:block>
 					<input autofocus type="text" id="input1" style="display: block"
 						th:field="${combinacionCC1.carta.ValorInput}" placeholder=""
 						class="form-control mb-4 col-4">
@@ -51,8 +51,8 @@
 						class="form-control mb-4 col-4">
 					</select>
 					<th:block th:replace="fragmentos/comboImagenesAtributos.html  :: fragmento(numero = '2')"></th:block>
-					<th:block th:replace="fragmentos/comboImagenesClases.html"></th:block>
-					<th:block th:replace="fragmentos/comboImagenesTipos.html"></th:block>
+					<th:block th:replace="fragmentos/comboImagenesClases.html :: fragmento(numero = '2')"></th:block>
+					<th:block th:replace="fragmentos/comboImagenesTipos.html ::  fragmento(numero = '2')"></th:block>
 					<input autofocus type="text" id="input2"
 						th:field="${combinacionCC2.carta.ValorInput}" placeholder=""
 						class="form-control mb-4 col-4">
@@ -77,8 +77,8 @@
 						class="form-control mb-4 col-4">
 					</select> 
 					<th:block th:replace="fragmentos/comboImagenesAtributos.html  :: fragmento(numero = '3')"></th:block>
-					<th:block th:replace="fragmentos/comboImagenesClases.html"></th:block>
-					<th:block th:replace="fragmentos/comboImagenesTipos.html"></th:block>
+					<th:block th:replace="fragmentos/comboImagenesClases.html :: fragmento(numero = '3')"></th:block>
+					<th:block th:replace="fragmentos/comboImagenesTipos.html ::  fragmento(numero = '3')"></th:block>
 					<input autofocus type="text" id="input3"
 						th:field="${combinacionCC3.carta.ValorInput}" placeholder=""
 						class="form-control mb-4 col-4">
