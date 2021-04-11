@@ -1,7 +1,7 @@
 $(document).ready(function(e) {
 	try {
-		CrearCombos();
 		$("#comboClases").msDropDown();
+		$("#comboAtrib1").msDropDown();
 		$("#comboTipos").msDropDown();
 		CrearListeners();
 	} catch (e) {
@@ -9,17 +9,13 @@ $(document).ready(function(e) {
 	}
 });
 
-function CrearCombos() {
-	for (let i = 0; i < 6; i++) {
-		$("#comboAtrib" + i).msDropDown();
-	}
-}
-
 
 function CrearListeners() {
-	for (let i = 0; i < 6; i++) {
+	for (let i = 0; i < 2; i++) {
+		console.log("comboAtrib" + i + "_child");
 		$("#comboAtrib" + i).click(function() {
 			$("#comboAtrib" + i + "_child").attr("style", "");
+			console.log("ojo: comboAtrib" + i + "_child");
 		});
 
 	}

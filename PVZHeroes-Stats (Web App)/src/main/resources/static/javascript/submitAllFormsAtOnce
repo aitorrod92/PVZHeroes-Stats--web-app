@@ -6,6 +6,7 @@
 $('#form1').submit(doubleSubmit);
 
 function doubleSubmit(e1) {
+	console.log("POR AQUÍ");
     e1.preventDefault();
     e1.stopPropagation();
 

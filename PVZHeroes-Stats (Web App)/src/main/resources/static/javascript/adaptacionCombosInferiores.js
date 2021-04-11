@@ -5,6 +5,7 @@ $('.comboAtributos').change(function() {
 	var numeroCombo = nombreCombo.substring(longitudId - 1);
 	adaptarComboOperadores(numeroCombo, atributoSeleccionado);
 	elegirInputOCombo(numeroCombo, atributoSeleccionado);
+
 })
 
 function adaptarComboOperadores(numeroCombo, atributoSeleccionado) {
@@ -50,7 +51,7 @@ function mostrarInputYOcultarCombo(valor, numeroCombo, filtro) {
 			$('#input' + numeroCombo),
 			$('#comboOpcionesAtributo' + numeroCombo),
 			$('#comboClases_msdd'),
-			$('#comboAtributos_msdd'),
+			$('#comboAtrib' + numeroCombo + '_msdd'),
 			$('#comboTipos_msdd'),
 		);
 	} else {
@@ -60,39 +61,36 @@ function mostrarInputYOcultarCombo(valor, numeroCombo, filtro) {
 				ActivarPrimeroYDesactivarElResto(
 					$('#comboClases_msdd'),
 					$('#comboOpcionesAtributo' + numeroCombo),
-					$('#comboAtributos_msdd'),
+					$('#comboAtrib' + numeroCombo + '_msdd'),
 					$('#comboTipos_msdd'),
 					$('#input' + numeroCombo)
 				);
 				$('#comboClases_msdd').addClass("mb-4 sb-4");
-				DesactivarSetterCombosImagenes($('#comboAtributos'), $('#comboTipos'));
 				break;
 			case "Atributos":
 				ActivarPrimeroYDesactivarElResto(
-					$('#comboAtributos_msdd'),
+					$('#comboAtrib' + numeroCombo + '_msdd'),
 					$('#comboOpcionesAtributo' + numeroCombo),
 					$('#comboClases_msdd'),
 					$('#comboTipos_msdd'),
 					$('#input' + numeroCombo),
 				);
 				$('#comboAtributos_msdd').addClass("mb-4 sb-4");
-				DesactivarSetterCombosImagenes($('#comboClases'), $('#comboTipos'));
 				break;
 			case "Tipo":
 				ActivarPrimeroYDesactivarElResto(
 					$('#comboTipos_msdd'),
 					$('#comboOpcionesAtributo' + numeroCombo),
 					$('#comboClases_msdd'),
-					$('#comboAtributos_msdd'),
+					$('#comboAtrib' + numeroCombo + '_msdd'),
 					$('#input' + numeroCombo),
 				);
 				$('#comboTipos_msdd').addClass("mb-4 sb-4");
-				DesactivarSetterCombosImagenes($('#comboClases'), $('#comboAtributos'));
 				break;
 			default:
 				ActivarPrimeroYDesactivarElResto(
 					$('#comboOpcionesAtributo' + numeroCombo),
-					$('#comboAtributos_msdd'),
+					$('#comboAtrib' + numeroCombo + '_msdd'),
 					$('#comboClases_msdd'),
 					$('#comboTipos_msdd'),
 					$('#input' + numeroCombo),
@@ -140,21 +138,11 @@ $('#comboClases').click(function() {
 	$('#comboClases_child').attr("style", "");
 });
 
-$('#comboAtributos').click(function() {
-	$('#comboAtributos_child').attr("style", "");
-});
+
 
 $('#comboTipos').click(function() {
 	$('#comboTipos_child').attr("style", "");
 });
-
-// NO SE PUEDE CAMBIAR ESE CAMPO UNA VEZ YA ESTÁ SELECCIONADO, 
-//PROBABLEMENTE HACER UN COMPONENTE COMBO DIFERENTE POR CADA
-// O HACER ALGO EN EL SETTER QUE IDENTIFIQUE EL CAMPO QUE ESTÁ ACTIVO
-function DesactivarSetterCombosImagenes(ComboADesactivar1, ComboADesactivar2){
-	ComboADesactivar1.attr("th:field", "");
-	ComboADesactivar2.attr("th:field", "");
-}
 
 
 

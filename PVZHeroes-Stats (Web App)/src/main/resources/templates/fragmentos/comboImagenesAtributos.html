@@ -1,6 +1,6 @@
 <!-- Las rutas parten desde el directorio de las carpetas Jquery y msdropdown -->
-<select name="webmenu" id="comboAtributos" th:field="${combinacionCC1.carta.ValorComboAtributos}" style="display:  none" class="form-select form-select-sm" >
-		<option value="Amphibious"  data-image="">Amphibious </option>
+<select name="webmenu" th:fragment="fragmento(numero)" th:id="'comboAtrib'+${numero}" th:field="${combinacionCC1.carta.ValorComboAtributos}" style="display:  none" class="form-select form-select-sm" >
+		<option value="Amphibious" data-image="">Amphibious </option>
 		<option value="Anti-Hero" title="../images/abilities/Anti-Hero.png">Anti-Hero</option>
 		<option value="Armored" data-image="../images/abilities/Armored.png">Armored  </option>
 		<option value="Bullseye"  data-image="../images/abilities/Bullseye.png">Bullseye </option>
@@ -14,5 +14,5 @@
 		<option value="Strikethrough"  data-image="../images/abilities/Strikethrough.png">Strikethrough </option>
 		<option value="Splash Damage"  data-image="">Splash Damage </option>
 		<option value="Team-Up"  data-image="">Team-Up</option>
-		<option value="Untrickable" data-image="../images/abilities/Untrickable.png">Untrickable </option>
+		<option value="Untrickable" data-image="../images/abilities/Untrickable.png">Untrickable</option>
 </select>

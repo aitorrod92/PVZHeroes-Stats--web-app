@@ -171,7 +171,6 @@ public class Cartas {
 	}
 
 	public String getValorCombo() {
-		System.out.println("valor combo letras: " + this.ValorCombo);
 		return this.ValorCombo;
 	}
 
@@ -181,7 +180,6 @@ public class Cartas {
 	}
 
 	public String getValorComboTipo() {
-		System.out.println("valor combo tipo: " + this.ValorComboTipo);
 		return this.ValorComboTipo;
 	}
 
