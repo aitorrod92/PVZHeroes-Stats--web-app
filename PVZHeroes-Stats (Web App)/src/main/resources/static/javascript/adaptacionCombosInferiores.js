@@ -64,7 +64,7 @@ function mostrarInputYOcultarCombo(valor, numeroCombo, filtro) {
 					$('#comboTipos' + numeroCombo + '_msdd'),
 					$('#input' + numeroCombo)
 				);
-				$('#comboClases_msdd').addClass("mb-4 sb-4");
+				$('#comboClases' + numeroCombo + '_msdd').addClass("mb-4 sb-4");
 				break;
 			case "Atributos":
 				ActivarPrimeroYDesactivarElResto(
@@ -74,7 +74,7 @@ function mostrarInputYOcultarCombo(valor, numeroCombo, filtro) {
 					$('#comboTipos' + numeroCombo + '_msdd'),
 					$('#input' + numeroCombo),
 				);
-				$('#comboAtributos_msdd').addClass("mb-4 sb-4");
+				$('#comboAtrib' + numeroCombo + '_msdd').addClass("mb-4 sb-4");
 				break;
 			case "Tipo":
 				ActivarPrimeroYDesactivarElResto(
@@ -84,7 +84,7 @@ function mostrarInputYOcultarCombo(valor, numeroCombo, filtro) {
 					$('#comboAtrib' + numeroCombo + '_msdd'),
 					$('#input' + numeroCombo),
 				);
-				$('#comboTipos_msdd').addClass("mb-4 sb-4");
+				$('#comboTipos' + numeroCombo + '_msdd').addClass("mb-4 sb-4");
 				break;
 			default:
 				ActivarPrimeroYDesactivarElResto(
