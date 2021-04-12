@@ -6,6 +6,7 @@ import org.com.PVZHeroesStatswebapp.Entities.CartaAndCombobox;
 import org.com.PVZHeroesStatswebapp.Entities.Cartas;
 import org.com.PVZHeroesStatswebapp.Entities.ComboNumeroFiltros;
 import org.com.PVZHeroesStatswebapp.Entities.ComboboxOperadores;
+import org.com.PVZHeroesStatswebapp.Entities.Formulario;
 import org.com.PVZHeroesStatswebapp.Service.CardsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,31 +34,34 @@ public class MainController {
 		theModel.addAttribute("listaPosiblesImagenes", listaPosiblesImagenes);
 		añadirElementos(theModel);
 		cartasRecuperadas = cardsService.findAll();
-		return devolverBusquedaOBusquedaFallida(theModel, "", cartasRecuperadas);
+		return "index";
 	}
 
 	@RequestMapping("/busqueda")
-	public String mostrarPaginaBusqueda(@ModelAttribute("combinacionCC1") CartaAndCombobox cartaAndCombobox,
-			@ModelAttribute("combinacionCC2") CartaAndCombobox cartaAndCombobox2,
-			@ModelAttribute("combinacionCartaCombobox3") CartaAndCombobox cartaAndCombobox3, Model theModel) {
-
-		// INCLUIR EL PRIMER COMBO
+	public String mostrarPaginaBusqueda(@ModelAttribute("formulario") Formulario formulario, Model theModel) {
 		añadirElementos(theModel);
-		obtenerValoresFiltro(cartaAndCombobox);
-		switch (atributo) {
-		case "Ataque":
-		case "Defensa":
-		case "Coste":
-		case "NumeroAtributos":
-			return buscarCartas(theModel, valor, operador, atributo, "Numero");
-		default:
-			return buscarCartas(theModel, valor, operador, atributo, "String");
+		CartaAndCombobox CC1 = formulario.getCC1();
+		CartaAndCombobox CC2 = formulario.getCC2();
+		obtenerValoresFiltro(CC1);
+		ArrayList<Cartas> lista1 = buscarEnFunciónDeAtributoSeleccionado(theModel, CC1.getComboboxA().getValor());
+		obtenerValoresFiltro(CC2);
+		ArrayList<Cartas> lista2 = buscarEnFunciónDeAtributoSeleccionado(theModel, CC2.getComboboxA().getValor()); // buscarEnFunción...
+
+		ArrayList<Cartas> listaCartasComunes = new ArrayList();
+		for (Cartas carta : lista1) {
+			if (lista2.contains(carta)) {
+				listaCartasComunes.add(carta);
+				System.out.println(carta.getNombre());
+			}
 		}
-	}
-	
-	@GetMapping("/error")
-	public String mostrarPaginaError() {
-		return "error";
+
+		if (!listaCartasComunes.isEmpty()) {
+			añadirImagenesHabilidades(listaCartasComunes);
+			theModel.addAttribute("listaCartas", listaCartasComunes);
+			return "index";
+		} else {
+			return "busquedaFallida";
+		}
 	}
 
 	private void obtenerValoresFiltro(CartaAndCombobox cartaAndCombobox) {
@@ -84,7 +88,20 @@ public class MainController {
 		System.out.println("Atributo: " + atributo + " operador: " + operador + " valor: " + valor);
 	}
 
-	private String buscarCartas(Model theModel, String valor, String operador, String atributo, String tipo) {
+	private ArrayList<Cartas> buscarEnFunciónDeAtributoSeleccionado(Model theModel, String atributo) {
+		switch (atributo) {
+		case "Ataque":
+		case "Defensa":
+		case "Coste":
+		case "NumeroAtributos":
+			return buscarCartas(theModel, valor, operador, atributo, "Numero");
+		default:
+			return buscarCartas(theModel, valor, operador, atributo, "String");
+		}
+	}
+
+	private ArrayList<Cartas> buscarCartas(Model theModel, String valor, String operador, String atributo,
+			String tipo) {
 		try {
 			if (tipo.equals("String")) {
 				{
@@ -94,7 +111,6 @@ public class MainController {
 					} else {
 						cartasRecuperadas = cardsService.findByPattern(valor, operador, atributo);
 					}
-					return devolverBusquedaOBusquedaFallida(theModel, valor, cartasRecuperadas);
 				}
 			} else {
 				int valorNumerico = 0;
@@ -103,10 +119,10 @@ public class MainController {
 				} catch (NumberFormatException e) {
 				}
 				cartasRecuperadas = cardsService.findByValue(valorNumerico, operador, atributo);
-				return devolverBusquedaOBusquedaFallida(theModel, valor, cartasRecuperadas);
 			}
+			return cartasRecuperadas;
 		} catch (NoSuchElementException ex) {
-			return devolverBusquedaFallida(theModel, valor.toString());
+			return null;
 		}
 
 	}
@@ -119,31 +135,15 @@ public class MainController {
 
 		// Para poder pasar dos atributos en el formulario, estos se tienen que poner en
 		// un objeto común
-		theModel.addAttribute("combinacionCC1", new CartaAndCombobox());
-		theModel.addAttribute("combinacionCC2", new CartaAndCombobox());
-		theModel.addAttribute("combinacionCC3", new CartaAndCombobox());
+		theModel.addAttribute("formulario", new Formulario());
 	}
 
-	private String devolverBusquedaOBusquedaFallida(Model theModel, String nombreCarta,
-			ArrayList<Cartas> cartasRecuperadas) {
-		if (cartasRecuperadas.isEmpty()) {
-			return devolverBusquedaFallida(theModel, nombreCarta);
-		} else {
-			return devolverBusquedaConLista(theModel, cartasRecuperadas);
-		}
-	}
-
-	private String devolverBusquedaFallida(Model theModel, String nombreCarta) {
+	// ESTO HABRÍA QUE ADAPTARLO PARA QUE MUESTRE TODOS LOS FILTROS APLICADOS
+	/*private String devolverBusquedaFallida(Model theModel, String nombreCarta) {
 		theModel.addAttribute("nombreCarta", nombreCarta);
 		theModel.addAttribute("cartaBuscada", new Cartas());
 		return "busquedaFallida";
-	}
-
-	private String devolverBusquedaConLista(Model theModel, ArrayList<Cartas> listaCartas) {
-		añadirImagenesHabilidades(listaCartas);
-		theModel.addAttribute("listaCartas", listaCartas);
-		return "index";
-	}
+	}*/
 
 	private void añadirImagenesHabilidades(ArrayList<Cartas> cartas) {
 		for (Cartas carta : cartas) {
@@ -190,5 +190,10 @@ public class MainController {
 			 */
 		}
 		return habilidades;
+	}
+
+	@GetMapping("/error")
+	public String mostrarPaginaError() {
+		return "error";
 	}
 }

@@ -1,5 +1,5 @@
 <!-- Las rutas parten desde el directorio de las carpetas Jquery y msdropdown -->
-<select name="webmenu" th:fragment="fragmento(numero)" th:id="'comboClases'+${numero}" th:field="${combinacionCC1.carta.ValorComboClases}" style="display: none" class="form-select form-select-sm" >
+<select name="webmenu" th:fragment="fragmento(numero)" th:id="'comboClases'+${numero}" th:field="${formulario.CC__${numero}__.carta.ValorComboClases}" style="display: none" class="form-select form-select-sm" >
 		<option value="Guardian" title="../images/classes/icons/Guardian.png">Guardian</option>
 		<option value="Kabloom" data-image="../images/classes/icons/Kabloom.png">Kabloom</option>
 		<option value="Mega-Grow" data-image="../images/classes/icons/Mega-Grow.png">Mega-Grow</option>
