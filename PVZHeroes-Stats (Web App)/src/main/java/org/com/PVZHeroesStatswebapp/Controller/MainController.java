@@ -45,17 +45,19 @@ public class MainController {
 		ArrayList<String> stringsFiltros = new ArrayList();
 
 		obtenerValoresFiltro(CC1);
-		String atributo1 = CC1.getComboboxA().getValor();
+		String atributo1 = atributo;
 		String valor1 = valor;
 		stringsFiltros.add(atributo1);
 		stringsFiltros.add(valor1);
 		ArrayList<Cartas> lista1 = buscarEnFunciónDeAtributoSeleccionado(theModel, atributo1);
 
 		obtenerValoresFiltro(CC2);
-		String atributo2 = CC2.getComboboxA().getValor();
-		String valor2 = valor;
-		stringsFiltros.add(atributo2);
-		stringsFiltros.add(valor2);
+		String atributo2 = atributo;
+		if (!atributo2.equals("")) { // EXISTE LA POSIBILIDAD DE QUE SE QUEDEN SI HAN SIDO SELECCIONADOS Y LUEGO SE ESCONDEN?
+			String valor2 = valor;
+			stringsFiltros.add(atributo2);
+			stringsFiltros.add(valor2);
+		}
 		ArrayList<Cartas> lista2 = buscarEnFunciónDeAtributoSeleccionado(theModel, atributo2);
 
 		ArrayList<Cartas> listaCartasComunes = new ArrayList();
