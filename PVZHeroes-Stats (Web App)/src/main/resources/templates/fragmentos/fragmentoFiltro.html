@@ -1,4 +1,4 @@
-<div th:fragment="fragmento(numero)">
+<div th:fragment="fragmento(numero, visibilidadBoton)">
 	<select th:id="comboAtributos__${numero}__"
 		class="form-select form-select-sm comboAtributos"
 		th:field="${formulario.CC__${numero}__.comboboxA.valor}">
@@ -25,5 +25,5 @@
 		th:field="${formulario.CC__${numero}__.carta.ValorInput}"
 		placeholder="" class="form-control mb-4 col-4">
 	<button class="btn btn-primary"
-		style="visibility: hidden">Buscar</button>
+		th:style="'visibility: __${visibilidadBoton}__;'">Buscar</button>
 </div>

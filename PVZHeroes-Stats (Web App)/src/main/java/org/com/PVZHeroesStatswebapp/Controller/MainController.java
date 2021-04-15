@@ -42,16 +42,26 @@ public class MainController {
 		añadirElementos(theModel);
 		CartaAndCombobox CC1 = formulario.getCC1();
 		CartaAndCombobox CC2 = formulario.getCC2();
+		ArrayList<String> stringsFiltros = new ArrayList();
+
 		obtenerValoresFiltro(CC1);
-		ArrayList<Cartas> lista1 = buscarEnFunciónDeAtributoSeleccionado(theModel, CC1.getComboboxA().getValor());
+		String atributo1 = CC1.getComboboxA().getValor();
+		String valor1 = valor;
+		stringsFiltros.add(atributo1);
+		stringsFiltros.add(valor1);
+		ArrayList<Cartas> lista1 = buscarEnFunciónDeAtributoSeleccionado(theModel, atributo1);
+
 		obtenerValoresFiltro(CC2);
-		ArrayList<Cartas> lista2 = buscarEnFunciónDeAtributoSeleccionado(theModel, CC2.getComboboxA().getValor()); // buscarEnFunción...
+		String atributo2 = CC2.getComboboxA().getValor();
+		String valor2 = valor;
+		stringsFiltros.add(atributo2);
+		stringsFiltros.add(valor2);
+		ArrayList<Cartas> lista2 = buscarEnFunciónDeAtributoSeleccionado(theModel, atributo2);
 
 		ArrayList<Cartas> listaCartasComunes = new ArrayList();
 		for (Cartas carta : lista1) {
 			if (lista2.contains(carta)) {
 				listaCartasComunes.add(carta);
-				System.out.println(carta.getNombre());
 			}
 		}
 
@@ -60,7 +70,7 @@ public class MainController {
 			theModel.addAttribute("listaCartas", listaCartasComunes);
 			return "index";
 		} else {
-			return "busquedaFallida";
+			return devolverBusquedaFallida(theModel, stringsFiltros);
 		}
 	}
 
@@ -138,12 +148,19 @@ public class MainController {
 		theModel.addAttribute("formulario", new Formulario());
 	}
 
-	// ESTO HABRÍA QUE ADAPTARLO PARA QUE MUESTRE TODOS LOS FILTROS APLICADOS
-	/*private String devolverBusquedaFallida(Model theModel, String nombreCarta) {
-		theModel.addAttribute("nombreCarta", nombreCarta);
-		theModel.addAttribute("cartaBuscada", new Cartas());
+	private String devolverBusquedaFallida(Model theModel, ArrayList<String> listaFiltros) {
+		String tipoString;
+		for (int i = 0; i < listaFiltros.size(); i++) {
+			if (i % 2 == 0) {
+				tipoString = "atributo";
+			} else {
+				tipoString = "valor";
+			}
+			theModel.addAttribute(tipoString + i, listaFiltros.get(i));
+		}
+		theModel.addAttribute("listaFiltros", listaFiltros);
 		return "busquedaFallida";
-	}*/
+	}
 
 	private void añadirImagenesHabilidades(ArrayList<Cartas> cartas) {
 		for (Cartas carta : cartas) {
