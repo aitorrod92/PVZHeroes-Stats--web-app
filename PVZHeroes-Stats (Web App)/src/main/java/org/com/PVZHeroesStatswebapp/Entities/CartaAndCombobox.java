@@ -5,12 +5,14 @@ public class CartaAndCombobox {
 	
 	private ComboboxOperadores comboboxOperadores; 
 	private ComboboxAtributo comboboxA;
+	private ComboboxTipoUnion comboboxTipoUnion;
 	
 
 	public CartaAndCombobox() {
 		carta = new Cartas();
 		this.comboboxOperadores = new ComboboxOperadores();
 		this.comboboxA = new ComboboxAtributo();
+		this.comboboxTipoUnion = new ComboboxTipoUnion();
 	}
 
 
@@ -27,7 +29,6 @@ public class CartaAndCombobox {
 		return comboboxOperadores;
 	}
 
-
 	public void setComboboxOperadores(ComboboxOperadores comboboxOperadores) {
 		this.comboboxOperadores = comboboxOperadores;
 	}
@@ -39,6 +40,14 @@ public class CartaAndCombobox {
 
 	public void setComboboxA(ComboboxAtributo comboboxA) {
 		this.comboboxA = comboboxA;
+	}
+	
+	public ComboboxTipoUnion getComboboxTipoUnion() {
+		return comboboxTipoUnion;
+	}
+
+	public void setComboboxTipoUnion(ComboboxTipoUnion comboboxTipoUnion) {
+		this.comboboxTipoUnion = comboboxTipoUnion;
 	}
 	
 	

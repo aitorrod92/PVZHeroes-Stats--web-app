@@ -1,0 +1,29 @@
+<div th:fragment="fragmento(numero)">
+	<select th:id="comboAtributos__${numero}__"
+		class="form-select form-select-sm comboAtributos"
+		th:field="${formulario.CC__${numero}__.comboboxA.valor}">
+		<option value="">--</option>
+		<option
+			th:each="entry : ${formulario.CC__${numero}__.comboboxA.opcionesSeleccion.entrySet()}"
+			th:value="${entry.value}" th:utext="${entry.key}"></option>
+	</select> <select th:id="comboOperadores__${numero}__"
+		class="form-select form-select-sm"
+		th:field="${formulario.CC__${numero}__.comboboxOperadores.valor}">
+		<option value="">--</option>
+	</select> <select th:id="comboOpcionesAtributo__${numero}__" style="display: none"
+		th:field="${formulario.CC__${numero}__.carta.ValorCombo}"
+		class="form-control mb-4 col-4">
+	</select>
+	
+	<th:block
+		th:replace="fragmentos/comboImagenesAtributos.html  :: fragmento(numero = ${numero})"></th:block>
+	<th:block
+		th:replace="fragmentos/comboImagenesClases.html :: fragmento(numero = ${numero})"></th:block>
+	<th:block
+		th:replace="fragmentos/comboImagenesTipos.html ::  fragmento(numero = ${numero})"></th:block>
+	<input autofocus type="text" th:id="input__${numero}__"
+		th:field="${formulario.CC__${numero}__.carta.ValorInput}"
+		placeholder="" class="form-control mb-4 col-4">
+	<button class="btn btn-primary"
+		style="visibility: hidden">Buscar</button>
+</div>

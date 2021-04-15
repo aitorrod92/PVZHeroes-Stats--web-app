@@ -1,0 +1,10 @@
+<div th:fragment="fragmento(numero)">
+	<select style="visibility: hidden" class="form-select form-select-sm "></select>
+	<select th:id="'comboTipoUnion'+${numero}"
+		th:field="${formulario.CC__${numero}__.comboboxTipoUnion.valor}"
+		style="display: block" class="form-select form-select-sm">
+		<option value="AND">AND</option>
+		<option value="OR">OR</option>
+	</select> <select style="visibility: hidden" class="form-control mb-4 col-4"></select>
+	<button style="visibility: hidden" class="btn btn-primary">T</button>
+</div>
