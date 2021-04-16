@@ -6,6 +6,7 @@ import org.com.PVZHeroesStatswebapp.Entities.CartaAndCombobox;
 import org.com.PVZHeroesStatswebapp.Entities.Cartas;
 import org.com.PVZHeroesStatswebapp.Entities.ComboNumeroFiltros;
 import org.com.PVZHeroesStatswebapp.Entities.ComboboxOperadores;
+import org.com.PVZHeroesStatswebapp.Entities.ComboboxTipoUnion;
 import org.com.PVZHeroesStatswebapp.Entities.Formulario;
 import org.com.PVZHeroesStatswebapp.Service.CardsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ public class MainController {
 	String[] listaPosiblesImagenes = { "strength", "health", "suns", "brains", "freeze", "bullseye", "double strike",
 			"strikethrough", "deadly", "untrickable", "overshoot", "frenzy" };
 	ArrayList<Cartas> cartasRecuperadas = new ArrayList();
+	ArrayList<String> stringsFiltros;
+	ArrayList<Cartas> listaCartasComunes;
 
 	String atributo;
 	String operador;
@@ -39,41 +42,58 @@ public class MainController {
 
 	@RequestMapping("/busqueda")
 	public String mostrarPaginaBusqueda(@ModelAttribute("formulario") Formulario formulario, Model theModel) {
-		añadirElementos(theModel);
+		añadirElementos(theModel); // ADAPTARLO PARA QUE FUNCIONE CON MÁS
 		CartaAndCombobox CC1 = formulario.getCC1();
 		CartaAndCombobox CC2 = formulario.getCC2();
-		ArrayList<String> stringsFiltros = new ArrayList();
+		stringsFiltros = new ArrayList();
+		listaCartasComunes = new ArrayList();
 
 		obtenerValoresFiltro(CC1);
-		String atributo1 = atributo;
-		String valor1 = valor;
-		stringsFiltros.add(atributo1);
-		stringsFiltros.add(valor1);
-		ArrayList<Cartas> lista1 = buscarEnFunciónDeAtributoSeleccionado(theModel, atributo1);
+		ArrayList<Cartas> lista1 = generarLista(theModel);
 
 		obtenerValoresFiltro(CC2);
-		String atributo2 = atributo;
-		if (!atributo2.equals("")) { // EXISTE LA POSIBILIDAD DE QUE SE QUEDEN SI HAN SIDO SELECCIONADOS Y LUEGO SE ESCONDEN?
-			String valor2 = valor;
-			stringsFiltros.add(atributo2);
-			stringsFiltros.add(valor2);
-		}
-		ArrayList<Cartas> lista2 = buscarEnFunciónDeAtributoSeleccionado(theModel, atributo2);
+		ArrayList<Cartas> lista2 = generarLista(theModel);
 
-		ArrayList<Cartas> listaCartasComunes = new ArrayList();
-		for (Cartas carta : lista1) {
-			if (lista2.contains(carta)) {
-				listaCartasComunes.add(carta);
+		String tipoUnion = formulario.getCTU1().getValor();
+		if (!tipoUnion.equals("")) { // PUEDE QUE SE LEA AÚN ASÍ SI ESTÁ INACTIVO
+			listaCartasComunes = generarListadoComun(lista1, lista2, tipoUnion);
+			if (listaCartasComunes.isEmpty()) {
+				return devolverBusquedaFallida(theModel, stringsFiltros);
+			} else {
+				theModel.addAttribute("listaCartas", listaCartasComunes);
+				return "index";
 			}
-		}
-
-		if (!listaCartasComunes.isEmpty()) {
-			añadirImagenesHabilidades(listaCartasComunes);
-			theModel.addAttribute("listaCartas", listaCartasComunes);
-			return "index";
 		} else {
-			return devolverBusquedaFallida(theModel, stringsFiltros);
+			theModel.addAttribute("listaCartas", lista1);
+			return "index";
 		}
+	}
+
+	private ArrayList<Cartas> generarLista(Model theModel) {
+		if (!atributo.equals("")) {
+			stringsFiltros.add(atributo);
+			stringsFiltros.add(valor);
+		}
+		ArrayList<Cartas> lista = buscarEnFunciónDeAtributoSeleccionado(theModel, atributo);
+		return lista;
+	}
+
+	private ArrayList<Cartas> generarListadoComun(ArrayList<Cartas> lista1, ArrayList<Cartas> lista2,
+			String tipoUnion) {
+		if (tipoUnion.equals("AND")) {
+			for (Cartas carta : lista1) {
+				if (lista2.contains(carta)) {
+					listaCartasComunes.add(carta);
+				}
+			}
+			if (!listaCartasComunes.isEmpty()) {
+				añadirImagenesHabilidades(listaCartasComunes);
+			}
+		} else {
+			listaCartasComunes.addAll(lista1);
+			listaCartasComunes.addAll(lista2);
+		}
+		return listaCartasComunes;
 	}
 
 	private void obtenerValoresFiltro(CartaAndCombobox cartaAndCombobox) {

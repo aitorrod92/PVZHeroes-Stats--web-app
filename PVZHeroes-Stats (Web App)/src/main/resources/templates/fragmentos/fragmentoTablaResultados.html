@@ -290,13 +290,13 @@
 						th:src="@{'/images/types/'+ ${card.Tipo} + '.png'}" th:width="40"></span></td>
 
 				<div th:switch="${card.NumeroAtributos}">
-					<td th:case="0" th:style="'background: firebrick;'"><span
+					<td th:case="0" th:style="'background: firebrick; opacity: 0.8'"><span
 						th:text=${card.NumeroAtributos} th:style="'color: black;'" /></td>
-					<td th:case="1" th:style="'background: gold;'"><span
+					<td th:case="1" th:style="'background: gold; opacity: 0.8'"><span
 						th:text=${card.NumeroAtributos} th:style="'color: black;'" /></td>
-					<td th:case="2" th:style="'background: limegreen;'"><span
+					<td th:case="2" th:style="'background: limegreen; opacity: 0.8'"><span
 						th:text=${card.NumeroAtributos} th:style="'color: black;'" /></td>
-					<td th:case="*" th:style="'background: steelblue;'"><span
+					<td th:case="*" th:style="'background: steelblue; opacity: 0.8'"><span
 						th:text=${card.NumeroAtributos} th:style="'color: black;'" /></td>
 				</div>
 			</tr>

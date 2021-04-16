@@ -1,7 +1,7 @@
 <div th:fragment="fragmento(numero)">
 	<select style="visibility: hidden" class="form-select form-select-sm "></select>
-	<select th:id="'comboTipoUnion'+${numero}"
-		th:field="${formulario.CC__${numero}__.comboboxTipoUnion.valor}"
+	<select th:id="'CTU'+${numero}"
+		th:field="${formulario.CTU__${numero}__.valor}"
 		style="display: block" class="form-select form-select-sm">
 		<option value="AND">AND</option>
 		<option value="OR">OR</option>
