@@ -55,7 +55,7 @@ public class MainController {
 		ArrayList<Cartas> lista2 = generarLista(theModel);
 
 		String tipoUnion = formulario.getCTU1().getValor();
-		if (!tipoUnion.equals("")) { // PUEDE QUE SE LEA AÚN ASÍ SI ESTÁ INACTIVO
+		if (!tipoUnion.equals("")) { // PROBLEMA: SE LEE AÚN SI ESTÁ INACTIVO
 			listaCartasComunes = generarListadoComun(lista1, lista2, tipoUnion);
 			if (listaCartasComunes.isEmpty()) {
 				return devolverBusquedaFallida(theModel, stringsFiltros);

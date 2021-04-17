@@ -1,36 +1,38 @@
 <form name='f' th:object="${formulario}" th:action="@{/busqueda}"
 	method='POST' id="form1">
-	<table class="elementoConMargen" id="tablaCombos">
-		<thead>
-			<th class="titulo">Filtro 1</th>
-			<th hidden class="titulo"></th>
-			<th hidden class="titulo">Filtro 2</th>
-			<th hidden class="titulo"></th>
-			<th hidden class="titulo">Filtro 3</th>
-		</thead>
-		<tbody>
-			<tr>
-				<td class="columnaFiltro" hidden><th:block
-						th:replace="fragmentos/fragmentoFiltro.html  :: fragmento(numero = '1', visibilidadBoton = 'visible')"></th:block>
-				</td>
+	<div class="contenedorNaranja elementoConMargen">
+		<table class="elementoConMargen" id="tablaCombos">
+			<thead>
+				<th class="titulo">Filtro 1</th>
+				<th hidden class="titulo"></th>
+				<th hidden class="titulo">Filtro 2</th>
+				<th hidden class="titulo"></th>
+				<th hidden class="titulo">Filtro 3</th>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="columnaFiltro" hidden><th:block
+							th:replace="fragmentos/fragmentoFiltro.html  :: fragmento(numero = '1', visibilidadBoton = 'visible')"></th:block>
+					</td>
 
-				<td class="columnaFiltro" hidden><th:block
-						th:replace="fragmentos/comboTipoUnion.html  :: fragmento(numero = '1')"></th:block>
-				</td>
+					<td class="columnaFiltro" hidden><th:block
+							th:replace="fragmentos/comboTipoUnion.html  :: fragmento(numero = '1')"></th:block>
+					</td>
 
-				<td class="columnaFiltro" hidden><th:block
-						th:replace="fragmentos/fragmentoFiltro.html  :: fragmento(numero = '2', visibilidadBoton = 'hidden')"></th:block>
-				</td>
+					<td class="columnaFiltro" hidden><th:block
+							th:replace="fragmentos/fragmentoFiltro.html  :: fragmento(numero = '2', visibilidadBoton = 'hidden')"></th:block>
+					</td>
 
-				<td class="columnaFiltro" hidden><th:block
-						th:replace="fragmentos/comboTipoUnion.html  :: fragmento(numero = '2')"></th:block>
-				</td>
-				
-				<td class="columnaFiltro" hidden><th:block
-						th:replace="fragmentos/fragmentoFiltro.html  :: fragmento(numero = '3', visibilidadBoton = 'hidden')"></th:block>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+					<td class="columnaFiltro" hidden><th:block
+							th:replace="fragmentos/comboTipoUnion.html  :: fragmento(numero = '2')"></th:block>
+					</td>
+
+					<td class="columnaFiltro" hidden><th:block
+							th:replace="fragmentos/fragmentoFiltro.html  :: fragmento(numero = '3', visibilidadBoton = 'hidden')"></th:block>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </form>
 

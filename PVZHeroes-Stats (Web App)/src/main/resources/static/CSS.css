@@ -9,12 +9,25 @@
 	max-width: 800px;
 }
 
-body {
-	background-color: aquamarine;
+.contenedorNaranja {
+	background-color: gold;
+	max-width: 90%;
 }
 
-.table th {
+body {
+	background-color: DarkOrange;
+}
+
+table {
 	text-align: center;
+}
+
+.columnaFiltro {
+	padding: 5px 5px 15px 5px;
+}
+
+.titulo {
+	padding: 10px 5px 15px 0px;
 }
 
 #berry {
